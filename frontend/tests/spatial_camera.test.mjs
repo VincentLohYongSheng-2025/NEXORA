@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
+import {floorZones,floorOptions,facilityAlerts} from '../src/js/floor_conditions.js';
 
 // Run the actual Three.js geometry, camera and animation code with a render sink.
 // This verifies camera motion without requiring a GPU or claiming visual QA.
@@ -12,7 +13,7 @@ function harness({width=1200,height=690,reduced=false}={}) {
   const overlay=element(),parent=element(),container=element();
   parent.querySelector=()=>overlay;container.parentElement=parent;
   container.clientWidth=width;container.clientHeight=height;
-  const context=vm.createContext({console,devicePixelRatio:1,document:{createElement:element},
+  const context=vm.createContext({console,devicePixelRatio:1,floorZones,floorOptions,facilityAlerts,document:{createElement:element},
     performance:{now:()=>time},matchMedia:()=>({matches:reduced}),
     ResizeObserver:class{observe(){}disconnect(){}},
     requestAnimationFrame:callback=>{frames.set(++sequence,callback);return sequence},

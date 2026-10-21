@@ -1,0 +1,113 @@
+.renewable-workspace{--renew-line:#ebdacb;--renew-soft:#fff6eb;--renew-accent:#d65b07}
+.renewable-workspace [hidden],.renew-modal [hidden]{display:none!important}
+.renewable-workspace .page-head{margin-bottom:12px}
+.renew-toolbar{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.renew-model-status{margin-right:auto;color:#925021;background:#fff0df;border:1px solid #efd2b5;border-radius:6px;padding:7px 10px;font-size:11px;font-weight:700}
+.renew-save-status{font-size:11px;color:#6c642d;font-weight:700}
+.renewable-workspace .sim-stepper{margin:12px 0 18px}
+.renew-prerequisites{padding:12px 15px;border:1px dashed #e3cdb8;border-radius:10px;margin-bottom:22px;font-size:12px;background:#fffaf5}
+.renew-prerequisites p{font-size:12px;line-height:1.6;margin-top:12px;color:#796554}
+.renew-ready-grid{display:flex;gap:20px;flex-wrap:wrap;margin-top:15px;color:#865328}
+.renewable-workspace .sim-workspace{grid-template-columns:minmax(0,1.18fr) minmax(0,1fr);gap:22px;align-items:start}
+.renewable-workspace .sim-left,.renewable-workspace .sim-right{gap:20px}
+.renewable-workspace .card-pad{padding:20px}
+.renewable-workspace .card-head{gap:12px;align-items:center;flex-wrap:wrap}
+.renewable-workspace .card-head h2{font-size:16px}
+.renewable-workspace .sim-preview-head{gap:8px;padding:16px}
+.renewable-workspace .sim-preview-head h2{font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.renewable-workspace .sim-preview-head .segmented button{font-size:11px;padding:7px 9px;min-height:32px}
+.renewable-workspace .sim-preview-stage{height:430px;background:#fff8f1}
+.renewable-workspace .sim-preview-foot{font-size:11px;line-height:1.5;padding:11px 16px;color:#7f6c5b}
+.renewable-workspace .orbit-toolbar{top:14px;left:12px;padding:5px;border:1px solid #ecdccf}
+.renewable-workspace .orbit-toolbar button{width:31px;height:35px;font-size:21px}
+.renewable-workspace .orbit-toolbar svg{width:19px;height:19px;margin:auto}
+.renewable-workspace .orbit-toolbar button[aria-pressed=true]{background:#ffecd8;color:#a44300;border-radius:6px}
+.renew-equipment-labels{position:absolute;top:16px;left:67px;display:grid;gap:7px;justify-items:start;max-width:calc(100% - 86px);pointer-events:none}
+.renew-equipment-labels button{pointer-events:auto;background:#ffffffed;border:1px solid #dfc7b1;color:#665142;border-radius:7px;padding:7px 9px;font-size:11px;text-align:left;box-shadow:0 3px 8px #68402310}
+.renew-equipment-labels button.active{background:#6e3e20;border-color:#6e3e20;color:#fff}
+.renew-equipment-labels i{display:inline-block;width:6px;height:6px;background:#f39027;border-radius:50%;margin-right:6px}
+.renew-equipment-labels small{display:block;font-size:10px;margin-top:3px;margin-left:12px}
+.renewable-workspace .renew-mix{padding:18px 20px;gap:12px}
+.renew-mix>div>span{display:flex;align-items:center;gap:6px;font-size:12px;color:#766454}
+.renew-mix svg{width:18px;height:18px;color:#c75c16}
+.renew-mix strong{font-size:21px;color:#493022}
+.renew-mix small{font-size:11px}
+.renew-mix>.renew-note{grid-column:1/-1;margin-top:0}
+.renew-mix.is-stale,.renew-flow.is-stale{position:relative}
+.renew-mix.is-stale:after,.renew-flow.is-stale:after{content:'Inputs changed · run simulation';position:absolute;inset:0;display:grid;place-items:center;background:#fff8f1ed;border-radius:10px;font-size:12px;color:#945017;font-weight:700;padding:20px;text-align:center}
+.renewable-workspace .sim-tech-grid{gap:10px}
+.renewable-workspace .sim-tech{min-height:166px;border-color:#e6d7c9;border-radius:10px}
+.renewable-workspace .sim-tech.focused{border:2px solid #d65b07;box-shadow:0 0 0 2px #d65b0710;background:#fff9f2}
+.renewable-workspace .sim-tech-select{padding:15px 12px 30px;min-height:164px;color:#493426}
+.renewable-workspace .sim-tech-select strong{font-size:13px}
+.renewable-workspace .sim-tech-select small{font-size:11px;color:#7c6859;line-height:1.5}
+.renewable-workspace .sim-tech-icon{background:#fff0dc;color:#ca570c}
+.renewable-workspace .sim-tech-icon svg{width:21px;height:21px}
+.renewable-workspace .sim-tech-check{top:0;right:0;width:44px;height:44px;display:grid;place-items:center}
+.renewable-workspace .sim-tech-check input{width:16px;height:16px;accent-color:#d65b07;cursor:pointer}
+.renewable-workspace .sim-recommend{background:#ffead1;color:#9f4600;font-size:9px;left:12px}
+.renewable-workspace .renew-config>.card-head{margin-bottom:10px}
+.renew-text-button{border:0;background:transparent;color:#b34a05;font-weight:800;font-size:11px;padding:8px 0}
+.renew-field{display:flex;justify-content:space-between;align-items:center;gap:14px;min-height:48px;padding:7px 0;font-size:12px;color:#75604f}
+.renew-field>span:first-child{flex:1;line-height:1.5}
+.renew-input{display:flex;position:relative;align-items:center;width:160px;flex:none}
+.renew-input input{width:100%;height:37px;border:1px solid #e6d7c9;border-radius:7px;background:#fff;padding:0 53px 0 11px;font-size:12px;color:#493325}
+.renew-input small{position:absolute;right:10px;font-size:10px;color:#8d7766;pointer-events:none}
+.renew-field select{width:190px;max-width:56%;height:38px;border:1px solid #e6d7c9;border-radius:7px;padding:0 8px;color:#493325;background:#fff;font-size:11px}
+.renew-field>strong{font-size:12px;line-height:1.5;text-align:right;color:#493325}
+.renewable-workspace input:focus-visible,.renewable-workspace select:focus-visible,.renewable-workspace button:focus-visible,.renew-modal :focus-visible{outline:2px solid #b44d08;outline-offset:3px}
+.renew-advice{font-size:11px;line-height:1.7;background:#fff5e8;border-left:3px solid #e89245;border-radius:6px;padding:12px;margin-top:15px;color:#806147}
+.renew-selection-note{font-size:11px;color:#a25315;padding:12px;border:1px dashed #e5c29f;border-radius:7px;margin-top:15px;line-height:1.6}
+.renewable-workspace .sim-run{margin-top:20px;flex-wrap:wrap}
+.renewable-workspace .sim-investment{margin-top:20px}
+.renewable-workspace .sim-investment .segmented{max-width:100%;flex-wrap:wrap}
+.renewable-workspace .sim-investment .segmented button{font-size:10px;padding:7px 8px}
+.renewable-workspace .sim-stats{gap:9px;margin:15px 0}
+.renewable-workspace .sim-stats>div{padding:12px 10px;border-color:#eddfd2;background:#fffdfb}
+.renewable-workspace .sim-stats span{font-size:10px;color:#826d5a;line-height:1.5}
+.renewable-workspace .sim-stats strong{font-size:16px;color:#493325;overflow-wrap:anywhere;line-height:1.4}
+.renew-financial-breakdown{display:grid;grid-template-columns:1fr 1fr;gap:12px;border-top:1px solid #eadbcc;padding:14px 0}
+.renew-financial-breakdown>div{display:flex;justify-content:space-between;gap:10px;font-size:10px;color:#87705b;line-height:1.5}
+.renew-financial-breakdown strong{color:#514034;text-align:right;white-space:nowrap;font-size:11px}
+.renew-finance{margin-top:12px}
+.renew-finance .renew-field{font-size:11px}
+.renew-note{font-size:11px;line-height:1.65;color:#88715d;margin-top:14px}
+.renew-dirty{padding:16px;background:#fff8ed;border:1px dashed #e8c7a7;border-radius:8px;font-size:12px;color:#89633e;line-height:1.6;margin:12px 0}
+.renewable-workspace .sim-impact,.renewable-workspace .sim-saved,.renew-support{margin-top:22px}
+.renew-impact-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.renew-impact-kpis>div{border:1px solid #ecdac9;border-radius:10px;padding:16px;display:grid;gap:7px;background:#fffaf5}
+.renew-impact-kpis span{font-size:12px;color:#806a57}
+.renew-impact-kpis strong{font-size:25px;color:#c65106;line-height:1.2}
+.renew-impact-kpis small{font-size:11px;color:#92775f}
+.renew-secondary-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0;border-top:1px solid #eddece;padding-top:16px}
+.renew-secondary-metrics>div{display:grid;gap:7px}
+.renew-secondary-metrics span{font-size:11px;color:#91775f}.renew-secondary-metrics strong{font-size:14px;color:#604733}
+.renew-chart{margin-top:15px;overflow:hidden}.renew-chart svg{width:100%;height:auto;max-height:320px}.renew-chart text{font-size:12px;fill:#8d7663;font-family:inherit}
+.renew-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:70px 22px 25px;height:100%;align-content:center}
+.renew-flow>div{display:grid;justify-items:center;gap:9px;font-size:12px;text-align:center;color:#8a512c}
+.renew-flow svg{width:40px;height:40px;padding:8px;background:#fff;border:1px solid #e8cdb4;border-radius:11px}
+.renew-flow span{font-size:11px;color:#806b5b}.renew-flow b{font-size:22px;color:#d97b37}
+.renew-flow .renew-flow-building{grid-column:1/-1;padding:20px;border:1px solid #e7c9ab;background:#fff;border-radius:12px;font-weight:800;color:#4c3828}
+.renew-flow~.renew-equipment-labels{display:none}
+.renew-saved-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px;border:1px solid #eaddce;border-radius:8px;margin-top:10px;font-size:11px;flex-wrap:wrap}
+.renew-saved-row label{display:flex;align-items:center;gap:9px;flex-wrap:wrap;cursor:pointer}.renew-saved-row input{accent-color:#d65b07;width:16px;height:16px}
+.renew-saved-row small{color:#8d7663;font-size:10px}.renew-saved-row>span{color:#806247;margin-left:auto}.renew-saved-row>div{display:flex;gap:6px}
+.renewable-workspace .sim-comparison article{background:#fff6eb;border:1px solid #efd5b9;border-radius:9px;padding:15px;font-size:12px}.renewable-workspace .sim-comparison p{font-size:11px;color:#82664f;line-height:1.7}
+.renew-partners{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.renew-partners article{padding:20px 15px;border:1px solid #e9d9c9;border-radius:11px;text-align:center;display:grid;justify-items:center;gap:10px}
+.renew-partner-initials{padding:12px;background:#fff2e2;border-radius:9px;font-size:15px;font-weight:800;color:#b8520b}
+.renew-partners h3{font-size:14px}.renew-partners strong{font-size:11px;color:#b35819}.renew-partners p{font-size:11px;color:#8b725d}
+.renew-partners button{margin-top:7px;width:100%}
+.renew-support-foot{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:16px;border:1px solid #eaddce;border-radius:9px;margin-top:16px}
+.renew-support-foot p{flex:1;font-size:12px;line-height:1.6;color:#8a705a;min-width:220px}
+.renew-modal{width:min(600px,calc(100vw - 28px));max-width:600px;max-height:85vh;overflow:auto;color:#4c3829;padding:24px;border:1px solid #e8d0b9}
+.renew-dialog .card-head{gap:14px;margin-bottom:17px;align-items:center}.renew-dialog h2{color:#4c3829;font-size:18px;margin:0}.renew-dialog h3{font-size:13px;margin-top:15px}
+.renew-dialog p{font-size:12px;line-height:1.65;color:#806952;margin:13px 0}
+.renew-dialog label{display:grid;gap:8px;font-size:12px;font-weight:700;margin-top:16px;color:#72573e}
+.renew-dialog input,.renew-dialog select,.renew-dialog textarea{width:100%;padding:10px 12px;border:1px solid #e2c7ad;border-radius:8px;background:#fff;font-size:13px;color:#4b3524;min-height:42px}
+.renew-dialog textarea{height:100px;resize:vertical}.renew-dialog form>button{margin-top:14px;min-height:40px}.renew-dialog [data-error]{color:#b42332}
+.renew-model-list{display:grid;gap:12px}.renew-model-list article{display:flex;align-items:center;gap:16px;justify-content:space-between;padding:16px;border:1px solid #e7d0bb;border-radius:10px;background:#fffaf5}.renew-model-list h3{margin:0;font-size:13px}.renew-model-list p{font-size:11px;margin:6px 0 0}
+@media(min-width:1600px){.renewable-workspace .sim-preview-stage{height:480px}}
+@media(max-width:1100px){.renewable-workspace .sim-workspace{gap:16px;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}.renewable-workspace .sim-tech-select{padding:12px 9px 29px}.renewable-workspace .sim-tech-select small{font-size:10px}.renew-field select{width:160px}.renew-input{width:140px}.renew-financial-breakdown{grid-template-columns:1fr}}
+@media(max-width:900px){.renewable-workspace .sim-workspace{grid-template-columns:1fr}.renewable-workspace .sim-preview-stage{height:410px}.renewable-workspace .sim-tech-select small{font-size:12px}.renewable-workspace .sim-tech-select{padding:16px 15px 30px}.renew-financial-breakdown{grid-template-columns:1fr 1fr}}
+@media(max-width:540px){.renewable-workspace .card-pad{padding:15px}.renew-toolbar{justify-content:flex-start}.renew-model-status{width:100%}.renewable-workspace .sim-preview-head{padding:12px}.renewable-workspace .sim-preview-head h2{width:100%;font-size:14px}.renewable-workspace .sim-preview-stage{height:340px}.renew-equipment-labels{left:59px;font-size:10px}.renew-equipment-labels button{font-size:10px}.renewable-workspace .sim-tech-grid{gap:6px}.renewable-workspace .sim-tech-select{padding:12px 9px 28px;min-height:176px}.renewable-workspace .sim-tech-select strong{font-size:12px}.renewable-workspace .sim-tech-select small{font-size:10px}.renewable-workspace .sim-tech-check{right:5px}.renewable-workspace .sim-tech-icon{width:26px;height:26px}.renew-field{font-size:11px;gap:8px}.renew-input{width:133px}.renew-field select{width:155px}.renewable-workspace .sim-stats{grid-template-columns:repeat(2,1fr)}.renew-financial-breakdown{grid-template-columns:1fr}.renew-impact-kpis{grid-template-columns:1fr}.renew-impact-kpis>div{padding:15px}.renew-impact-kpis strong{font-size:26px}.renew-secondary-metrics{grid-template-columns:1fr;gap:16px}.renew-partners{grid-template-columns:1fr}.renewable-workspace .sim-comparison{grid-template-columns:1fr}.renew-saved-row>span{margin-left:25px}.renew-chart svg{min-width:620px}.renew-chart{overflow-x:auto}.renew-modal{padding:18px}.renew-model-list article{flex-wrap:wrap}.renew-flow{padding:30px 16px}.renewable-workspace .stepper{flex-wrap:wrap;gap:12px}.renewable-workspace .stepper b{width:16px}.renewable-workspace .sim-mix{padding:15px}.renew-mix strong{font-size:18px}}

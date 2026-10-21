@@ -34,6 +34,8 @@ html, body, #app, .shell { background: var(--brand-canvas); color: var(--brand-i
 }
 .source-strip { background:var(--brand-orange-wash); border-color:#f4dfcb; color:#76543c; }
 .source-strip strong { color:var(--brand-orange-deep); }
+.building-filter{display:grid;gap:5px;justify-items:start}.building-filter-hint{max-width:290px;color:#806d5f;font-size:10px;line-height:1.45}
+.monitoring-disclosure{display:flex;align-items:flex-start;gap:10px;margin:-5px 0 16px;padding:12px 15px;border:1px solid #f0ddca;border-radius:9px;background:#fff8f0;color:#705744;font-size:11px;line-height:1.55}.monitoring-disclosure strong{flex:none;color:#9b4c17}.monitoring-comparison .card-head{align-items:flex-start}.forecast-score{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;margin:14px 0 8px;padding:12px;border-radius:8px;background:#f2f8ef;color:#4c7041}.forecast-score strong{font-size:18px;color:#3f7937}.forecast-score span{font-size:10px}.monitoring-model-note{margin-top:5px}
 .dot { background:var(--brand-orange); }
 .card, .kpis, .township-card { border-color:var(--brand-border); box-shadow:0 3px 16px #60320d08; }
 .badge { background:#fff2e5; color:#b95210; }
@@ -63,6 +65,7 @@ html, body, #app, .shell { background: var(--brand-canvas); color: var(--brand-i
 .recommendations .ghost { background:#fff; color:#705c4f; border-color:var(--brand-border); }
 .recommendations .impact-number { color:var(--brand-orange-deep); }
 .recommendations .details summary { color:var(--brand-orange-deep); }
+@media(max-width:900px){.grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .township-card { background:#f8f3ec; }
 .township-heading, .township-summary, .facility-directory button { background:#fffffffa; }
 .township-heading strong, .township-summary strong { color:#4d3626; }
@@ -120,4 +123,77 @@ dialog::backdrop { background:#49301f70; }
 .stepper span.current:before, .stepper span.done:before { background:var(--brand-orange); color:#fff; }
 .stepper b { background:#efcfb4; }
 .model-controls button.active, .segmented button.active { background:var(--brand-orange-soft); color:var(--brand-orange-deep); }
+
+/* Manager alerts remain individually identifiable while scanning a long list. */
+.alert-recommendations>.card-head{align-items:flex-start;gap:14px;margin-bottom:20px}
+.alert-recommendations>.card-head>.badge{white-space:nowrap}
+.alert-recommendations .manager-alert-intro{font-size:12px;line-height:1.6;color:#756456;margin-top:6px}
+.manager-alert-list{display:grid;gap:16px}
+.alert-recommendations .manager-alert{--alert-accent:#c62828;--alert-tint:#fff1f1;border:1px solid #efbfc1;border-left:5px solid var(--alert-accent);border-radius:12px;background:#fff;padding:18px;margin:0;box-shadow:0 3px 12px #6a3c1310;overflow:hidden}
+.alert-recommendations .manager-alert.is-critical{--alert-accent:#b42332;--alert-tint:#fff0f1;border-color:#edc8cd;border-left-color:var(--alert-accent)}
+.manager-alert-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}
+.manager-alert-severity{display:inline-flex;align-items:center;gap:7px;background:var(--alert-tint);color:var(--alert-accent);border-radius:6px;padding:6px 9px;font-size:11px;font-weight:800}
+.manager-alert-severity svg{width:17px;height:17px;flex:none}
+.manager-alert-number{font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:#807065}
+.alert-recommendations .manager-alert h3{font-size:16px;line-height:1.4;color:#36281f}
+.alert-recommendations .manager-alert .manager-alert-building{font-size:12px;font-weight:700;color:#68574a;margin-top:7px}
+.alert-recommendations .manager-alert .alert-location{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:12px;color:#69594e;margin-top:8px}
+.manager-alert .alert-location span{display:inline-block;padding:3px 8px;border:1px solid #e9d9ca;border-radius:5px;background:#fffaf5;color:#49382a;font-weight:800}
+.manager-alert-solution{background:#eef8e9;border:1px solid #d5e8cb;border-radius:8px;padding:12px 14px;margin-top:15px}
+.alert-recommendations .manager-alert .manager-alert-solution>strong{display:block;color:#49382a;font-size:11px;font-weight:800;margin-bottom:4px}
+.alert-recommendations .manager-alert .manager-alert-solution p{font-size:12px;line-height:1.65;color:#665245;margin:0}
+.manager-alert .alert-approve-row{gap:10px;justify-content:space-between;margin-top:16px;flex-wrap:wrap}
+.manager-alert .alert-approve-row button{min-height:40px;font-size:11px}
+.alert-recommendations .settled-alerts{border-top:1px solid #ead9c9;padding-top:16px;color:#456348}
+.alert-recommendations .alerts-clear{padding:16px;background:#f1f8ef;border:1px solid #cbdcc4;border-radius:9px;color:#365b32}
+@media(max-width:540px){.alert-recommendations .manager-alert{padding:14px}.alert-recommendations>.card-head{flex-wrap:wrap}.manager-alert .alert-approve-row button{min-height:44px}.manager-alert .alert-approve-row .primary{flex:1}.manager-alert-number{font-size:9px}}
+
+/* Monitoring dashboard: separate observed history, model evidence and a clearly marked scenario. */
+.monitoring-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.monitoring-kpis .kpi{border:1px solid var(--brand-border);border-radius:10px;box-shadow:0 2px 8px #59320f08}
+.monitoring-primary{grid-template-columns:minmax(0,1.65fr) minmax(280px,.82fr);gap:14px;margin-bottom:16px}
+.monitoring-chart-card,.monitoring-health,.monitoring-optimization{min-width:0}
+.monitoring-card-heading{align-items:flex-start}
+.monitoring-card-heading>div:first-child{min-width:0}
+.monitoring-card-heading h2{margin:3px 0 4px}
+.monitoring-card-heading .caption{display:block;line-height:1.5}
+.monitoring-chart-explain{margin:0 0 7px;color:#776858;font-size:11px;line-height:1.55}
+.monitoring-chart-card .chart-holder{margin-top:2px}
+.monitoring-chart-card .chart,.monitoring-optimization .chart{aspect-ratio:2.75}
+.monitoring-chart-details{margin-top:12px;border-top:1px solid #f0e5db;padding-top:10px}
+.monitoring-chart-details summary,.monitoring-actions>summary{cursor:pointer;color:var(--brand-orange-deep);font-size:11px;font-weight:800}
+.monitoring-chart-details p{margin:9px 0 0;color:#756456;font-size:11px;line-height:1.6}
+.monitoring-health-summary{color:#756456;font-size:11px;line-height:1.6;margin:-4px 0 14px}
+.monitoring-status-good,.monitoring-status-watch{background:#edf7e9;color:#47733c;white-space:nowrap}
+.monitoring-status-watch{background:#fff2e4;color:#9d5a13}
+.monitoring-error-comparison{display:grid;gap:8px}
+.monitoring-error-comparison>div{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #f0e5db;border-radius:8px;padding:10px 11px}
+.monitoring-error-comparison span{color:#756456;font-size:10px;line-height:1.4}
+.monitoring-error-comparison strong{color:#3b3027;font-size:12px;white-space:nowrap}
+.monitoring-health .forecast-score{margin:10px 0;background:#f2f8ef;color:#4c7041}
+.monitoring-health .forecast-score strong{font-size:15px}
+.monitoring-health .stat-row{font-size:10px}
+.monitoring-health .note{font-size:10px;line-height:1.55}
+.monitoring-optimization .chart-holder{margin-top:4px}
+.monitoring-optimization .card-head .primary{flex:none}
+.monitoring-scenario-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:13px}
+.monitoring-scenario-stats>div{display:grid;gap:5px;border:1px solid #f0e5db;border-radius:8px;padding:10px}
+.monitoring-scenario-stats span{color:#827264;font-size:10px}
+.monitoring-scenario-stats strong{color:#41352b;font-size:12px}
+.monitoring-optimization>.note{margin-top:12px}
+.monitoring-actions{margin-top:14px;padding:14px 17px}
+.monitoring-actions>summary{display:flex;justify-content:space-between;gap:10px;list-style:none}
+.monitoring-actions>summary::-webkit-details-marker{display:none}
+.monitoring-actions>summary:after{content:'＋';font-size:14px}
+.monitoring-actions[open]>summary:after{content:'−'}
+.monitoring-actions>summary span{margin-left:auto;color:#897868;font-size:10px;font-weight:600}
+.monitoring-action-list{display:grid;gap:8px;margin:13px 0}
+.monitoring-action{display:flex;justify-content:space-between;gap:12px;border:1px solid #f0e5db;border-radius:8px;padding:11px}
+.monitoring-action h3{font-size:12px;color:#41352b}
+.monitoring-action p,.monitoring-action small{display:block;margin-top:4px;color:#756456;font-size:10px;line-height:1.5}
+.monitoring-action .badge{height:max-content;white-space:nowrap}
+.monitoring-actions>.note{padding-top:10px;border-top:1px solid #f0e5db}
+@media(max-width:1050px){.monitoring-primary{grid-template-columns:minmax(0,1.35fr) minmax(250px,.9fr)}}
+@media(max-width:900px){.monitoring-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.monitoring-primary{grid-template-columns:1fr}.monitoring-health{display:grid;grid-template-columns:1fr 1fr;column-gap:16px}.monitoring-health>.card-head,.monitoring-health>.monitoring-health-summary,.monitoring-health>.note{grid-column:1/-1}.monitoring-health>.forecast-score{align-self:center}}
+@media(max-width:600px){.monitoring-card-heading{flex-wrap:wrap}.monitoring-card-heading .segmented{max-width:100%}.monitoring-card-heading .segmented button{padding:7px 8px}.monitoring-chart-card .chart,.monitoring-optimization .chart{aspect-ratio:1.7}.monitoring-health{display:block}.monitoring-scenario-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.monitoring-action{align-items:flex-start}.monitoring-action .badge{font-size:9px}}
 

@@ -1,9 +1,16 @@
 """Checks for the local, source-labelled workbench calculations and plan state."""
 from uuid import UUID
+import pytest
+import src.workbench as workbench
 
 from fastapi import HTTPException
 
 from src.workbench import SNAPSHOT, SESSION, ActionRequest, CopilotRequest, _state, copilot, decide, report
+
+
+@pytest.fixture(autouse=True)
+def isolate_workbench_persistence(tmp_path, monkeypatch):
+    monkeypatch.setattr(workbench, "SESSION_FILE", tmp_path / "workbench-session.json")
 
 
 def test_four_buildings_have_distinct_observed_results_and_source_dates():
@@ -85,3 +92,17 @@ def test_zero_impact_proposal_cannot_be_approved():
     else:
         raise AssertionError("A zero-impact proposal must be rejected")
     assert SESSION[key]["approved"] == []
+
+
+def test_dashboard_report_includes_planning_assumptions_without_changing_inventory():
+    SESSION.clear()
+    key = SNAPSHOT["assets"]["items"][0]["id"]
+    response = report(UUID(key), "week", dashboard=True, load_type="hvac",
+                      target_percent=25, tree_factor=22, bei_benchmark=180,
+                      evidence_count=3)
+    assert response.body.startswith(b"%PDF-1.4")
+    assert b"Dashboard planning appendix" in response.body
+    assert b"Assumed load allocation" in response.body
+    assert b"Selected load: HVAC" in response.body
+    assert b"Scope 1 / direct" in response.body
+    assert b"not separately metered" in response.body

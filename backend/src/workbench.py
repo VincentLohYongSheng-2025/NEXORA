@@ -12,7 +12,7 @@ import json
 import re
 from pathlib import Path
 from threading import Lock
-from typing import Literal
+from typing import Annotated, Literal
 from uuid import UUID, NAMESPACE_URL, uuid5
 from zoneinfo import ZoneInfo
 
@@ -123,11 +123,29 @@ class ActionRequest(BaseModel):
     asset_id: UUID
 
 
+class SimulatorDesign(BaseModel):
+    model_config = ConfigDict(extra="allow", allow_inf_nan=False)
+    evCount: int = Field(default=8, ge=0, le=1000)
+    evPower: float = Field(default=22, ge=1, le=350)
+    evHours: float = Field(default=3, ge=0, le=24)
+    evStart: int = Field(default=9, ge=0, le=23)
+    evDays: int = Field(default=300, ge=1, le=365)
+
+
 class ScenarioRequest(BaseModel):
     asset_id: UUID
     name: str = Field(min_length=1, max_length=64)
-    technology: Literal["pv", "battery", "pv_battery"]
+    technology: Literal["none", "pv", "battery", "pv_battery", "ev", "pv_ev", "battery_ev", "pv_battery_ev"]
     config: Configuration
+    design: SimulatorDesign = Field(default_factory=SimulatorDesign)
+    scenario_id: int | None = Field(default=None, ge=1)
+
+
+class SupportRequest(BaseModel):
+    asset_id: UUID
+    discipline: Literal["solar", "battery", "ev", "combined"] = "combined"
+    note: str = Field(min_length=3, max_length=1000)
+    scenario: ScenarioRequest | None = None
 
 
 class CopilotRequest(BaseModel):
@@ -262,6 +280,7 @@ def _state(asset_id: str, period: str) -> dict:
         "model": {"method": bundle["forecast"]["method"], "test_metrics": bundle["forecast"]["test_metrics"],
                   "limitations": bundle["forecast"]["limitations"]},
         "config": config, "alerts": alerts, "actions": actions, "history": session["history"], "scenarios": session["scenarios"],
+        "support_requests": session.get("support_requests", []),
         "metrics": {
             "observed_energy_kwh": observed_total,
             "observed_cost_estimate_myr": observed_total * config["tariff_myr_per_kwh"] if config["tariff_myr_per_kwh"] is not None else None,
@@ -323,39 +342,82 @@ def configure(payload: ConfigRequest):
 @router.post("/scenarios")
 def save_scenario(payload: ScenarioRequest):
     key = str(payload.asset_id)
-    asset, bundle = _asset(key)
-    config = payload.config.model_dump()
-    if payload.technology == "pv":
-        config["battery_kwh"] = config["battery_power_kw"] = config["starting_soc_percent"] = 0
-    if payload.technology == "battery":
-        config["pv_kw"] = 0
-    result = _dispatch(asset, bundle, config)
-    record = {"id": len(_session(key)["scenarios"]) + 1, "name": payload.name, "technology": payload.technology,
-              "config": config, "forecast_grid_avoided_kwh": result["baseline_energy_kwh"] - result["simulated_grid_energy_kwh"],
-              "peak_reduction_kw": result["baseline_peak_kw"] - result["simulated_grid_peak_kw"],
-              "cost_difference_myr": result["cost_estimate"]["horizon_difference_myr"] if result["cost_estimate"] else None,
-              "label": "Saved simulation — no equipment change"}
     session = _session(key)
+    if payload.scenario_id is not None and not any(s["id"] == payload.scenario_id for s in session["scenarios"]):
+        raise HTTPException(404, "Scenario to update was not found for this building")
+    result = _scenario_preview(payload)
+    record = {"id": payload.scenario_id or max((s["id"] for s in session["scenarios"]), default=0) + 1, "name": payload.name, "technology": payload.technology,
+              "config": payload.config.model_dump(), "design": payload.design.model_dump(), "preview": result,
+              "forecast_grid_avoided_kwh": result["grid_avoided_kwh"],
+              "peak_reduction_kw": result["peak_reduction_kw"],
+              "cost_difference_myr": result["cost_difference_myr"],
+              "label": "Saved simulation — no equipment change"}
+    session["scenarios"] = [s for s in session["scenarios"] if s["id"] != record["id"]]
     session["scenarios"].insert(0, record)
     session["history"].insert(0, {"type": "scenario", "label": f"Saved {payload.name}", "at": datetime.now(ZoneInfo("Asia/Kuala_Lumpur")).isoformat(timespec="minutes")})
+    _save_session()
     return record
 
 
 @router.post("/preview")
 def preview_scenario(payload: ScenarioRequest):
+    return _scenario_preview(payload)
+
+
+def _scenario_preview(payload: ScenarioRequest):
     asset, bundle = _asset(str(payload.asset_id))
     config = payload.config.model_dump()
-    if payload.technology == "pv":
+    selected = payload.technology.split("_")
+    if "battery" not in selected:
         config["battery_kwh"] = config["battery_power_kw"] = config["starting_soc_percent"] = 0
-    if payload.technology == "battery":
+    if "pv" not in selected:
         config["pv_kw"] = 0
+    building = [r["forecast_kwh"] for r in bundle["forecast"]["items"]]
+    ev = []
+    for row in bundle["forecast"]["items"]:
+        hour = datetime.fromisoformat(row["timestamp"].replace("Z", "+00:00")).astimezone(ZoneInfo(asset["timezone"])).hour
+        overlap = max(0., min(1., payload.design.evHours - ((hour - payload.design.evStart) % 24)))
+        ev.append(payload.design.evCount * payload.design.evPower * overlap * payload.design.evDays / 365 if "ev" in selected else 0.)
+    bundle = deepcopy(bundle)
+    for row, additional in zip(bundle["forecast"]["items"], ev):
+        row["forecast_kwh"] += additional
     result = _dispatch(asset, bundle, config)
+    avoided = sum(building) - result["simulated_grid_energy_kwh"]
+    for row, base, additional in zip(result["items"], building, ev):
+        row.update(building_baseline_kwh=base, ev_kwh=additional)
     return {"technology": payload.technology, "forecast_energy_kwh": result["baseline_energy_kwh"],
+            "building_energy_kwh": sum(building), "ev_energy_kwh": sum(ev),
+            "solar_generation_kwh": sum(r["solar_kwh"] for r in result["items"]),
+            "initial_stored_kwh": result["initial_stored_kwh"], "ending_stored_kwh": result["ending_stored_kwh"],
             "simulated_grid_kwh": result["simulated_grid_energy_kwh"],
-            "grid_avoided_kwh": result["baseline_energy_kwh"] - result["simulated_grid_energy_kwh"],
-            "peak_reduction_kw": result["baseline_peak_kw"] - result["simulated_grid_peak_kw"],
-            "cost_difference_myr": result["cost_estimate"]["horizon_difference_myr"] if result["cost_estimate"] else None,
+            "grid_avoided_kwh": avoided,
+            "peak_reduction_kw": max(building) - result["simulated_grid_peak_kw"],
+            "cost_difference_myr": avoided * config["tariff_myr_per_kwh"] if config["tariff_myr_per_kwh"] is not None else None,
             "items": result["items"], "limitations": result["limitations"], "label": "Hypothetical 24-hour forecast simulation"}
+
+
+@router.post("/scenarios/{scenario_id}/delete")
+def delete_scenario(scenario_id: int, payload: ActionRequest):
+    session = _session(str(payload.asset_id))
+    if not any(s["id"] == scenario_id for s in session["scenarios"]):
+        raise HTTPException(404, "Scenario not found")
+    session["scenarios"] = [s for s in session["scenarios"] if s["id"] != scenario_id]
+    _save_session()
+    return {"deleted": scenario_id}
+
+
+@router.post("/support-requests")
+def request_support(payload: SupportRequest):
+    if payload.scenario and payload.scenario.asset_id != payload.asset_id:
+        raise HTTPException(422, "Support scenario must refer to the selected building")
+    session = _session(str(payload.asset_id))
+    requests = session.setdefault("support_requests", [])
+    record = {"id": len(requests) + 1, "discipline": payload.discipline, "note": payload.note,
+              "status": "pending_review", "created_at": datetime.now(ZoneInfo("Asia/Kuala_Lumpur")).isoformat(timespec="minutes")}
+    record["scenario"] = payload.scenario.model_dump(mode="json") if payload.scenario else None
+    requests.append(record)
+    _save_session()
+    return {**record, "message": "Request saved locally for admin review. No external message has been sent."}
 
 
 @router.post("/actions/{action_id}/{decision}")
@@ -535,10 +597,22 @@ async def gemini_copilot(request: Request, payload: CopilotRequest,
 
 
 @router.get("/report.pdf")
-def report(asset_id: UUID, period: Literal["day", "week"] = "day"):
+def report(asset_id: UUID, period: Literal["day", "week"] = "day",
+           dashboard: bool = False,
+           load_type: Literal["all", "hvac", "lighting", "plugs", "lifts", "ev"] = "all",
+           target_percent: Annotated[float, Query(ge=1, le=100)] = 20,
+           tree_factor: Annotated[float, Query(ge=0.1, le=10000)] = 21.77,
+           bei_benchmark: Annotated[float, Query(ge=1, le=10000)] = 180,
+           evidence_count: Annotated[int, Query(ge=0, le=6)] = 0):
     from src.carbon_report import build_carbon_report
 
     data = _state(str(asset_id), period)
+    if dashboard:
+        data["dashboard_planning"] = {
+            "load_type": load_type, "target_percent": target_percent,
+            "tree_factor": tree_factor, "bei_benchmark": bei_benchmark,
+            "evidence_count": evidence_count,
+        }
     name = data["asset"].get("name") or data["asset"]["source_asset_id"]
     slug = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
     filename = f"nexora-carbon-esg-{slug}-{period}.pdf"

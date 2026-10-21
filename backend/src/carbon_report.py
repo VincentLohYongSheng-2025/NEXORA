@@ -14,12 +14,12 @@ from reportlab.platypus import (
     Flowable, PageBreak, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle,
 )
 
-NAVY = colors.HexColor('#142B46')
-TEAL = colors.HexColor('#00A991')
-BLUE = colors.HexColor('#147CC1')
-MUTED = colors.HexColor('#667E90')
-PALE = colors.HexColor('#F0F6F9')
-LINE = colors.HexColor('#DAE5ED')
+NAVY = colors.HexColor('#663519')
+TEAL = colors.HexColor('#DC6716')
+BLUE = colors.HexColor('#C95C14')
+MUTED = colors.HexColor('#897464')
+PALE = colors.HexColor('#FFF5EB')
+LINE = colors.HexColor('#EFDFD0')
 WIDTH = A4[0] - 84
 
 
@@ -101,7 +101,7 @@ class CarbonTrend(Flowable):
         area = c.beginPath(); area.moveTo(left, bottom)
         for x, y in points: area.lineTo(x, y)
         area.lineTo(points[-1][0], bottom); area.close()
-        c.setFillColor(colors.HexColor('#E2F5EF')); c.drawPath(area, fill=1, stroke=0)
+        c.setFillColor(colors.HexColor('#FFF0E2')); c.drawPath(area, fill=1, stroke=0)
         path = c.beginPath(); path.moveTo(*points[0])
         for point in points[1:]: path.lineTo(*point)
         c.setStrokeColor(TEAL); c.setLineWidth(1.8); c.drawPath(path)
@@ -189,13 +189,13 @@ def build_carbon_report(data: dict) -> bytes:
              table(['Indicator', 'Selected-period result'], [
                  ['Building Energy Index (BEI)', f'{fmt(bei, 3)} kWh/m2; selected period only' if bei is not None else 'Not available: floor area is missing'],
                  ['End-use emissions / HVAC, lighting, plugs, lifts, EV', 'Not separately metered; electricity total remains unallocated.'],
-                 ['Year-on-year change / target progress', 'Not assessed: comparable baseline and target are not configured.'],
+                 ['Year-on-year performance', 'Not assessed: a comparable measured annual baseline is unavailable.'],
              ], [235, WIDTH - 235]),
              p('05 / Methodology & calculation assumptions', H2),
              p(f'<b>Electricity emissions:</b> kWh x {fmt(factor, 4)} kg CO<sub>2</sub>e/kWh. '
                f'<b>Cost:</b> kWh x {fmt(config["tariff_myr_per_kwh"], 4)} MYR/kWh. '
                'Tonnes = kilograms / 1,000. BEI = selected-period kWh / floor area; it is not annualised. '
-               'No tree equivalent or certified offset is calculated.'),
+               'No certified offset is calculated. Optional planning comparisons are recorded separately in the dashboard appendix.'),
              Spacer(1, 6), p(f'<b>Assumption reference:</b> {safe(config["assumption_reference"])}', SMALL),
              Spacer(1, 6), p('<b>Source:</b> Building Data Genome Project 2 v1.0, CC BY 4.0. '
                'doi.org/10.5281/zenodo.3887306. '
@@ -203,5 +203,36 @@ def build_carbon_report(data: dict) -> bytes:
                + ('Facility results are scaled illustrative estimates derived from this historical benchmark. ' if estimated else 'Source readings are historical public benchmark observations. ')
                + 'Floor alerts are illustrative. No corporate-site identity, physical control or verified saving is claimed.', SMALL),
     ]
+    planning = data.get('dashboard_planning')
+    if planning:
+        shares = [('hvac', 'HVAC', 48), ('lighting', 'Lighting', 21),
+                  ('plugs', 'Plug loads', 14), ('lifts', 'Lifts', 9), ('ev', 'EV charging', 8)]
+        selected = next((row for row in shares if row[0] == planning['load_type']), None)
+        share = selected[2] / 100 if selected else 1
+        source_days = max(1, len(data['observed']) / 24)
+        annualised = m['observed_energy_kwh'] / source_days * 365 / asset['floor_area_m2'] * share if asset.get('floor_area_m2') else None
+        avoided = m['projected_avoided_carbon_kg']
+        trees = avoided * share / planning['tree_factor'] if avoided is not None else None
+        story += [PageBreak(), p('Dashboard planning appendix', TITLE),
+                  p('Whole-building inventory is retained on the preceding pages. This appendix records the dashboard filter and its planning assumptions.', SMALL),
+                  p(f'Selected load: {safe(selected[1] if selected else "All electricity loads")}', H2),
+                  Metrics([
+                      ('Selected emissions', fmt(co2 * share / 1000 if co2 is not None else None, 3), 't CO2e | selected period'),
+                      ('Annualised energy intensity', fmt(annualised), 'kWh/m2/year | extrapolated'),
+                      ('Trees equivalent', fmt(trees), 'annual sequestration comparison'),
+                  ]), p('Assumed load allocation', H2),
+                  table(['Load type', 'Assumed share', 'Selected-period t CO2e'],
+                        [[name, f'{percent}%', fmt(co2 * percent / 100 / 1000 if co2 is not None else None, 3)]
+                         for _, name, percent in shares], [200, 110, WIDTH - 310]),
+                  Spacer(1, 9), p('End-use values are planning allocations of the electricity total, not separately metered readings. The shares sum to 100%.', SMALL),
+                  p('Targets and reporting evidence', H2),
+                  table(['Planning input', 'Value'], [
+                      ['CO2 reduction target', f'{fmt(planning["target_percent"])}%'],
+                      ['Annual BEI comparison benchmark', f'{fmt(planning["bei_benchmark"])} kWh/m2/year'],
+                      ['Tree comparison assumption', f'{fmt(planning["tree_factor"], 2)} kg CO2e/tree/year'],
+                      ['Evidence items reviewed by user', f'{planning["evidence_count"]} of 6'],
+                  ], [250, WIDTH - 250]),
+                  Spacer(1, 10), p('Annualised BEI extrapolates the selected source-day energy over 365 days. It is not measured annual performance. The dashboard trend repeats the source-day pattern into future planning periods without a seasonal or weather model. No confidence interval is claimed.', SMALL),
+                  Spacer(1, 7), p('Trees equivalent divides next-24-hour projected avoided emissions by the configured annual tree comparison. It is not a certified offset or a tree-planting claim. Evidence checklist completion records user review only; it does not establish certification, assurance or regulatory compliance.', SMALL)]
     doc.build(story, onFirstPage=chrome, onLaterPages=chrome)
     return output.getvalue()

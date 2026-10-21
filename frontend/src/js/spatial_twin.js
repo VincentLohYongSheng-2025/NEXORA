@@ -12,7 +12,7 @@ export const FACILITIES = [
 ];
 
 /** Concept geometry, independent of the selected historical benchmark data. */
-export function mountSpatialTwin(container,{facility=null,night=false,selectedFloor='whole',initialView=null,onRoom=()=>{},onEnter=()=>{},onFloor=()=>{},returnFrom=null,returnView=null}={}) {
+export function mountSpatialTwin(container,{facility=null,night=false,selectedFloor='whole',initialView=null,installation=null,onRoom=()=>{},onEnter=()=>{},onFloor=()=>{},returnFrom=null,returnView=null}={}) {
   if(!container||!window.THREE)return null;
   const T=window.THREE, detail=!!facility, spec=FACILITIES.find(f=>f.id===facility)||FACILITIES[0];
   let renderer;
@@ -134,6 +134,52 @@ export function mountSpatialTwin(container,{facility=null,night=false,selectedFl
     const combined=new T.Mesh(geometry,batch.material);combined.castShadow=true;combined.receiveShadow=true;combined.userData={facility:batch.facility,floor:batch.floor,zone:batch.zone,infill:batch.infill,interior:batch.interior,slab:batch.slab};scene.add(combined);if(batch.floor)floorMeshes.push(combined);retained.add(geometry);if(batch.facility)hits.push(combined);batch.parts.forEach(g=>g.dispose());
   }
   originals.forEach(o=>o.parent.remove(o));geometries.forEach(g=>{if(!retained.has(g))g.dispose()});geometries.splice(0,geometries.length,...retained);batches.clear();originals.length=0;
+  // The simulator uses this same facility scene, with only the proposed
+  // equipment added. Keep its geometry separate from the static batch so the
+  // Before/After control can toggle it without rebuilding the building.
+  let setInstallation=()=>{};
+  if(detail&&installation){
+    const roof={
+      mall:{y:6.5,xs:[-2.6,-1.1,.4,1.9],zs:[-2,0]},
+      hospital:{y:7.7,xs:[-5.2,-3.7,-2.2],zs:[.3,2.1]},
+      restaurant:{y:3.2,xs:[-2.4,-.9,.6,2.1],zs:[-1.5,.3]},
+      commercial:{y:15.8,xs:[-4.2,-2.7,-1.2,.3],zs:[-2.8,-1]},
+      residential:{y:10.4,xs:[3.3,4.8,6.3],zs:[-2.8,-1]},
+      solar:{y:2.8,xs:[-8.2,-6.7],zs:[6.4]},
+    }[facility];
+    const layer=new T.Group(),solarLayer=new T.Group(),batteryLayer=new T.Group(),evLayer=new T.Group();
+    layer.scale.setScalar(1.1);scene.add(layer);layer.add(solarLayer,batteryLayer,evLayer);
+    const positions=roof.zs.flatMap(z=>roof.xs.map(x=>[x,z]));
+    const solarPanels=positions.map(([x,z])=>{
+      const panel=new T.Group();panel.position.set(x,roof.y,z);panel.rotation.x=-.12;solarLayer.add(panel);
+      box(1.28,.09,1.5,0,0,0,M.metal,panel);
+      box(1.18,.06,1.4,0,.07,0,M.panel,panel);
+      box(.06,.17,.06,-.46,-.1,.5,M.stone,panel);
+      box(.06,.17,.06,.46,-.1,.5,M.stone,panel);
+      return panel;
+    });
+    const batteryX=facility==='solar'?13:spec.w/2+2;
+    const batteryZ=facility==='restaurant'?3:facility==='mall'?5:facility==='residential'?6:spec.d/2+1;
+    box(1.8,2.2,1.2,batteryX,1.15,batteryZ,M.teal,batteryLayer);
+    box(1.5,.12,1.26,batteryX,2.32,batteryZ,M.dark,batteryLayer);
+    for(let i=0;i<4;i++)box(1.4,.035,.035,batteryX,.6+i*.36,batteryZ+.63,M.ivory,batteryLayer);
+    const chargers=Array.from({length:8},(_,i)=>{
+      const charger=new T.Group();charger.position.set((i-3.5)*1.5,0,spec.d/2+2.7);evLayer.add(charger);
+      box(.38,1.15,.26,0,.72,0,M.teal,charger);box(.25,.28,.03,0,.98,.15,M.panel,charger);
+      box(.08,.8,.08,.28,.68,.12,M.dark,charger);box(.3,.08,.08,.17,1.1,.12,M.dark,charger);
+      return charger;
+    });
+    setInstallation=next=>{
+      solarLayer.visible=!!(next.after&&next.solar&&next.capacity>0);
+      batteryLayer.visible=!!(next.after&&next.battery&&next.batteryKwh>0);
+      evLayer.visible=!!(next.after&&next.ev&&next.evCount>0);
+      const count=Math.min(solarPanels.length,Math.max(1,Math.ceil((Number(next.capacity)||0)/60)));
+      solarPanels.forEach((panel,i)=>{panel.visible=i<count;panel.rotation.x=-(Number(next.tilt??10))*Math.PI/180;});
+      chargers.forEach((charger,i)=>charger.visible=i<Math.min(next.evCount||0,8));
+      dirty=true;renderer.shadowMap.needsUpdate=true;
+    };
+    setInstallation(installation);
+  }
   const cutPlane=new T.Plane(new T.Vector3(0,-1,0),40);
   renderer.localClippingEnabled=true;
   let activeFloor=selectedFloor,floorMotion=null;
@@ -203,5 +249,5 @@ export function mountSpatialTwin(container,{facility=null,night=false,selectedFl
     if(dirty){for(const l of labels){const p=l.point.clone().project(camera);l.element.style.left=`${(p.x+1)*50}%`;l.element.style.top=`${(1-p.y)*50}%`;l.element.style.visibility=p.z>1||Math.abs(p.x)>1||Math.abs(p.y)>1?'hidden':'visible';}renderer.render(scene,camera);dirty=false;}frame=requestAnimationFrame(animate);
   }
   frame=requestAnimationFrame(animate);
-  return {enter,setFloor,getView(){return {facility,position:camera.position.toArray(),target:controls.target.toArray(),wholePosition:wholePose.position.toArray(),wholeTarget:wholePose.target.toArray()}},zoom(f){if(transition||floorMotion)return;camera.position.sub(controls.target).multiplyScalar(f).add(controls.target);controls.update();},reset(){if(floorMotion)return;if(detail&&activeFloor!=='whole'){onFloor('whole');return;}if(transition)return;camera.position.copy(home);controls.target.copy(look);resize();controls.update();},rotate(){if(transition||floorMotion)return;controls.autoRotate=!controls.autoRotate;controls.autoRotateSpeed=.65;},dispose(){disposed=true;cancelAnimationFrame(frame);observer.disconnect();controls.dispose();renderer.domElement.removeEventListener('pointerdown',downHandler);renderer.domElement.removeEventListener('pointerup',upHandler);renderer.domElement.removeEventListener('pointermove',moveHandler);labels.forEach(l=>l.element.remove());geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());renderer.dispose();renderer.forceContextLoss();renderer.domElement.remove();}};
+  return {enter,setFloor,setInstallation,getView(){return {facility,position:camera.position.toArray(),target:controls.target.toArray(),wholePosition:wholePose.position.toArray(),wholeTarget:wholePose.target.toArray()}},zoom(f){if(transition||floorMotion)return;camera.position.sub(controls.target).multiplyScalar(f).add(controls.target);controls.update();},reset(){if(floorMotion)return;if(detail&&activeFloor!=='whole'){onFloor('whole');return;}if(transition)return;camera.position.copy(home);controls.target.copy(look);resize();controls.update();},rotate(){if(transition||floorMotion)return;controls.autoRotate=!controls.autoRotate;controls.autoRotateSpeed=.65;},dispose(){disposed=true;cancelAnimationFrame(frame);observer.disconnect();controls.dispose();renderer.domElement.removeEventListener('pointerdown',downHandler);renderer.domElement.removeEventListener('pointerup',upHandler);renderer.domElement.removeEventListener('pointermove',moveHandler);labels.forEach(l=>l.element.remove());geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());renderer.dispose();renderer.forceContextLoss();renderer.domElement.remove();}};
 }
