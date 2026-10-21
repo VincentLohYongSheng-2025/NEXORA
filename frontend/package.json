@@ -1,0 +1,14 @@
+{
+  "name": "energios-frontend-v2",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "test": "node --test tests/api.test.mjs tests/simulation.test.mjs tests/digital_twin_simulation.test.mjs tests/assistant.test.mjs tests/interaction_helpers.test.mjs tests/demo_preferences.test.mjs tests/scenario_profile.test.mjs tests/spatial_camera.test.mjs",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "5.4.21"
+  }
+}

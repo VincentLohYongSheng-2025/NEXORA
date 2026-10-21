@@ -1,0 +1,92 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 2833 >>
+stream
+0.04 0.35 0.60 rg
+BT /F1 19 Tf 48 745 Td (EnergiOS | Carbon and Energy Report) Tj ET
+0.37 0.49 0.56 rg
+BT /F1 9 Tf 48 724 Td (Illustrative facility profile derived from BDG2) Tj ET
+0.10 0.67 0.58 RG 1.5 w 48 710 m 564 710 l S
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 687 Td (Building: The Garden Kitchen) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 672 Td (Source window: 2017-12-31T00:00:00 to 2017-12-31T23:00:00) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 657 Td (Source timezone: US/Central) Tj ET
+0.06 0.36 0.56 rg
+BT /F1 11 Tf 48 631 Td (Demo whole-building electricity estimate:) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 616 Td (Energy: 586.71 kWh) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 601 Td (Peak interval-average demand: 37.16 kW) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 586 Td (Estimated cost: MYR 293.35) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 571 Td (Estimated emissions: 322.69 kg CO2e) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 556 Td (Selected-period BEI: 0.32 kWh/m2 \(not annual\)) Tj ET
+0.06 0.36 0.56 rg
+BT /F1 11 Tf 48 530 Td (Separate next-24-hour forecast / approved demo plan:) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 515 Td (Forecast energy: 608.87 kWh) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 500 Td (Projected energy reduction: 13.40 kWh) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 485 Td (Projected grid energy avoided: 13.40 kWh) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 470 Td (Projected cost savings: MYR 6.70) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 455 Td (Projected peak reduction: 0.72 kW) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 440 Td (Projected avoided emissions: 7.37 kg CO2e) Tj ET
+0.06 0.36 0.56 rg
+BT /F1 11 Tf 48 414 Td (Calculation assumptions:) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 399 Td (Flat demo tariff: 0.50 MYR/kWh) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 384 Td (Demo carbon factor: 0.55 kg CO2e/kWh) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 369 Td (Source: Nexora township v1 illustrative profile; hypothetical tariff, carbon factor and) Tj ET
+BT /F1 10 Tf 48 354 Td (equipment inputs.) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 328 Td (Local demo only. No physical equipment control or verified savings.) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 313 Td (No corporate-site identity, floor telemetry or verified saving is claimed.) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 298 Td (Dataset: doi.org/10.5281/zenodo.3887306 | CC BY 4.0) Tj ET
+0.06 0.36 0.56 rg
+BT /F1 11 Tf 48 272 Td (Alert approvals:) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 257 Td (Ground / Dining room: Cooling an unoccupied zone - settled) Tj ET
+0.17 0.25 0.30 rg
+BT /F1 10 Tf 48 242 Td (Roof / HVAC plant: High supply temperature - settled) Tj ET
+0.78 0.85 0.89 RG .5 w 48 49 m 564 49 l S
+0.45 0.55 0.60 rg
+BT /F1 8 Tf 48 34 Td (EnergiOS | Historical benchmark and labelled demo estimates) Tj ET
+BT /F1 8 Tf 538 34 Td (1 / 1) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000311 00000 n 
+trailer << /Size 6 /Root 1 0 R >>
+startxref
+3196
+%%EOF

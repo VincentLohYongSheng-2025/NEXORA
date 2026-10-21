@@ -1,0 +1,123 @@
+:root {
+  color-scheme: light;
+  --brand-orange: #ed6a0b;
+  --brand-orange-deep: #c94e08;
+  --brand-orange-soft: #fff0e2;
+  --brand-orange-wash: #fff8f1;
+  --brand-amber: #f5a623;
+  --brand-ink: #34271f;
+  --brand-muted: #81766d;
+  --brand-border: #eee1d5;
+  --brand-surface: #ffffff;
+  --brand-canvas: #fffaf5;
+  accent-color: var(--brand-orange);
+}
+
+html, body, #app, .shell { background: var(--brand-canvas); color: var(--brand-ink); }
+.topbar { background:#fff; border-bottom-color:var(--brand-border); box-shadow:0 3px 20px #60320d0a; }
+.nav a { color:#75685e; }
+.nav a:hover { background:var(--brand-orange-wash); color:var(--brand-orange-deep); }
+.nav a.active { background:transparent; color:var(--brand-orange-deep); border-color:var(--brand-orange); }
+.logo { color:var(--brand-orange-deep); }
+.logo-mark { background:linear-gradient(145deg,var(--brand-orange-deep),#f5a623); box-shadow:0 4px 9px #ed6a0b38; }
+.primary, .pill-button { color:#fff; background:var(--brand-orange); box-shadow:0 4px 12px #d95a1230; }
+.primary:hover, .pill-button:hover { background:var(--brand-orange-deep); }
+.secondary { color:var(--brand-orange-deep); background:var(--brand-orange-soft); }
+.secondary:hover { background:#ffe3c8; }
+.ghost { color:#705c4f; border-color:var(--brand-border); }
+.ghost:hover { border-color:#e8a06e; color:var(--brand-orange-deep); background:var(--brand-orange-wash); }
+.avatar { color:#fff; background:var(--brand-orange); }
+.page-head p, .muted, .note, .caption { color:var(--brand-muted); }
+.select-wrap select:focus, .field input:focus, .field select:focus,
+.field textarea:focus, .chat-input input:focus {
+  border-color:var(--brand-orange); box-shadow:0 0 0 3px #ed6a0b20;
+}
+.source-strip { background:var(--brand-orange-wash); border-color:#f4dfcb; color:#76543c; }
+.source-strip strong { color:var(--brand-orange-deep); }
+.dot { background:var(--brand-orange); }
+.card, .kpis, .township-card { border-color:var(--brand-border); box-shadow:0 3px 16px #60320d08; }
+.badge { background:#fff2e5; color:#b95210; }
+.badge.blue, .badge.gray { background:#f8f2ec; color:#75685e; }
+.badge.amber { background:#fff0d3; color:#985900; }
+.kpi .kpi-icon, .action-symbol { background:var(--brand-orange-soft); color:var(--brand-orange-deep); }
+.kpi.teal .kpi-icon, .kpi.green .kpi-icon { background:var(--brand-orange-soft); color:var(--brand-orange-deep); }
+.sparkline, .kpi.teal .sparkline, .kpi.green .sparkline { color:var(--brand-orange); }
+.kpis .kpi .sub { color:var(--brand-orange-deep); }
+.inline-link { color:var(--brand-orange-deep); }
+.chart-grid line { stroke:#efe4da; }
+.chart-axis { fill:#918378; }
+.chart-tooltip { background:#613413; }
+.segmented { background:#fbf6f1; border-color:var(--brand-border); }
+.segmented button.active { color:var(--brand-orange-deep); box-shadow:0 1px 4px #7d421415; }
+.tech-choice.active { border-color:var(--brand-orange); background:var(--brand-orange-wash); box-shadow:0 0 0 2px #ed6a0b20; }
+.floor-pills button.active { background:var(--brand-orange); border-color:var(--brand-orange); }
+.room-list button.active { border-color:#e8a06e; background:var(--brand-orange-soft); color:var(--brand-orange-deep); }
+.measure-bar { background:#f5e8dc; }
+.action-row:hover { background:var(--brand-orange-wash); }
+.recommendations { background:#fff; border-color:var(--brand-border); color:var(--brand-ink); }
+.recommendations h2, .recommendations h3 { color:var(--brand-ink); }
+.recommendations .muted, .recommendations .rec p { color:#77695e; }
+.recommendations .rec { border-color:#f0e4d9; }
+.recommendations .badge { background:var(--brand-orange-soft); color:var(--brand-orange-deep); }
+.recommendations .primary { color:#fff; background:var(--brand-orange); }
+.recommendations .ghost { background:#fff; color:#705c4f; border-color:var(--brand-border); }
+.recommendations .impact-number { color:var(--brand-orange-deep); }
+.recommendations .details summary { color:var(--brand-orange-deep); }
+.township-card { background:#f8f3ec; }
+.township-heading, .township-summary, .facility-directory button { background:#fffffffa; }
+.township-heading strong, .township-summary strong { color:#4d3626; }
+.township-indicator { background:var(--brand-orange); }
+.township-summary strong.good, .township-summary strong.blue { color:var(--brand-orange-deep); }
+.township-guide { color:#63452e; background:#fffffff0; border-color:#f0deca; }
+.township-compass, .township-compass span { color:#9c6136; }
+.facility-directory button { color:#563e2e; border-color:var(--brand-border); }
+.township-pin { color:#563e2e; }
+.township-pin small { color:#8b7869; }
+.township-pin b { color:var(--brand-orange-deep); }
+.township-pin:after { background:#e9b27d; }
+.copilot-fab { background:linear-gradient(135deg,var(--brand-orange-deep),#f5a623); box-shadow:0 8px 25px #d95a1240; }
+.chat-panel { border-color:var(--brand-border); }
+.chat-head { background:var(--brand-orange-deep); }
+.chat-head small { color:#ffe2c4; }
+.bubble { background:#fff5eb; color:#593c28; }
+.bubble.user { background:var(--brand-orange); color:#fff; }
+.prompt-row button { border-color:#efd9c5; color:var(--brand-orange-deep); }
+.prompt-row button:hover { background:var(--brand-orange-wash); }
+.details summary { color:var(--brand-orange-deep); }
+.details, .stat-row { border-color:#f0e5db; }
+.empty { background:#fffaf5; border-color:#ead9c9; color:#857569; }
+.loading, .boot { color:#9c6136; }
+.model-controls button.active { background:var(--brand-orange); }
+.orbit-toolbar button:hover { background:var(--brand-orange-wash); color:var(--brand-orange-deep); }
+.tech-choice, .floor-pills button, .room-list button { border-color:var(--brand-border); }
+input[type="range"] { accent-color:var(--brand-orange); }
+.error { background:#fff1eb; color:#9c3d18; }
+dialog { border:1px solid var(--brand-border); }
+dialog::backdrop { background:#49301f70; }
+.approval-savings { background:var(--brand-orange-wash); border-color:#f1d9c4; }
+.approval-savings > div { border-color:#f1d9c4; }
+.approval-savings dd { color:var(--brand-orange-deep); }
+.primary:focus-visible, .secondary:focus-visible, .ghost:focus-visible,
+.nav a:focus-visible, .township-pin:focus-visible, .facility-directory button:focus-visible {
+  outline:3px solid #ed6a0b70; outline-offset:2px;
+}
+
+@media (max-width:680px) { .nav.open { background:#fff8f1; } }
+
+.condition-icon.blue, .condition-icon.green, .condition-icon.teal, .condition-icon.amber { background:var(--brand-orange-soft); color:var(--brand-orange-deep); }
+.overview-right:focus-visible, .floor-navigation button:focus-visible, .floor-zone:focus-visible { outline-color:var(--brand-orange); }
+
+
+.floor-navigation button.active, .floor-zone.selected { background:var(--brand-orange-soft); border-color:var(--brand-orange); color:var(--brand-orange-deep); box-shadow:0 0 0 1px #ed6a0b20; }
+.floor-alert, .zone-status-dot { background:var(--brand-amber); }
+.energy-layer-button.active { background:#c94e08; border-color:#c94e08; color:#fff; }
+.energy-layer-dot, .energy-layer-dot.grid, .energy-layer-dot.solar { background:var(--brand-orange); }
+.township-return { color:var(--brand-orange-deep); border-color:#f0d9c6; }
+.township-return:hover { background:var(--brand-orange-wash); border-color:#e8a06e; }
+
+
+.stepper span.current { color:var(--brand-orange-deep); }
+.stepper span.current:before, .stepper span.done:before { background:var(--brand-orange); color:#fff; }
+.stepper b { background:#efcfb4; }
+.model-controls button.active, .segmented button.active { background:var(--brand-orange-soft); color:var(--brand-orange-deep); }
+
