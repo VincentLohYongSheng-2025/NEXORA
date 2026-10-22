@@ -1,4 +1,5 @@
 import {energyLegend, energySymbol} from './township_energy.js';
+import {flexCard, flexSimulatorPage} from './township_flex.js?v=flex-2';
 const e = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const n = value => value == null ? 'Not calculated' : new Intl.NumberFormat('en-MY',{maximumFractionDigits:1}).format(value);
 const rm = value => value == null ? 'Rate not set' : `RM ${Number(value).toFixed(2)}`;
@@ -8,7 +9,7 @@ export function actionCatalog(state){
  const alerts=items.flatMap(({asset,alerts=[]})=>alerts.map(a=>({...a,kind:'alert',asset_id:asset.id,target:asset.facility_id,target_name:asset.name,description:a.solution,sources:[],type:'Alert'})));
  const shares=(state.township?.energy_network?.recommendations||[]).map(a=>({...a,kind:'sharing',asset_id:items.find(i=>i.asset.facility_id===a.target)?.asset.id,description:`Share surplus from ${a.sources.join(' + ')} with ${a.target_name} · ${a.floor_label} during ${state.township.energy_network.window}.`,sources:a.source_ids,type:'AI suggestion'}));
  const actions=items.flatMap(({asset,actions=[]})=>actions.filter(a=>a.metric>0).map(a=>({...a,kind:'action',asset_id:asset.id,target:asset.facility_id,target_name:asset.name,description:a.reason,sources:[],floor:'whole',floor_label:'Whole building',type:'AI suggestion'})));
- return [...shares,...alerts,...actions];
+ return [...(state.township?.flex_plan?[state.township.flex_plan]:[]),...shares,...alerts,...actions];
 }
 export const simulationButton = (kind,id,asset) => `<button type="button" class="ghost action-simulation-button" data-simulate-kind="${e(kind)}" data-simulate-id="${e(id)}" data-simulate-asset="${e(asset)}">Simulation</button>`;
 export const actionHash = item => `action-simulator?${new URLSearchParams({kind:item.kind,id:item.id,asset:item.asset_id})}`;
@@ -18,12 +19,16 @@ export function selectedAction(state){
  return params.has('id')?catalog.find(a=>a.kind===params.get('kind')&&a.id===params.get('id')&&a.asset_id===params.get('asset')):catalog[0];
 }
 export function aiSuggestionCards(state,facility=null){
- const items=actionCatalog(state).filter(a=>a.kind!=='alert'&&(facility?(a.target===facility||a.sources.includes(facility)):true));
- if(!items.length)return '';
- return `<div class="ai-suggestion-list"><h3 class="action-list-label">AI suggestions <span>${items.length}</span></h3>${items.map(a=>`<article class="manager-alert ai-suggestion"><div class="manager-alert-top"><span class="ai-suggestion-badge">✧ AI suggestion</span><span class="manager-alert-number">${a.status==='approved'?'Approved plan':a.status==='dismissed'?'Dismissed':'For review'}</span></div><h3>${e(a.title)}</h3><p class="manager-alert-building">${e(a.target_name)}${a.floor_label?' · '+e(a.floor_label):''}</p><div class="manager-alert-solution"><strong>Suggested action</strong><p>${e(a.description)}</p></div><div class="alert-approve-row">${simulationButton(a.kind,a.id,a.asset_id)}${a.status==='proposed'?`<button type="button" class="primary ai-review-button" data-ai-review-kind="${e(a.kind)}" data-ai-review-id="${e(a.id)}" data-ai-review-asset="${e(a.asset_id)}">Review</button>`:''}</div></article>`).join('')}${state.township?.energy_network?.approved_grid_avoided_kwh>0?'<button type="button" class="inline-link" data-sharing-reset>Reset sharing plan</button>':''}</div>`;
+ const relevant=actionCatalog(state).filter(a=>a.kind!=='alert'&&(facility?(a.target===facility||a.sources.includes(facility)):true));
+ const items=relevant.filter(a=>a.kind!=='flex');
+ if(!relevant.length)return '';
+ return `${flexCard(relevant.find(a=>a.kind==='flex'),simulationButton)}<div class="ai-suggestion-list"><h3 class="action-list-label">AI suggestions <span>${items.length}</span></h3>${items.map(a=>`<article class="manager-alert ai-suggestion"><div class="manager-alert-top"><span class="ai-suggestion-badge">✧ AI suggestion</span><span class="manager-alert-number">${a.status==='approved'?'Approved plan':a.status==='dismissed'?'Dismissed':'For review'}</span></div><h3>${e(a.title)}</h3><p class="manager-alert-building">${e(a.target_name)}${a.floor_label?' · '+e(a.floor_label):''}</p><div class="manager-alert-solution"><strong>Suggested action</strong><p>${e(a.description)}</p></div><div class="alert-approve-row">${simulationButton(a.kind,a.id,a.asset_id)}${a.status==='proposed'?`<button type="button" class="primary ai-review-button" data-ai-review-kind="${e(a.kind)}" data-ai-review-id="${e(a.id)}" data-ai-review-asset="${e(a.asset_id)}">Review</button>`:''}</div></article>`).join('')}${state.township?.energy_network?.approved_grid_avoided_kwh>0?'<button type="button" class="inline-link" data-sharing-reset>Reset sharing plan</button>':''}</div>`;
 }
 export function actionScene(state){
  const selected=selectedAction(state),result=state.actionResultKey===location.hash?state.actionResult:null;
+ if(selected?.kind==='flex')return {network:state.township?.energy_network?{...state.township.energy_network,links:[]}:null,
+  focus:{target:selected.target,floor:'whole',sources:selected.sources,after:!!result&&state.actionView!=='before',flex:true,
+   labels:Object.fromEntries(selected.offers.map(p=>[p.facility,`${p.resource} · ↓ ${n(p.reduction_kw)} kW`]))}};
  const network=result?(state.actionView==='before'?result.before_network:result.after_network):state.township?.energy_network;
  return {network:network?{...network,links:network.links.filter(l=>l.status==='approved')}:null,
   focus:selected?{target:selected.target,floor:selected.floor,sources:selected.sources||[],after:!!result&&state.actionView!=='before'}:null};
@@ -31,6 +36,7 @@ export function actionScene(state){
 export function actionSimulatorPage(state,{heading,chart}){
  const selected=selectedAction(state),catalog=actionCatalog(state);
  if(!selected)return `${heading('Action Simulator','Preview an alert or AI suggestion across the township.',false)}<div class="empty">This action is no longer available. <a href="#overview">Return to action recommendations</a></div>`;
+ if(selected.kind==='flex')return flexSimulatorPage(state,selected,{heading});
  const result=state.actionResultKey===location.hash?state.actionResult:null;
  const metrics=result?.metrics;
  const sourceNames=(selected.sources||[]).map(id=>state.township.items.find(i=>i.asset.facility_id===id)?.asset.name||id);

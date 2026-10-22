@@ -26,6 +26,7 @@ from src.demo_scenarios import SolarGridDispatchInputs, ShiftInputs, solar_grid_
 from src.scenario_profile import build_scenario_profile
 from src.township_energy import energy_network
 from src.action_simulator import simulate_action
+from src.township_flex import build_flex_plan, PLAN_ID, PARTICIPANTS
 
 router = APIRouter(prefix="/workbench", tags=["Local demonstration workbench"])
 from src.malaysia_benchmark import SNAPSHOT, HISTORY_FORECASTS, SPECS, multiplier as malaysia_multiplier, derivative, schedule
@@ -377,6 +378,7 @@ def township(period: Literal["day", "week"] = "day"):
     solar_session = next((_session(s["asset"]["id"]) for s in states if s["asset"]["facility_id"] == "solar"), {})
     return {"period": period, "facility_count": len(states), "metrics": totals,
             "energy_network": network,
+            "flex_plan": build_flex_plan(states, solar_session.get('flex_review')),
             "observed": trend, "observed_window": states[0]["observed_window"], "coverage": states[0]["coverage"],
             "items": [{"asset": s["asset"], "metrics": s["metrics"], "config": s["config"], "alerts": s["alerts"], "actions": s["actions"]} for s in states],
             "label": "Sum of six illustrative facility profiles; not measured township consumption"}
@@ -418,7 +420,7 @@ def reset_sharing():
 class ActionSimulationRequest(BaseModel):
     model_config = ConfigDict(extra='forbid')
     asset_id: UUID
-    kind: Literal['alert', 'sharing', 'action']
+    kind: Literal['alert', 'sharing', 'action', 'flex']
     action_id: str = Field(min_length=1, max_length=120)
 
 
@@ -429,6 +431,13 @@ def run_action_simulator(payload: ActionSimulationRequest):
     if data is None:
         data = _state(str(payload.asset_id), 'day')
     solar = next(s for s in states if s['asset']['facility_id'] == 'solar')
+    if payload.kind == 'flex':
+        plan = build_flex_plan(states, _session(solar['asset']['id']).get('flex_review'))
+        if payload.action_id != PLAN_ID or str(payload.asset_id) != plan['asset_id']:
+            raise HTTPException(422, 'Select the current Galleria township flexibility scenario.')
+        # Capacity coordination does not change energy sources or imply transfer.
+        plan.update(before_network=None, after_network=None)
+        return plan
     approved = _session(solar['asset']['id']).get('sharing_approved', [])
     baseline_approved = [ident for ident in approved if ident != payload.action_id] if payload.kind == 'sharing' else approved
     before_network = energy_network(states, baseline_approved)
@@ -446,6 +455,27 @@ def run_action_simulator(payload: ActionSimulationRequest):
         return simulate_action(data, before_network, after_network, payload.kind, payload.action_id)
     except ValueError as error:
         raise HTTPException(422, str(error)) from error
+
+
+class FlexReviewRequest(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    signature: str = Field(min_length=20, max_length=20)
+    participants: list[Literal['mall', 'restaurant', 'residential', 'commercial']] = Field(max_length=4)
+
+
+@router.post('/township/flex/{plan_id}/review')
+def review_flex_plan(plan_id: str, payload: FlexReviewRequest):
+    with APPROVAL_LOCK:
+        plan = township('day')['flex_plan']
+        if plan_id != PLAN_ID or payload.signature != plan['signature']:
+            raise HTTPException(409, 'The scenario inputs changed. Refresh and review the latest plan.')
+        if not plan['feasible']:
+            raise HTTPException(422, 'Capacity or service recovery constraints are not satisfied.')
+        solar = next(a for a in FACILITY_ASSETS.values() if a['facility_id'] == 'solar')
+        _session(solar['id'])['flex_review'] = dict(signature=plan['signature'],
+            participants=[f for f in PARTICIPANTS if f in payload.participants])
+        _save_session()
+        return township('day')['flex_plan']
 
 
 @router.post("/configuration")

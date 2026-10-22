@@ -342,6 +342,16 @@ export function mountSpatialTwin(container,{facility=null,night=false,selectedFl
   }
   const overlay=container.parentElement.querySelector('.township-labels');
   if(!detail&&overlay)FACILITIES.forEach(f=>{const b=document.createElement('button');b.className=`township-pin pin-${f.id}${actionFocus?.target===f.id?' action-target'+(actionFocus.after?' action-preview-after':''):''}${actionFocus?.sources?.includes(f.id)?' action-source':''}`;b.style.setProperty('--facility-color',f.color);b.innerHTML=`<span class="township-energy-badge">${energySymbol(energyNetwork?.buildings.find(b=>b.facility_id===f.id)?.mode||'grid')}<span>${(energyNetwork?.buildings.find(b=>b.facility_id===f.id)?.mode||'grid').replace(/^./,c=>c.toUpperCase())}</span></span><i></i><span><span class="pin-name">${f.name}</span><small class="pin-type">${f.type}</small></span><b>↗</b>`;if(!navigation)b.setAttribute('aria-disabled','true');if(actionFocus?.target===f.id&&actionFocus.floor!=='whole'){const tag=document.createElement('small');tag.className='pin-action-floor';tag.textContent=(actionFocus.after?'Preview: ':'Target: ')+actionFocus.floor.replace('level_','Level ').replace('ground','Ground').replace('roof','Roof');b.querySelector('.pin-name').parentElement.appendChild(tag);}b.setAttribute('aria-label',`Explore ${f.type}: ${f.name}`);b.onclick=()=>enter(f.id);overlay.appendChild(b);const point=new T.Vector3(f.x,f.id==='commercial'?17:f.id==='residential'?12:f.id==='hospital'?10:f.id==='mall'?8:4,f.z);labels.push({element:b,point});const alerts=facilityAlerts(f.id);if(alerts.length){const marker=document.createElement('button');marker.className='township-alert-marker';marker.innerHTML='<span aria-hidden="true">⚠</span><small>'+alerts.length+'</small>';marker.setAttribute('aria-label',`${f.name}: ${alerts.length} alerts. Open ${alerts[0].floorLabel}, ${alerts[0].name}`);marker.title=`${alerts[0].floorLabel} · ${alerts[0].issue}`;marker.onclick=()=>enter(f.id,true);overlay.appendChild(marker);labels.push({element:marker,point:point.clone()});b.classList.add('has-alert');}});
+  if(!detail&&overlay&&actionFocus?.flex){
+    for(const f of FACILITIES){
+      const pin=overlay.querySelector(`.pin-${f.id}`);
+      if(!pin)continue;
+      const type=pin.querySelector('.pin-type');
+      if(f.id===actionFocus.target)type.textContent=actionFocus.after?'Mall cooling retained':'Crowd-driven cooling surge';
+      else if(actionFocus.labels?.[f.id])type.textContent=actionFocus.after?actionFocus.labels[f.id]:'Flexibility partner · '+f.type;
+      else type.textContent=f.id==='hospital'?'Essential care · No curtailment':f.type+' · No dispatch';
+    }
+  }
   let transition=null,disposed=false,frame,down=null,hover=null;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const focusPose=f=>({position:new T.Vector3(f.x+19,23,f.z+22),target:new T.Vector3(f.x,4,f.z)});

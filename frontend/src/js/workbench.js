@@ -1,8 +1,9 @@
-import {actionCatalog, simulationButton, aiSuggestionCards, selectedAction, actionHash, actionScene, actionSimulatorPage} from './action_simulator.js?v=malaysia-v2-43';
+import {actionCatalog, simulationButton, aiSuggestionCards, selectedAction, actionHash, actionScene, actionSimulatorPage} from './action_simulator.js?v=township-flex-48';
+import {showFlexReview} from './township_flex.js?v=flex-1';
 import {floorSupply, energyLegend} from './township_energy.js';
 import { carbonPage, bindCarbonDashboard } from './carbon_dashboard.js?v=malaysia-v2-43';
 import { mountBuildingPreview } from './building_preview.js?v=white-scenes-38';
-import { mountSpatialTwin, FACILITIES } from './spatial_twin.js?v=overlays-restored-46';
+import { mountSpatialTwin, FACILITIES } from './spatial_twin.js?v=township-flex-48';
 import { floorOptions, floorZones, floorIssueCount, facilityAlerts, syncAlertState, FLOOR_COUNTS } from './floor_conditions.js?v=malaysia-v2-43';
 import { simulatorPage, mountInstallation, installation, simulatorUI, syncSimulatorForm, bindSimulator, simulatorDesign, scenarioPayload, setSimulatorSettingsMode } from './renewable_simulator.js?v=malaysia-v2-43';
 
@@ -364,6 +365,7 @@ async function sendChat(form){const question=new FormData(form).get('question')?
 function returnToTownship(){if(!state.spatialFacility)return;townshipReturn={facility:state.spatialFacility,view:townshipView};state.spatialFacility=null;render();window.scrollTo({top:0,behavior:'instant'})}
 document.addEventListener('click',async event=>{
   const simulate=event.target.closest('[data-simulate-kind]');if(simulate){const selection=actionCatalog(state).find(a=>a.kind===simulate.dataset.simulateKind&&a.id===simulate.dataset.simulateId&&a.asset_id===simulate.dataset.simulateAsset);if(selection){state.actionResult=null;state.actionError=null;state.actionView='before';location.hash=actionHash(selection);}return}
+  const flexReview=event.target.closest('[data-flex-review]');if(flexReview){if(state.township?.flex_plan)showFlexReview(state.township.flex_plan,{dialog,post,refresh});return}
   const preview=event.target.closest('[data-action-preview]');if(preview){state.actionView=preview.dataset.actionPreview;render();return}
   const run=event.target.closest('[data-run-action-simulator]');if(run){const selected=selectedAction(state);if(!selected||state.actionBusy)return;const key=location.hash;state.actionBusy=true;state.actionError=null;state.actionResult=null;state.actionResultKey=null;render();try{const result=await post('/action-simulator/run',{asset_id:selected.asset_id,kind:selected.kind,action_id:selected.id});if(location.hash===key){state.actionResult=result;state.actionResultKey=key;state.actionView='after';}}catch(error){if(location.hash===key)state.actionError=error.message;}finally{state.actionBusy=false;render();if(location.hash===key&&state.actionResult){const results=document.querySelector('.action-results');results?.focus({preventScroll:true});results?.scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}}return}
 
