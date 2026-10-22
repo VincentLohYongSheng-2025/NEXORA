@@ -510,5 +510,5 @@
   },
   "drop_in_replacement_pass": false,
   "decision": "Current dashboard requires a continuous 7-day window. Do not substitute absent hours or duplicate one source as independently measured building types.",
-  "hourly_csv_sha256": "89d62d8a605fd47dbf9e500776717cd7541e1c82c5a5452188f7213a8ea606a5"
+  "hourly_csv_sha256": "2a3f88f1fdffd58d3b26132846828949367f4f31e045c7bee41ace8a2e5aaadf"
 }
