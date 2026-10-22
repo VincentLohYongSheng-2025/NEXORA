@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
-from math import sin, pi, isfinite
+from math import sin, pi, isfinite, floor
 from typing import Literal
 from uuid import UUID
 from zoneinfo import ZoneInfo
@@ -122,8 +122,8 @@ class InvestmentComparisonInputs(Inputs):
 def hourly_values(forecast: dict) -> tuple[list[float], list[str]]:
     items = forecast.get("items", [])
     if (len(items) != 24 or forecast.get("unit") != "kWh"
-            or forecast.get("provenance", {}).get("source_code") != "bdg2_v1"):
-        raise ValueError("A complete source-labelled BDG2 hourly forecast is required")
+            or forecast.get("provenance", {}).get("source_code") not in {"bdg2_v1", "clemd_v1"}):
+        raise ValueError("A complete validated source-labelled hourly forecast is required")
     values = [float(row["forecast_kwh"]) for row in items]
     stamps = [datetime.fromisoformat(row["timestamp"].replace("Z", "+00:00")) for row in items]
     if any(not isfinite(v) or v < 0 for v in values):
@@ -142,8 +142,9 @@ def energy_scenario(forecast: dict, asset: dict, inputs: EnergyInputs) -> dict:
     local_hours = [datetime.fromisoformat(t.replace("Z", "+00:00")).astimezone(zone).hour
                    for t in timestamps]
     # Hypothetical clear-day profile, evaluated by source-site local clock, not UTC index.
-    factors = [max(0., sin(pi*(h-6)/12)) if 6 <= h <= 18 else 0. for h in local_hours]
-    solar = [inputs.solar_capacity_kw*f for f in factors]
+    sunrise = 7 if forecast["provenance"]["source_code"] == "clemd_v1" else 6
+    factors = [max(0., sin(pi*(h-sunrise)/12)) if sunrise <= h <= sunrise+12 else 0. for h in local_hours]
+    solar = [inputs.solar_capacity_kw*f*(4.5/7.59575411272515 if forecast["provenance"]["source_code"] == "clemd_v1" else 1) for f in factors]
     stored = initial = inputs.battery_capacity_kwh*inputs.starting_soc_percent/100
     target = max(baseline)*inputs.target_fraction
     rows = []
@@ -165,7 +166,7 @@ def energy_scenario(forecast: dict, asset: dict, inputs: EnergyInputs) -> dict:
     return dict(label="simulated", asset_id=str(inputs.asset_id), unit="kWh",
                 demand_unit="kW_interval_average", interval_hours=1,
                 provenance=forecast["provenance"], input_label="forecast",
-                assumptions=inputs.model_dump(mode="json"), solar_profile="hypothetical_sine_06_18_local",
+                assumptions=inputs.model_dump(mode="json"), solar_profile="malaysia_sine_07_19_4.5psh" if forecast["provenance"]["source_code"]=="clemd_v1" else "hypothetical_sine_06_18_local",
                 timezone=asset["timezone"], initial_stored_kwh=initial, ending_stored_kwh=stored,
                 baseline_peak_kw=max(baseline), simulated_peak_kw=max(grid),
                 peak_reduction_kw=max(baseline)-max(grid), baseline_energy_kwh=sum(baseline),
@@ -189,8 +190,9 @@ def solar_grid_dispatch(forecast: dict, asset: dict, inputs: SolarGridDispatchIn
     baseline, timestamps = hourly_values(forecast)
     zone = ZoneInfo(asset["timezone"])
     local_hours = [datetime.fromisoformat(t.replace("Z", "+00:00")).astimezone(zone).hour for t in timestamps]
-    solar_factors = [max(0., sin(pi * (hour - 6) / 12)) if 6 <= hour <= 18 else 0. for hour in local_hours]
-    solar = [inputs.solar_capacity_kw * factor for factor in solar_factors]
+    sunrise = 7 if forecast["provenance"]["source_code"] == "clemd_v1" else 6
+    solar_factors = [max(0., sin(pi * (hour - sunrise) / 12)) if sunrise <= hour <= sunrise+12 else 0. for hour in local_hours]
+    solar = [inputs.solar_capacity_kw * factor * (4.5/7.59575411272515 if forecast["provenance"]["source_code"] == "clemd_v1" else 1) for factor in solar_factors]
     prices = (inputs.hourly_grid_price_myr_per_kwh
               if inputs.hourly_grid_price_myr_per_kwh is not None
               else ([inputs.tariff_myr_per_kwh] * 24 if inputs.tariff_myr_per_kwh is not None else [1.0] * 24))
@@ -203,10 +205,10 @@ def solar_grid_dispatch(forecast: dict, asset: dict, inputs: SolarGridDispatchIn
     capacity = inputs.battery_capacity_kwh
     quantum = capacity / steps if capacity else 1.0
     initial_stored = capacity * inputs.starting_soc_percent / 100
-    initial_state = min(steps, max(0, round(initial_stored / quantum))) if capacity else 0
+    initial_state = min(steps, max(0, floor(initial_stored / quantum))) if capacity else 0
 
-    def transition(state: int, index: int, discharge_step: int) -> tuple[int, dict] | None:
-        stored = state * quantum if capacity else 0.0
+    def transition(state: int, index: int, discharge_step: int, actual_stored=None) -> tuple[int, dict] | None:
+        stored = actual_stored if actual_stored is not None else state * quantum if capacity else 0.0
         demand, generation = baseline[index], solar[index]
         direct = min(demand, generation)
         surplus = generation - direct
@@ -215,7 +217,7 @@ def solar_grid_dispatch(forecast: dict, asset: dict, inputs: SolarGridDispatchIn
         max_discharge = min(demand - direct, inputs.battery_power_kw, after_charge * inputs.efficiency)
         discharge = min(max_discharge, discharge_step * quantum * inputs.efficiency)
         ending = max(0.0, after_charge - discharge / inputs.efficiency)
-        next_state = min(steps, max(0, round(ending / quantum))) if capacity else 0
+        next_state = min(steps, max(0, floor((ending+1e-9) / quantum))) if capacity else 0
         grid = max(0.0, demand - direct - discharge)
         return next_state, dict(direct=direct, surplus=surplus, charge=charge, discharge=discharge, grid=grid, stored=ending)
 
@@ -236,10 +238,12 @@ def solar_grid_dispatch(forecast: dict, asset: dict, inputs: SolarGridDispatchIn
                 costs[index][state] = best
 
     state = initial_state
+    physical_stored = initial_stored
     rows = []
     for index, stamp in enumerate(timestamps):
         discharge_step = costs[index][state][1]
-        next_state, row = transition(state, index, discharge_step)
+        next_state, row = transition(state, index, discharge_step, physical_stored)
+        physical_stored = row['stored']
         state = next_state
         source = "solar" if row["grid"] <= 1e-9 and row["discharge"] <= 1e-9 else (
             "solar_and_battery" if row["grid"] <= 1e-9 else (
@@ -261,7 +265,7 @@ def solar_grid_dispatch(forecast: dict, asset: dict, inputs: SolarGridDispatchIn
                 input_label="calculated_forecast", timezone=asset["timezone"],
                 model="forecast_informed_simulated_dynamic_programming_dispatch", optimisation_objective=(
                     "minimise_user_assumed_grid_cost" if price_disclosed else "minimise_simulated_grid_import"),
-                assumptions=inputs.model_dump(mode="json"), solar_profile="hypothetical_sine_06_18_source_local",
+                assumptions=inputs.model_dump(mode="json"), solar_profile="malaysia_sine_07_19_4.5psh" if forecast["provenance"]["source_code"]=="clemd_v1" else "hypothetical_sine_06_18_source_local",
                 initial_stored_kwh=initial_stored, ending_stored_kwh=rows[-1]["stored_kwh"],
                 baseline_energy_kwh=sum(baseline), simulated_grid_energy_kwh=grid_energy,
                 baseline_peak_kw=max(baseline), simulated_grid_peak_kw=max(row["grid_kwh"] for row in rows),

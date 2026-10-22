@@ -1,4 +1,4 @@
-"""Local, source-labelled EnergiOS workbench over the frozen BDG2 API snapshot.
+"""Local source-labelled workbench over the audited Malaysian CLEMD reference.
 
 The snapshot contains measured whole-building intervals and a previously
 calculated forecast. All plans and controls here are session-only simulations.
@@ -7,7 +7,8 @@ from __future__ import annotations
 
 import asyncio
 from copy import deepcopy
-from datetime import datetime
+from functools import lru_cache
+from datetime import datetime, timedelta
 import json
 import re
 from pathlib import Path
@@ -23,12 +24,13 @@ from pydantic import BaseModel, ConfigDict, Field
 from src import gemini_assistant as gemini
 from src.demo_scenarios import SolarGridDispatchInputs, ShiftInputs, solar_grid_dispatch, peak_shift
 from src.scenario_profile import build_scenario_profile
+from src.township_energy import energy_network
+from src.action_simulator import simulate_action
 
 router = APIRouter(prefix="/workbench", tags=["Local demonstration workbench"])
-SNAPSHOT = json.loads((Path(__file__).resolve().parents[1] / "bdg2_live_snapshot.json").read_text(encoding="utf-8"))
-HISTORY_FORECASTS = json.loads((Path(__file__).resolve().parents[1] / "bdg2_history_forecasts.json").read_text(encoding="utf-8"))
+from src.malaysia_benchmark import SNAPSHOT, HISTORY_FORECASTS, SPECS, multiplier as malaysia_multiplier, derivative, schedule
 ASSETS = {item["id"]: item for item in SNAPSHOT["assets"]["items"]}
-SESSION_FILE = Path(__file__).resolve().parents[2] / "data/local/workbench-session.json"
+SESSION_FILE = Path(__file__).resolve().parents[2] / "data/local/workbench-malaysia-v2-session.json"
 try:
     SESSION: dict[str, dict] = json.loads(SESSION_FILE.read_text(encoding="utf-8")) if SESSION_FILE.exists() else {}
 except (ValueError, OSError):
@@ -46,33 +48,38 @@ PERIODS = {"day": 24, "week": 168}
 
 # Versioned illustrative inputs, not calibrated facility measurements. Each
 # concept has its own identity/configuration/plan; original benchmarks stay intact.
-FACILITY_PROFILES = [
-    ("mall", "Nexora Galleria", "Shopping mall", "Hog_assembly_Dona", 1.4),
-    ("hospital", "Nexora Medical Centre", "Hospital", "Hog_lodging_Francisco", 1.65),
-    ("restaurant", "The Garden Kitchen", "Restaurant", "Hog_assembly_Dona", .12),
-    ("commercial", "Nexora Exchange", "Commercial buildings", "Hog_office_Bill", 1.0),
-    ("residential", "Nexora Residences", "Residential buildings", "Hog_lodging_Francisco", .85),
-    ("solar", "Nexora Solar Park", "Solar farm", "Hog_office_Bill", .015),
-]
-FACILITY_ASSETS = {}
-for facility_id, name, use, source, multiplier in FACILITY_PROFILES:
-    original = next(a for a in ASSETS.values() if a["source_asset_id"] == source)
-    asset = deepcopy(original)
-    asset.update(id=str(uuid5(NAMESPACE_URL, f"nexora:township:v1:{facility_id}")),
-                 name=name, facility_id=facility_id, asset_type=use,
-                 floor_area_m2=None if facility_id == "solar" else original["floor_area_m2"] * multiplier,
-                 demo_basis={"version": "nexora-township-v1", "source_asset_id": source,
-                             "load_multiplier": multiplier,
-                             "formula": "Historical benchmark interval kWh × illustrative load multiplier",
-                             "note": "Solar farm consumption is auxiliary site load; generation is separate."})
-    asset["provenance"] = {**asset["provenance"], "kind": "simulated_demonstration_assumption",
-                           "label": "Illustrative township profile derived from BDG2; not site measurements"}
-    FACILITY_ASSETS[asset["id"]] = asset
-
-
-
+FACILITY_PROFILES = [(ident, name, use, "CLEMD_UPNM", malaysia_multiplier(ident)) for ident,name,use in [
+    ("mall", "Nexora Galleria", "Shopping mall"),
+    ("hospital", "Nexora Medical Centre", "Hospital"),
+    ("restaurant", "The Garden Kitchen", "Restaurant"),
+    ("commercial", "Nexora Exchange", "Commercial buildings"),
+    ("residential", "Nexora Residences", "Residential buildings"),
+    ("solar", "Nexora Solar Park", "Solar farm"),
+]]
 FLOOR_COUNTS = {"mall": 3, "hospital": 5, "restaurant": 1, "commercial": 11, "residential": 7, "solar": 0}
 ZONE_NAMES = {"mall": ["Retail zone A", "Retail zone B", "Service corridor"], "hospital": ["Care zone", "Consultation rooms", "Support room"], "restaurant": ["Dining room", "Kitchen", "Cold storage"], "commercial": ["Office zone A", "Meeting rooms", "Service room"], "residential": ["Apartment zone A", "Apartment zone B", "Common area"]}
+FACILITY_ASSETS = {}
+for facility_id, name, use, source, multiplier in FACILITY_PROFILES:
+    asset = deepcopy(next(a for a in ASSETS.values() if a["source_asset_id"] == source))
+    spec = SPECS[facility_id]
+    weights = [2 if facility_id == "commercial" and i == 4 else 1.8 if facility_id == "hospital" and i == 2 else 1+.04*i for i in range(FLOOR_COUNTS[facility_id])]
+    floor_weights = {("ground" if i == 0 else f"level_{i}"): .9*w/sum(weights) for i,w in enumerate(weights)}
+    if weights: floor_weights["roof"] = .1
+    lighting = 10 if facility_id == "solar" else 18
+    lifts = 6 if facility_id not in ("solar", "restaurant") else 0
+    asset.update(id=str(uuid5(NAMESPACE_URL, f"nexora:township:v1:{facility_id}")), name=name,
+        facility_id=facility_id, asset_type=use, floor_area_m2=spec["area"],
+        demo_basis={"version": "nexora-malaysia-v2", "source_asset_id": source,
+            "load_multiplier": multiplier, "pv_nameplate_kw": spec["pv"], "annual_bei_target": spec["bei"],
+            "hvac_share_percent": spec["hvac"], "floor_hvac_weights": floor_weights,
+            "load_allocations_percent": dict(hvac=spec["hvac"], lighting=lighting, lifts=lifts, ev=0, plugs=100-spec["hvac"]-lighting-lifts),
+            "area_basis": "Illustrative usable floor area consistent with conceptual floor count",
+            "schedule": {k:spec[k] for k in ("opened","closed","base","weekend")},
+            "formula": "CLEMD interval kWh × building schedule weight × training-period calibration multiplier",
+            "note": "Solar farm consumption is auxiliary site load; generation is separate."})
+    asset["provenance"] = {**asset["provenance"], "kind": "simulated_demonstration_assumption",
+                           "label": "Malaysian CLEMD-derived demo profile; not facility measurements"}
+    FACILITY_ASSETS[asset["id"]] = asset
 
 
 def _alerts(asset, session, forecast_total, config):
@@ -89,11 +96,12 @@ def _alerts(asset, session, forecast_total, config):
         zone = "plant" if roof else f"zone_{index % 3}"
         name = "HVAC plant" if roof else ZONE_NAMES[facility][index % 3]
         critical = not roof and index % 2 == 1
-        fraction = .012 if roof else .018 if critical else .01
+        hvac_share = SPECS[facility]["hvac"] / 100
+        fraction = hvac_share * .1 * .8 * .15 if roof else hvac_share * asset["demo_basis"]["floor_hvac_weights"][floor] * (.08 if critical else .12) * (.46,.34,.2)[index%3]
         energy = forecast_total * fraction
         alert_id = f"{floor}:{zone}"
-        title = "TNB Peak Demand (MD) Risk" if roof else "AHU Bypass Valve Stiction" if critical else "Unoccupied Cooling Overrun"
-        solution = "Pre-cool thermal mass and activate BESS peak-shaving dispatch." if roof else "Re-zero modulating actuator and trim VFD pump speed to 35 Hz." if critical else "Apply dynamic 26°C setback and enable PIR occupancy shutoff."
+        title = "Afternoon grid-import peak" if roof else "Room overheating" if critical else "Unoccupied Cooling Overrun"
+        solution = "Review chiller staging and reduce avoidable cooling demand." if roof else "Inspect airflow and review the cooling schedule." if critical else "Reduce cooling in the unoccupied zone after occupancy review."
         result.append({"id": alert_id, "floor": floor, "zone": zone, "floor_label": "Roof" if roof else f"Level {index}" if index else "Ground", "name": name,
                        "title": title,
                        "solution": solution,
@@ -161,19 +169,11 @@ def _asset(asset_id: str) -> tuple[dict, dict]:
     if asset_id in FACILITY_ASSETS:
         asset = FACILITY_ASSETS[asset_id]
         bundle = deepcopy(SNAPSHOT["buildings"][asset["source_asset_id"]])
-        multiplier = asset["demo_basis"]["load_multiplier"]
-        for row in bundle["readings"]["items"]:
-            row["consumption_kwh"] *= multiplier
-            row.update(label="simulated", quality_status="demo_estimate")
-        for row in bundle["forecast"]["items"]:
-            row["forecast_kwh"] *= multiplier
-            row["label"] = "simulated_forecast"
-        bundle["anomalies"]["items"] = []
-        bundle["anomalies"]["count"] = 0
+        bundle = derivative(asset, bundle)
         return asset, bundle
     asset = ASSETS.get(asset_id)
     if asset is None:
-        raise HTTPException(404, "Building not found in the four-building benchmark cohort")
+        raise HTTPException(404, "Building not found in the Malaysian reference or township catalogue")
     return asset, SNAPSHOT["buildings"][asset["source_asset_id"]]
 
 
@@ -196,14 +196,13 @@ def _session(asset_id: str) -> dict:
             ).model_dump(),
             "approved": [], "dismissed": [], "history": [], "scenarios": [],
         }
+        config = SESSION[asset_id]["config"]
+        config.update(tariff_myr_per_kwh=.45, carbon_kg_per_kwh=.760, starting_soc_percent=0,
+                      cooling_setpoint_c=24, efficiency_reduction_percent=5,
+                      assumption_reference="Malaysia v2: RM0.45/kWh flat planning rate; ST 2023 Peninsular GEF 0.760 kgCO2e/kWh; source and inputs in methodology.")
         if asset.get("facility_id"):
-            scale = asset["demo_basis"]["load_multiplier"]
-            config = SESSION[asset_id]["config"]
-            for key in ("pv_kw", "battery_kwh", "battery_power_kw"):
-                config[key] *= scale
-            if asset["facility_id"] == "solar":
-                config["pv_kw"] = 1000
-            config["assumption_reference"] = "Nexora township v1 illustrative profile; hypothetical tariff, carbon factor and equipment inputs."
+            spec = SPECS[asset["facility_id"]]
+            config.update(pv_kw=spec["pv"]*.84*.95, battery_kwh=spec["battery"], battery_power_kw=spec["power"])
     return SESSION[asset_id]
 
 
@@ -215,7 +214,8 @@ def _dispatch(asset: dict, bundle: dict, config: dict, *, efficiency=False, shif
             item["forecast_kwh"] *= factor
     if shift:
         values = [row["forecast_kwh"] for row in forecast["items"]]
-        top, low = max(range(24), key=values.__getitem__), min(range(24), key=values.__getitem__)
+        top = max(range(24), key=values.__getitem__)
+        low = min((i for i in range(24) if i != top), key=values.__getitem__)
         amount = min(values[top] * .12, max(0, (values[top] - values[low]) / 2))
         forecast["items"][top]["forecast_kwh"] -= amount
         forecast["items"][low]["forecast_kwh"] += amount
@@ -226,28 +226,36 @@ def _dispatch(asset: dict, bundle: dict, config: dict, *, efficiency=False, shif
         tariff_myr_per_kwh=config["tariff_myr_per_kwh"],
         assumption_reference=config["assumption_reference"],
     )
-    return solar_grid_dispatch(forecast, asset, inputs)
+    return deepcopy(_cached_dispatch(json.dumps(forecast,sort_keys=True), json.dumps(asset,sort_keys=True), inputs.model_dump_json()))
+
+
+@lru_cache(maxsize=96)
+def _cached_dispatch(forecast_json, asset_json, inputs_json):
+    return solar_grid_dispatch(json.loads(forecast_json), json.loads(asset_json), SolarGridDispatchInputs.model_validate_json(inputs_json))
 
 
 def _shift(bundle: dict, asset_id: str) -> dict:
     values = [row["forecast_kwh"] for row in bundle["forecast"]["items"]]
-    top, low = max(range(24), key=values.__getitem__), min(range(24), key=values.__getitem__)
+    top = max(range(24), key=values.__getitem__)
+    low = min((i for i in range(24) if i != top), key=values.__getitem__)
     amount = min(values[top] * .12, max(0, (values[top] - values[low]) / 2))
     return peak_shift(bundle["forecast"], ShiftInputs(asset_id=asset_id, flexible_load_kwh=amount,
                                                         from_interval=top, to_interval=low))
 
 
-def _state(asset_id: str, period: str) -> dict:
+def _base_state(asset_id: str, period: str) -> dict:
     if period not in PERIODS:
         raise HTTPException(422, "Period must be day or week")
     asset, bundle = _asset(asset_id)
     session = _session(asset_id)
     config = session["config"]
-    observed = bundle["readings"]["items"][-PERIODS[period]:]
+    end = datetime.fromisoformat(bundle["forecast"]["items"][0]["timestamp"].replace("Z", "+00:00"))
+    start = end - timedelta(hours=PERIODS[period])
+    observed = [r for r in bundle["readings"]["items"] if start <= datetime.fromisoformat(r["timestamp"].replace("Z", "+00:00")) < end]
     historical_model = HISTORY_FORECASTS['buildings'][asset['source_asset_id']]
     observed_times = {row['timestamp'] for row in observed}
     multiplier = asset.get('demo_basis', {}).get('load_multiplier', 1)
-    history_forecast = [{**row, 'forecast_kwh': row['forecast_kwh'] * multiplier}
+    history_forecast = [{**row, 'forecast_kwh': row['forecast_kwh'] * multiplier * (schedule(asset['facility_id'], datetime.fromisoformat(row['timestamp'].replace('Z','+00:00')).astimezone(ZoneInfo(asset['timezone']))) if asset.get('facility_id') else 1)}
                         for row in historical_model['items'] if row['timestamp'] in observed_times]
     forecast = bundle["forecast"]["items"]
     observed_total = sum(row["consumption_kwh"] for row in observed)
@@ -283,7 +291,8 @@ def _state(asset_id: str, period: str) -> dict:
     latest = observed[-1]
     return {
         "asset": asset, "period": period, "snapshot_fetched_at": SNAPSHOT["fetched_at"],
-        "observed_window": {"from": observed[0]["source_local_timestamp"], "to": latest["source_local_timestamp"], "timezone": asset["timezone"]},
+        "observed_window": {"from": start.astimezone(ZoneInfo(asset["timezone"])).isoformat(), "to": (end-timedelta(hours=1)).astimezone(ZoneInfo(asset["timezone"])).isoformat(), "timezone": asset["timezone"]},
+        "coverage": {"available_hours": len(observed), "expected_hours": PERIODS[period], "missing_hours": PERIODS[period]-len(observed), "note": "Missing source hours are excluded; totals cover available hours only."},
         "observed": observed, "observed_trend": bundle["readings"]["items"], "forecast": forecast, "history_forecast": history_forecast, "anomalies": bundle["anomalies"],
         "model": {"method": bundle["forecast"]["method"], "test_metrics": bundle["forecast"]["test_metrics"],
                   "limitations": bundle["forecast"]["limitations"],
@@ -315,15 +324,49 @@ def _state(asset_id: str, period: str) -> dict:
     }
 
 
+def _with_sharing(data, network):
+    delivered = sum(p["delivered_kwh"] for p in network["recommendations"] if p["status"] == "approved" and p["target"] == data["asset"].get("facility_id"))
+    m, c = data["metrics"], data["config"]
+    delivered = min(delivered, m["projected_grid_kwh"])
+    m["projected_shared_solar_kwh"] = delivered
+    if delivered:
+        allocations = {}
+        for p in network["recommendations"]:
+            if p["status"] == "approved" and p["target"] == data["asset"].get("facility_id"):
+                for r in p["allocations"]: allocations[r["timestamp"]] = allocations.get(r["timestamp"],0)+r["delivered_kwh"]
+        local_solar = any(a["id"] == "solar" and a["status"] == "approved" for a in data["actions"])
+        factor = m["projected_energy_kwh"]/m["forecast_energy_kwh"]
+        grid = [max(0,r["baseline_kwh"]*factor-(r["direct_solar_kwh"]+r["discharge_kwh"] if local_solar else 0)-allocations.get(r["timestamp"],0)) for r in data["dispatch"]["items"]]
+        m["projected_peak_interval_average_kw"] = max(grid)
+        m["projected_peak_reduction_kw"] = max(r["forecast_kwh"] for r in data["forecast"])-max(grid)
+    m["projected_grid_kwh"] -= delivered
+    m["projected_grid_avoided_kwh"] += delivered
+    m["projected_cost_difference_myr"] = m["projected_grid_avoided_kwh"]*c["tariff_myr_per_kwh"] if c["tariff_myr_per_kwh"] is not None else None
+    m["projected_avoided_carbon_kg"] = m["projected_grid_avoided_kwh"]*c["carbon_kg_per_kwh"] if c["carbon_kg_per_kwh"] is not None else None
+    return data
+
+def _state(asset_id: str, period: str) -> dict:
+    if asset_id not in FACILITY_ASSETS:
+        return _base_state(asset_id, period)
+    states = [_base_state(key, period) for key in FACILITY_ASSETS]
+    solar = next(s for s in states if s["asset"]["facility_id"] == "solar")
+    network = energy_network(states, _session(solar["asset"]["id"]).get("sharing_approved", []))
+    return _with_sharing(next(s for s in states if s["asset"]["id"] == asset_id), network)
+
+
 @router.get("/assets")
 def assets():
     return {"items": list(ASSETS.values()), "facilities": list(FACILITY_ASSETS.values()),
-            "source": "Public benchmark data — Building Data Genome Project 2 v1.0"}
+            "data_model_version": "malaysia-v2",
+            "source": "CLEMD — Malaysian institutional building, CC BY 4.0"}
 
 
 @router.get("/township")
 def township(period: Literal["day", "week"] = "day"):
-    states = [_state(asset_id, period) for asset_id in FACILITY_ASSETS]
+    states = [_base_state(asset_id, period) for asset_id in FACILITY_ASSETS]
+    solar = next(s for s in states if s["asset"]["facility_id"] == "solar")
+    network = energy_network(states, _session(solar["asset"]["id"]).get("sharing_approved", []))
+    states = [_with_sharing(s, network) for s in states]
     keys = ("observed_energy_kwh", "observed_cost_estimate_myr", "observed_carbon_estimate_kg",
             "projected_grid_avoided_kwh", "projected_energy_reduction_kwh", "projected_cost_difference_myr", "projected_avoided_carbon_kg")
     totals = {key: sum(s["metrics"][key] for s in states)
@@ -331,15 +374,78 @@ def township(period: Literal["day", "week"] = "day"):
     trend = [{"source_local_timestamp": row["source_local_timestamp"],
               "consumption_kwh": sum(s["observed"][i]["consumption_kwh"] for s in states)}
              for i, row in enumerate(states[0]["observed"])]
+    solar_session = next((_session(s["asset"]["id"]) for s in states if s["asset"]["facility_id"] == "solar"), {})
     return {"period": period, "facility_count": len(states), "metrics": totals,
-            "observed": trend, "observed_window": states[0]["observed_window"],
-            "items": [{"asset": s["asset"], "metrics": s["metrics"], "config": s["config"], "alerts": s["alerts"]} for s in states],
+            "energy_network": network,
+            "observed": trend, "observed_window": states[0]["observed_window"], "coverage": states[0]["coverage"],
+            "items": [{"asset": s["asset"], "metrics": s["metrics"], "config": s["config"], "alerts": s["alerts"], "actions": s["actions"]} for s in states],
             "label": "Sum of six illustrative facility profiles; not measured township consumption"}
 
 
 @router.get("/state")
 def state(asset_id: UUID, period: Literal["day", "week"] = "day"):
     return _state(str(asset_id), period)
+
+
+@router.post("/township/sharing/{plan_id}/approve")
+def approve_sharing(plan_id: str):
+    with APPROVAL_LOCK:
+        network = township("day")["energy_network"]
+        plan = next((p for p in network["recommendations"] if p["id"] == plan_id), None)
+        if plan is None:
+            raise HTTPException(409, "This sharing plan is unavailable. Refresh to review the current solar surplus.")
+        solar = next(a for a in FACILITY_ASSETS.values() if a["facility_id"] == "solar")
+        session = _session(solar["id"])
+        approved = session.setdefault("sharing_approved", [])
+        if plan_id not in approved:
+            approved.append(plan_id)
+            for facility in set(plan["source_ids"] + [plan["target"]]):
+                asset = next(a for a in FACILITY_ASSETS.values() if a["facility_id"] == facility)
+                _session(asset["id"])["history"].insert(0, {"type": "energy_sharing", "label": f"Approved shared-solar plan: {plan['target_name']} · {plan['floor_label']}. Planning only.", "at": datetime.now(ZoneInfo("Asia/Kuala_Lumpur")).isoformat(timespec="minutes")})
+            _save_session()
+        return township("day")["energy_network"]
+
+
+@router.post("/township/sharing/reset")
+def reset_sharing():
+    with APPROVAL_LOCK:
+        solar = next(a for a in FACILITY_ASSETS.values() if a["facility_id"] == "solar")
+        _session(solar["id"])["sharing_approved"] = []
+        _save_session()
+        return township("day")["energy_network"]
+
+
+class ActionSimulationRequest(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    asset_id: UUID
+    kind: Literal['alert', 'sharing', 'action']
+    action_id: str = Field(min_length=1, max_length=120)
+
+
+@router.post('/action-simulator/run')
+def run_action_simulator(payload: ActionSimulationRequest):
+    states = [_state(key, 'day') for key in FACILITY_ASSETS]
+    data = next((s for s in states if s['asset']['id'] == str(payload.asset_id)), None)
+    if data is None:
+        data = _state(str(payload.asset_id), 'day')
+    solar = next(s for s in states if s['asset']['facility_id'] == 'solar')
+    approved = _session(solar['asset']['id']).get('sharing_approved', [])
+    baseline_approved = [ident for ident in approved if ident != payload.action_id] if payload.kind == 'sharing' else approved
+    before_network = energy_network(states, baseline_approved)
+    preview_approved = list(dict.fromkeys([*approved, payload.action_id])) if payload.kind == 'sharing' else approved
+    after_network = energy_network(states, preview_approved)
+    if payload.kind == 'action' and payload.action_id == 'solar':
+        preview_states = deepcopy(states)
+        for item in preview_states:
+            if item['asset']['id'] == str(payload.asset_id):
+                for action in item['actions']:
+                    if action['id'] == 'solar':
+                        action['status'] = 'approved'
+        after_network = energy_network(preview_states, approved)
+    try:
+        return simulate_action(data, before_network, after_network, payload.kind, payload.action_id)
+    except ValueError as error:
+        raise HTTPException(422, str(error)) from error
 
 
 @router.post("/configuration")
@@ -450,6 +556,7 @@ def decide(action_id: Literal["solar", "shift", "efficiency"], decision: Literal
     elif action_id not in session["dismissed"]:
         session["dismissed"].append(action_id)
     session["history"].insert(0, {"type": decision, "label": f"{action_id.title()} {'approved' if decision == 'approve' else 'dismissed'} in local demo", "at": datetime.now(ZoneInfo("Asia/Kuala_Lumpur")).isoformat(timespec="minutes")})
+    _save_session()
     return _state(key, "day")
 
 
@@ -496,7 +603,7 @@ def copilot(payload: CopilotRequest):
         answer = f"Approved local demo actions: {', '.join(approved) if approved else 'none'}. The next-24-hour forecast is {metrics['forecast_energy_kwh']:,.1f} kWh. The applied plan projects {metrics['projected_grid_avoided_kwh']:,.1f} kWh less grid import and {metrics['projected_peak_reduction_kw']:,.1f} kW lower interval-average peak. No equipment command is sent."
     elif any(word in question for word in ("model", "accuracy", "forecast")):
         model = data["model"]
-        answer = f"The saved BDG2 model forecasts {metrics['forecast_energy_kwh']:,.1f} kWh over the next 24 source-local hours. Its held-out MAE is {model['test_metrics']['model']['mae_kwh']:,.1f} kWh per hour for this benchmark building. It is not a current or site-specific accuracy claim."
+        answer = f"The Malaysian CLEMD model forecasts {metrics['forecast_energy_kwh']:,.1f} kWh over the next 24 source-local hours. Its held-out MAE is {model['test_metrics']['model']['mae_kwh']:,.1f} kWh per hour for this benchmark building. It is not a current or site-specific accuracy claim."
     else:
         answer = f"{name} has {metrics['observed_energy_kwh']:,.1f} kWh observed over the selected historical {payload.period} period. The next 24 hours are a separate saved forecast of {metrics['forecast_energy_kwh']:,.1f} kWh. Ask about the forecast, carbon estimate, cost assumption or approved plan for more detail."
     if data["asset"].get("facility_id"):
@@ -561,7 +668,7 @@ def _copilot_evidence(data: dict) -> tuple[dict, dict]:
              ("title", "status", "floor_label", "name", "solution", "energy_kwh", "cost_myr", "carbon_kg")}}
             for index, alert in enumerate(data.get("alerts", []), start=1)
         ],
-        "limitations": [data["execution_label"], gemini.LIMITS_TEXT],
+        "limitations": [data["execution_label"], "CLEMD is one historical Malaysian building; township, room and equipment values are planning estimates, with no live controls."],
     }
     sources = {
         "observations": {"id": "observations", "label": evidence["observations"]["label"]},

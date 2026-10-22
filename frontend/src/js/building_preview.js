@@ -8,13 +8,14 @@ export function mountBuildingPreview(container, {floor='roof', tall=false, onSel
   let renderer;
   try { renderer=new T.WebGLRenderer({antialias:true,alpha:false}); }
   catch { return null; }
-  const scene=new T.Scene();scene.background=new T.Color(0xfff8f1);
+  const scene=new T.Scene();scene.background=new T.Color(0xf7fafc);
   const camera=new T.PerspectiveCamera(36,1,.1,200);
   const initial=tall?[19,18,24]:[16,17,20];camera.position.set(...initial);
   const levels=tall?7:3, levelHeight=tall?1.15:1.2, roofY=levels*levelHeight+.35;
   const target=new T.Vector3(0,roofY/2,0);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
   renderer.outputEncoding=T.sRGBEncoding;
+  renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
   renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
   container.appendChild(renderer.domElement);container.classList.add('ready');
   renderer.domElement.setAttribute('aria-label','Drag to rotate the illustrative building; scroll to zoom');
@@ -25,11 +26,11 @@ export function mountBuildingPreview(container, {floor='roof', tall=false, onSel
   const sun=new T.DirectionalLight(0xffffff,.7);sun.position.set(-12,23,15);sun.castShadow=true;
   sun.shadow.mapSize.set(1024,1024);sun.shadow.camera.left=-18;sun.shadow.camera.right=18;sun.shadow.camera.top=18;sun.shadow.camera.bottom=-18;scene.add(sun);
   const mats=[],geometries=[],interactive=[];
-  const material=(color,extra={})=>{const m=new T.MeshStandardMaterial({color,roughness:.76,...extra});mats.push(m);return m;};
+  const material=(color,extra={})=>{const m=new T.MeshStandardMaterial({color,roughness:.76,...extra});m.color.convertSRGBToLinear();mats.push(m);return m;};
   const white=material(0xf9fbfc), side=material(0xe3e9ef), base=material(0xd4dce6), panel=material(0x203e9a,{roughness:.45,metalness:.18}), panelEdge=material(0xd5deeb);
-  const windowMat=material(0xe8c5a6,{roughness:.3,metalness:.1});
+  const windowMat=material(0x3989ac,{roughness:.2,metalness:.3});
   const box=(w,h,d,x,y,z,mat,parent=scene)=>{const geometry=new T.BoxGeometry(w,h,d);geometries.push(geometry);const mesh=new T.Mesh(geometry,mat);mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;parent.add(mesh);return mesh;};
-  const ground=box(20,.12,18,0,-.25,0,material(0xf1e6db));ground.receiveShadow=true;
+  const ground=box(20,.12,18,0,-.25,0,material(0xe4eaf0));ground.receiveShadow=true;
   box(10.6,.35,8.6,0,.03,0,base);
   for(let i=0;i<levels;i++){
     const y=.3+i*levelHeight;

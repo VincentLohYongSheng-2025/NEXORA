@@ -11,7 +11,7 @@ export const BATTERY_MODELS=[
 export function pvDesign(d){
   const model=PANEL_MODELS.find(m=>m.id===d.panel)||PANEL_MODELS[1];
   const panels=Math.floor(d.area*d.utilisation/100/2.6),nameplate=panels*model.watts/1000;
-  const orientation={South:1,'South-east':.95,'South-west':.95,East:.88,West:.88,North:.75}[d.orientation]??1;
+  const orientation={South:1,'South-east':.99,'South-west':.99,East:.94,West:.94,North:.96}[d.orientation]??1;
   const tilt=Math.max(.6,1-Math.abs(d.tilt-10)*.003);
   return {panels,nameplate,effective:nameplate*d.ratio/100*(1-d.shade/100)*orientation*tilt*d.selfUse/100};
 }

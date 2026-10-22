@@ -1,0 +1,3 @@
+# Optional offline/source-audit tools; not application runtime dependencies.
+pandas==2.3.3
+requests==2.32.5

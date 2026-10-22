@@ -1,5 +1,5 @@
-import {carbonSolarRecommendation} from './carbon_recommendation.js?v=carbon-solar-27';
-import {pvDesign} from './simulator_planning.js?v=renewable-workspace-26';
+import {carbonSolarRecommendation} from './carbon_recommendation.js?v=malaysia-v2-43';
+import {pvDesign} from './simulator_planning.js?v=malaysia-v2-43';
 
 export const defaultDesign = c => ({solar:true,battery:false,ev:false,
   area:Math.max(50,Math.round(c.pv_kw/(.72/2.6*.6*.84*.95))),utilisation:72,panel:'bifacial600',orientation:'South',tilt:10,shade:5,ratio:84,degradation:.5,selfUse:100,
@@ -9,7 +9,9 @@ export const defaultDesign = c => ({solar:true,battery:false,ev:false,
 // The dashboard and simulator use the same sizing calculation and assumptions.
 export function recommendedSettings(data) {
   const recommendation=carbonSolarRecommendation(data);
-  const design={...defaultDesign(data.config),...recommendation.design};
+  const design={...defaultDesign(data.config),...recommendation.design,
+    evCount:({mall:8,hospital:6,restaurant:2,commercial:6,residential:4,solar:0})[data.asset.facility_id]??4,
+    evPower:['restaurant','residential'].includes(data.asset.facility_id)?7.4:22,evHours:2};
   return {design,config:{...data.config,pv_kw:Number(pvDesign(design).effective.toFixed(3))},
     name:recommendation.name,technology:'pv',preview:null,saved:null,editing:null};
 }

@@ -1,0 +1,514 @@
+{
+  "dataset": "CLEMD",
+  "collection_doi": "10.6084/m9.figshare.c.6946581",
+  "licence": "CC BY 4.0",
+  "timezone": "Asia/Kuala_Lumpur",
+  "building": "Faculty of Medicine and Defence Health, Universiti Pertahanan Nasional Malaysia",
+  "scope": "One institutional building incoming supply; not multiple independent buildings",
+  "aggregation": "Sum three phase real power W \u00d7 1 second / 3,600,000; accept only complete 3600-sample hours",
+  "files": [
+    {
+      "file": "24523552-incoming-0.csv",
+      "sha256": "a3beb674dcb94f82ce1db84c86d322e49a3eae305b913b572d66cd57d117da00",
+      "rows": 519001,
+      "date_format": "%d/%m/%Y",
+      "rows_without_timestamp": 0,
+      "start_local": "2023-09-27T23:55:00+08:00",
+      "end_local": "2023-10-04T00:05:00+08:00"
+    },
+    {
+      "file": "24523555-incoming-0.csv",
+      "sha256": "f14d88aaab3876675bb7b4814fd9a2811b553b999f663be6384a81aa078dc3f0",
+      "rows": 432601,
+      "date_format": "%m/%d/%Y",
+      "rows_without_timestamp": 0,
+      "start_local": "2023-09-21T23:55:00+08:00",
+      "end_local": "2023-09-27T00:05:00+08:00"
+    },
+    {
+      "file": "24523561-incoming-0.csv",
+      "sha256": "843e91d3d09831f0605d719221b6f7a8c7821c4698fbed5c5c1b1f838bc27671",
+      "rows": 519001,
+      "date_format": "%d/%m/%Y",
+      "rows_without_timestamp": 0,
+      "start_local": "2023-10-18T23:55:00+08:00",
+      "end_local": "2023-10-25T00:05:00+08:00"
+    },
+    {
+      "file": "24523564-incoming-0.csv",
+      "sha256": "edec9e53cfa1dbca4644cafdf24866628938495550e9bb8219f89a3cdc65ef6f",
+      "rows": 551772,
+      "date_format": "%m/%d/%Y",
+      "rows_without_timestamp": 32771,
+      "start_local": "2023-10-11T23:55:00+08:00",
+      "end_local": "2023-10-18T00:05:00+08:00"
+    },
+    {
+      "file": "24523567-incoming-0.csv",
+      "sha256": "7b013cf96a3100904ad7671b3caca10644a314755789867c51510039e45bbe72",
+      "rows": 519001,
+      "date_format": "%m/%d/%Y",
+      "rows_without_timestamp": 0,
+      "start_local": "2023-10-04T23:55:00+08:00",
+      "end_local": "2023-10-11T00:05:00+08:00"
+    }
+  ],
+  "quality": {
+    "duplicate_rows": 0,
+    "conflicting_duplicates": 0,
+    "rows_without_timestamp": 32771,
+    "invalid_samples": 0
+  },
+  "csv_rows": 2541376,
+  "timestamped_rows": 2508605,
+  "complete_hours": 696,
+  "incomplete_or_absent_hours": 98,
+  "full_days": 29,
+  "maximum_consecutive_complete_hours": 144,
+  "excluded_hours": [
+    {
+      "timestamp_local": "2023-09-21T23:00:00+08:00",
+      "samples": 300
+    },
+    {
+      "timestamp_local": "2023-09-27T00:00:00+08:00",
+      "samples": 301
+    },
+    {
+      "timestamp_local": "2023-09-27T01:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T02:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T03:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T04:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T05:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T06:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T07:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T08:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T09:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T10:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T11:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T12:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T13:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T14:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T15:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T16:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T17:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T18:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T19:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T20:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T21:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T22:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-09-27T23:00:00+08:00",
+      "samples": 300
+    },
+    {
+      "timestamp_local": "2023-10-04T00:00:00+08:00",
+      "samples": 301
+    },
+    {
+      "timestamp_local": "2023-10-04T01:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T02:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T03:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T04:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T05:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T06:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T07:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T08:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T09:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T10:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T11:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T12:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T13:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T14:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T15:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T16:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T17:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T18:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T19:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T20:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T21:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T22:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-04T23:00:00+08:00",
+      "samples": 300
+    },
+    {
+      "timestamp_local": "2023-10-11T00:00:00+08:00",
+      "samples": 301
+    },
+    {
+      "timestamp_local": "2023-10-11T01:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T02:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T03:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T04:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T05:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T06:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T07:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T08:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T09:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T10:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T11:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T12:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T13:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T14:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T15:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T16:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T17:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T18:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T19:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T20:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T21:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T22:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-11T23:00:00+08:00",
+      "samples": 300
+    },
+    {
+      "timestamp_local": "2023-10-18T00:00:00+08:00",
+      "samples": 301
+    },
+    {
+      "timestamp_local": "2023-10-18T01:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T02:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T03:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T04:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T05:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T06:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T07:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T08:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T09:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T10:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T11:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T12:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T13:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T14:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T15:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T16:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T17:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T18:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T19:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T20:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T21:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T22:00:00+08:00",
+      "samples": 0
+    },
+    {
+      "timestamp_local": "2023-10-18T23:00:00+08:00",
+      "samples": 300
+    },
+    {
+      "timestamp_local": "2023-10-25T00:00:00+08:00",
+      "samples": 301
+    }
+  ],
+  "daily_complete_hours": {
+    "2023-09-22": 24,
+    "2023-09-23": 24,
+    "2023-09-24": 24,
+    "2023-09-25": 24,
+    "2023-09-26": 24,
+    "2023-09-28": 24,
+    "2023-09-29": 24,
+    "2023-09-30": 24,
+    "2023-10-01": 24,
+    "2023-10-02": 24,
+    "2023-10-03": 24,
+    "2023-10-05": 24,
+    "2023-10-06": 24,
+    "2023-10-07": 24,
+    "2023-10-08": 24,
+    "2023-10-09": 24,
+    "2023-10-10": 24,
+    "2023-10-12": 24,
+    "2023-10-13": 24,
+    "2023-10-14": 24,
+    "2023-10-15": 24,
+    "2023-10-16": 24,
+    "2023-10-17": 24,
+    "2023-10-19": 24,
+    "2023-10-20": 24,
+    "2023-10-21": 24,
+    "2023-10-22": 24,
+    "2023-10-23": 24,
+    "2023-10-24": 24
+  },
+  "evaluation": {
+    "method": "Existing seasonal hour-of-week + trailing residual, validation-selected blend with previous-day baseline",
+    "train_end_exclusive": "2023-10-11T00:00:00+08:00",
+    "validation_end_exclusive": "2023-10-17T00:00:00+08:00",
+    "test_end_exclusive": "2023-10-25T00:00:00+08:00",
+    "seasonal_weight": 1.0,
+    "model": {
+      "n": 144,
+      "mae_kwh": 6.741485,
+      "rmse_kwh": 9.49169
+    },
+    "previous_day_baseline": {
+      "n": 144,
+      "mae_kwh": 8.236971,
+      "rmse_kwh": 16.10985
+    },
+    "note": "Both methods scored on identical available targets with available previous-day readings; missing targets excluded, never imputed. Short single-building experiment, not production accuracy."
+  },
+  "drop_in_replacement_pass": false,
+  "decision": "Current dashboard requires a continuous 7-day window. Do not substitute absent hours or duplicate one source as independently measured building types.",
+  "hourly_csv_sha256": "89d62d8a605fd47dbf9e500776717cd7541e1c82c5a5452188f7213a8ea606a5"
+}

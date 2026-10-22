@@ -1,0 +1,93 @@
+/* White application surfaces; orange remains the primary action accent.
+   Semantic energy-source and alert colours are preserved. */
+:root {
+  --brand-canvas: #ffffff;
+  --brand-surface: #ffffff;
+  --brand-ink: #172b3a;
+  --brand-muted: #64748b;
+  --brand-border: #e2e8ef;
+  --brand-orange-wash: #f8fafc;
+  --brand-orange-soft: #fff1e5;
+}
+html, body, #app, .shell { background: #fff; color: var(--brand-ink); }
+.topbar { background: #fff; border-color: #e2e8ef; box-shadow: 0 2px 12px #172b3a06; }
+.nav a, .ghost { color: #526477; }
+.card, .kpis, .township-card, dialog { border-color: #e2e8ef; box-shadow: 0 3px 18px #20364a06; }
+.card, .recommendations, .chat-panel, .sim-card, .sim-results { background: #fff; }
+.source-strip, .monitoring-disclosure, .empty { background: #f8fafc; color: #526477; border-color: #e2e8ef; }
+.segmented, .model-controls, .sim-mode-tabs { background: #f6f8fa; border-color: #e2e8ef; }
+.field input, .field select, .field textarea, .select-wrap select,
+.sim-field input, .sim-field select { background: #fff; color: #243b4d; border-color: #d7e0e9; }
+.stat-row, .details, .model-legend, .building-foot, .sim-card-head { border-color: #e7edf2; }
+.township-card, .building-stage, .sim-preview-stage, .action-township-stage { background: #f7fafc; }
+.township-heading, .township-summary, .township-guide,
+.township-pin, .facility-directory button { color: #2c4558; border-color: #dce5ec; }
+.township-heading strong, .township-summary strong { color: #243b4d; }
+.township-pin small, .township-guide, .township-compass,
+.building-filter-hint, .manager-alert-intro { color: #64748b; }
+.township-pin:after { background: #aebdcc; }
+.chart-grid line { stroke: #e2e8ef; }
+.chart-axis { fill: #697d8f; }
+.chart-tooltip { background: #243b4d; }
+.recommendations h2, .recommendations h3 { color: #172b3a; }
+.recommendations .muted, .recommendations .rec p { color: #64748b; }
+.recommendations .rec, .recommendations .stat-row, .recommendations .details { border-color: #e2e8ef; }
+.recommendations .stat-row strong { color: #243b4d; }
+.badge.blue, .badge.gray { color: #526477; background: #f1f5f9; }
+.action-result-stats > div { background: #f8fafc !important; }
+.approval-savings, .sim-investment-stat, .sim-finance-stat { background: #f8fafc; border-color: #e2e8ef; }
+.approval-savings > div { border-color: #e2e8ef; }
+.renew-prerequisites, .renew-settings-tabs, .renew-advice,
+.renew-dirty, .renew-impact-kpis > div, .renew-model-list article,
+.renewable-workspace .sim-stats > div, .renewable-workspace .sim-comparison article {
+  background: #f8fafc; border-color: #e2e8ef; color: #526477;
+}
+.renew-settings-tabs [role=tab] { color: #526477; }
+.renew-settings-tabs [aria-selected=true] { color: var(--brand-orange-deep); background: #fff; }
+.renewable-workspace .sim-preview-stage { background: #f7fafc; }
+.renew-input input, .renew-field select, .renew-dialog input,
+.renew-dialog select, .renew-dialog textarea { color: #243b4d; border-color: #d7e0e9; }
+.renewable-workspace input:disabled, .renewable-workspace select:disabled {
+  background: #f8fafc; color: #526477; -webkit-text-fill-color: #526477;
+}
+.renew-equipment-labels button.active { background: #243b4d; border-color: #243b4d; }
+.action-ai-heading { background: #f8fafc; border-color: #e2e8ef; }
+.action-plan-detail dl > div { border-color: #e2e8ef; }
+.action-plan-detail dt, .action-selector { color: #64748b; }
+.action-selector select { border-color: #d7e0e9; color: #243b4d; white-space: nowrap; text-overflow: ellipsis; }
+.carbon-checklist label, .carbon-modal-strategy dl { background: #f8fafc; border-color: #e2e8ef; }
+.carbon-load-track { background: #f1f5f9; }
+.bubble { background: #f1f5f9; color: #243b4d; }
+.bubble.user { background: var(--brand-orange); color: #fff; }
+dialog::backdrop { background: #172b3a66; }
+@media (max-width:680px) { .nav.open { background: #fff; } }
+
+/* Let long recommendation text wrap instead of widening cards and dialogs. */
+.card, .card-head > div, .manager-alert, .manager-alert-solution,
+.action-plan-detail, .sharing-plan, .renew-financial-breakdown > *,
+.stat-row > *, .action-result-stats > div > * { min-width: 0; }
+.card :is(h2,h3,p), dialog :is(h2,h3,p,dt,dd),
+.stat-row, .action-plan-detail, .sharing-route, .renew-financial-breakdown {
+  overflow-wrap: anywhere;
+}
+#confirm-dialog { max-width: calc(100vw - 32px); }
+#confirm-dialog .approval-savings > div {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  align-items: start; gap: 10px 16px;
+}
+.approval-savings :is(dt,dd) { min-width: 0; line-height: 1.5; }
+.approval-savings dd { white-space: normal; overflow-wrap: anywhere; }
+dialog .dialog-actions { flex-wrap: wrap; }
+dialog .dialog-actions > button { max-width: 100%; white-space: normal; }
+.stat-row { gap: 12px; }
+.stat-row > strong, .renew-financial-breakdown strong { white-space: normal; overflow-wrap: anywhere; }
+.manager-alert-top, .card-head, .alert-location { flex-wrap: wrap; }
+.manager-alert-number, .manager-alert-severity, .ai-suggestion-badge { white-space: normal; overflow-wrap: anywhere; }
+.action-plan-detail dl > div { min-width: 0; }
+.action-plan-detail :is(dt,dd) { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 540px) {
+  #confirm-dialog .approval-savings > div { grid-template-columns: minmax(0, 1fr); gap: 5px; }
+  #confirm-dialog .approval-savings dd { text-align: left; }
+  .action-plan-detail dl > div { flex-direction: column; gap: 5px; }
+  .action-plan-detail dd { max-width: 100%; text-align: left; }
+}

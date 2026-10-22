@@ -13,39 +13,41 @@ def isolate_workbench_persistence(tmp_path, monkeypatch):
     monkeypatch.setattr(workbench, "SESSION_FILE", tmp_path / "workbench-session.json")
 
 
-def test_four_buildings_have_distinct_observed_results_and_source_dates():
+def test_one_malaysian_reference_retains_observed_source_dates():
     SESSION.clear()
     ids = [asset["id"] for asset in SNAPSHOT["assets"]["items"]]
-    assert len(ids) == 4
+    assert len(ids) == 1
     totals = []
     for asset_id in ids:
         day = _state(asset_id, "day")
         week = _state(asset_id, "week")
         assert day["asset"]["scope"] == "whole_building"
-        assert day["observed_window"]["to"].startswith("2017-12-31")
+        assert day["observed_window"]["to"].startswith("2023-10-24")
         assert week["metrics"]["observed_energy_kwh"] > day["metrics"]["observed_energy_kwh"]
         assert len(day["forecast"]) == 24
-        assert len(day["observed_trend"]) == 168
+        assert len(day["observed_trend"]) == 696
         totals.append(day["metrics"]["observed_energy_kwh"])
-    assert len(set(totals)) == 4
+    assert len(set(totals)) == 1
 
 
 def test_historical_forecasts_match_selected_dates_and_township_scaling():
     from datetime import datetime
     for asset in workbench.FACILITY_ASSETS.values():
         source_rows = workbench.HISTORY_FORECASTS['buildings'][asset['source_asset_id']]['items']
-        for period, count in [('day', 24), ('week', 168)]:
+        for period, count in [('day', 24), ('week', 144)]:
             data = _state(asset['id'], period)
             rows = data['history_forecast']
             assert len(rows) == count
             assert [r['timestamp'] for r in rows] == [r['timestamp'] for r in data['observed']]
             assert len({r['source_local_timestamp'][:10] for r in rows}) == count // 24
             cutoff = datetime.fromisoformat(data['model']['history_forecast']['training_end_exclusive'])
-            for row, source in zip(rows, source_rows[-count:]):
+            source_map={r['timestamp']:r for r in source_rows}
+            for row in rows:
+                source=source_map[row['timestamp']]
                 origin, timestamp = map(datetime.fromisoformat, (row['forecast_origin'], row['timestamp']))
                 assert cutoff <= origin <= timestamp
                 assert (timestamp - origin).total_seconds() < 24 * 3600
-                assert row['forecast_kwh'] == pytest.approx(source['forecast_kwh'] * asset['demo_basis']['load_multiplier'])
+                assert row['forecast_kwh'] == pytest.approx(source['forecast_kwh'] * asset['demo_basis']['load_multiplier'] * workbench.schedule(asset['facility_id'],timestamp.astimezone(workbench.ZoneInfo(asset['timezone']))))
 
 
 def test_approval_recalculates_and_dismissal_preserves_applied_plan():
@@ -75,9 +77,9 @@ def test_report_pdf_contains_selected_period_assumptions_and_source():
     key = SNAPSHOT["assets"]["items"][0]["id"]
     response = report(UUID(key), "week")
     assert response.body.startswith(b"%PDF-1.4")
-    assert b"Building Data Genome Project 2 v1.0" in response.body
-    assert b"2017-12-25" in response.body
-    assert b"Methodology & calculation assumptions" in response.body
+    assert b"CLEMD Malaysian institutional reference" in response.body
+    assert b"2023-10-18" in response.body
+    assert b"Source provenance and checks" in response.body
     assert b"No corporate-site identity" in response.body
     assert b"Scope 1 / direct" in response.body
     assert b"Not assessed" in response.body

@@ -221,3 +221,5 @@ dialog::backdrop { background:#49301f70; }
 .monitoring-actions[open]{box-shadow:0 6px 22px #59320f0a}
 @media(max-width:680px){.monitoring-export{padding:0 9px}.monitoring-export>span{font-size:9px}.monitoring-kpis .kpi .sub{max-width:none}}
 
+
+.monitoring-axis-unit{font-size:9px;font-weight:700;fill:#8b7563}

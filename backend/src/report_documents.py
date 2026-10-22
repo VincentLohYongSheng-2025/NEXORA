@@ -11,6 +11,7 @@ from reportlab.platypus import SimpleDocTemplate, Spacer, PageBreak
 from .carbon_report import p, safe, table, fmt, Metrics, CarbonTrend, BODY, SMALL, TITLE, H2, NAVY, TEAL, MUTED, PALE, LINE, WIDTH
 
 SOURCES = [
+    ('Energy Commission Malaysia', '2022–2024 provisional grid emission factors; 2023 Peninsular: 0.760 kgCO2e/kWh', 'https://myenergystats.st.gov.my/documents/d/guest/grid-emission-factor-gef-in-malaysia-2022-2024-provisional-'),
     ('Bursa Malaysia', 'Sustainability Reporting Guide, 3rd edition',
      'https://www.bursamalaysia.com/sites/5d809dcf39fba22790cad230/assets/6768e301e6414a4c4beb9f49/Sustainability_Reporting_Guide_2022_FINAL__1_.pdf'),
     ('Securities Commission Malaysia', 'National Sustainability Reporting Framework', 'https://www.sc.com.my/nsrf'),
@@ -61,6 +62,7 @@ def build_report(data, report_type='carbon'):
     carbon = m['observed_carbon_estimate_kg']
     area = asset.get('floor_area_m2')
     energy = m['observed_energy_kwh']
+    shares = [(key,title,asset.get('demo_basis',{}).get('load_allocations_percent',{}).get(key,pct)) for key,title,pct in SHARES]
     days = max(1, len(data['observed']) / 24)
     intensity = energy / area if area else None
     annual_intensity = intensity / days * 365 if intensity is not None else None
@@ -145,8 +147,8 @@ def build_report(data, report_type='carbon'):
         'Unassessed categories are excluded, not zero. The assessed total covers purchased electricity only.')
     story += [table(['INVENTORY CATEGORY', 'RESULT', 'STATUS'], [
         ['Scope 1 / direct', 'Not assessed', 'Fuel and refrigerant records unavailable.'],
-        ['Scope 2 / electricity estimate', fmt(carbon/1000 if carbon is not None else None,3)+' t CO2e', 'Configured-factor calculation; factor provenance unverified.'],
-        ['Scope 2 / location-based disclosure', 'Not established', 'A geographically and temporally suitable grid factor has not been verified.'],
+        ['Scope 2 / electricity estimate', fmt(carbon/1000 if carbon is not None else None,3)+' t CO2e', 'Documented ST factor; activity remains unassured.' if factor == .760 else 'Configured-factor estimate; source review required.'],
+        ['Scope 2 / location-based disclosure', 'Not established', 'Organisational boundary, meter ownership and utility evidence remain unverified.'],
         ['Scope 2 / market-based disclosure', 'Not established', 'Supplier contracts, certificates and residual-mix data not supplied.'],
         ['Scope 3 / other indirect', 'Not assessed', 'Value-chain activity and category screening unavailable.'],
     ], [198, 100, WIDTH-298]), Spacer(1, 12),
@@ -159,21 +161,20 @@ def build_report(data, report_type='carbon'):
     ], [230, WIDTH-230])]
     story += section('TREND', 'Electricity-linked carbon profile')
     story += [CarbonTrend(data['observed'], factor, asset['timezone']),
-        p(f'Hourly activity for {safe(period_label)}. The source-local time zone is {safe(asset["timezone"])}. '
-          'A comparable prior-year inventory is unavailable; no year-on-year reduction is asserted.', SMALL)]
+        p(f'Coverage: {len(data["observed"])} / {data.get("coverage",{}).get("expected_hours",len(data["observed"]))} source hours; gaps are excluded from totals. '
+          f'Local time: {safe(asset["timezone"])}. No comparable prior-year inventory is supplied.', SMALL)]
     if esg:
-        story += [Spacer(1, 9), p(f'<b>Calculation basis:</b> electricity x {fmt(factor,4)} kg CO2e/kWh. '
-            f'Cost uses {fmt(config["tariff_myr_per_kwh"],4)} MYR/kWh. Both are configured assumptions; '
-            'factor publisher, year and geography have not been verified. Selected-period intensity = kWh / floor area; '
-            'annualisation repeats the source-day average over 365 days. '
-            'Gases are not disaggregated; a corporate base year and consolidation approach are not established.', SMALL)]
+        story += [Spacer(1, 9), p(f'<b>Calculation basis:</b> electricity x {fmt(factor,4)} kg CO2e/kWh; '
+            f'cost x {fmt(config["tariff_myr_per_kwh"],4)} MYR/kWh. Default factor: ST 2023 Peninsular GEF (0.760); changed factors need review. '
+            'Intensity = kWh / assumed floor area. Annualisation repeats the available-day mean. '
+            'Gas breakdown, corporate base year and consolidation are unassessed.', SMALL)]
 
     if not esg:
         story += [PageBreak(), p('Methodology<br/>& data quality', TITLE)]
         story += section('03', 'Methodology & calculation assumptions')
         story += [table(['INPUT / METHOD', 'DISCLOSURE'], [
             ['Calculation', f'Electricity (kWh) x {fmt(factor,4)} kg CO2e/kWh; divide by 1,000 for t CO2e.'],
-            ['Emission factor provenance', 'User-configured assumption. Publisher, publication year, geography and factor category have not been verified.'],
+            ['Emission factor provenance', ('Energy Commission, 2023 Peninsular Malaysia GEF: 0.760 kgCO2e/kWh; provisional publication 23 February 2026.' if factor == .760 else 'User-configured factor; independent provenance review required.')],
             ['Cost assumption', f'{fmt(config["tariff_myr_per_kwh"],4)} MYR/kWh; this is not an electricity invoice.'],
             ['Gases and GWP basis', 'Aggregate CO2e input only. Separate CO2, CH4, N2O, HFCs, PFCs, SF6 and NF3 quantities and GWP sources are unavailable.'],
             ['Consolidation approach', 'A building has been selected. Equity share, financial control and operational control boundaries are not established.'],
@@ -181,12 +182,13 @@ def build_report(data, report_type='carbon'):
             ['Uncertainty and exclusions', 'Facility scaling, configured factors and limited source history create uncertainty. No numerical uncertainty interval is established.'],
         ], [145, WIDTH-145])]
         story += section('QUALITY', 'Source provenance and checks')
-        story += [p(f'<b>Source:</b> Building Data Genome Project 2 v1.0 (CC BY 4.0). '
+        story += [p(f'<b>Source:</b> CLEMD Malaysian institutional reference (CC BY 4.0). '
             f'Benchmark asset: {safe(asset["source_asset_id"])}. '
             + ('Facility results are illustrative estimates derived from this benchmark. ' if estimated else 'These readings are historical public benchmark observations. ')
             + 'No corporate-site identity or live meter connection is established.', SMALL), Spacer(1, 10),
             table(['QUALITY ITEM', 'CURRENT RESULT'], [
-                ['Activity records in this export', f'{len(data["observed"]):,} hourly intervals; {fmt(days,0)} source day(s).'],
+                ['Activity records in this export', f'{len(data["observed"]):,} available hourly intervals; {fmt(days,0)} equivalent source day(s).'],
+                ['Calendar coverage', f'{data.get("coverage",{}).get("available_hours",len(data["observed"]))} / {data.get("coverage",{}).get("expected_hours",len(data["observed"]))} hours. Missing source hours are excluded; the selected-period total is incomplete if coverage is below 100%.'],
                 ['Utility / meter reconciliation', 'Invoice reconciliation and facility meter calibration evidence not supplied.'],
                 ['Factors and assumptions', str(config.get('assumption_reference','Not supplied'))],
                 ['Independent assurance', 'No assurance statement, provider opinion or verification scope is supplied.'],
@@ -227,7 +229,7 @@ def build_report(data, report_type='carbon'):
     ], [220,145,WIDTH-365]), Spacer(1,8),
         p('These savings compare the same forecast with the approved local plan. They are projected, not measured savings, and do not reduce the historical inventory. Approval does not issue a physical equipment command.',SMALL)]
     story += section('PLANNING', 'Dashboard planning appendix')
-    selected = next((row for row in SHARES if row[0]==planning.get('load_type')),None)
+    selected = next((row for row in shares if row[0]==planning.get('load_type')),None)
     story += [p(f'Selected load: {safe(selected[1] if selected else "All electricity loads")}',BODY),Spacer(1,6),
         table(['PLANNING INPUT', 'VALUE / BASIS'], [
             ['Reduction target',f'{fmt(target,0)}%; user-configured planning ambition, not a validated corporate commitment'],
@@ -237,7 +239,7 @@ def build_report(data, report_type='carbon'):
         ],[175,WIDTH-175])]
     story += section('ALLOCATION','Assumed load allocation')
     story += [table(['LOAD TYPE','ASSUMED SHARE','ESTIMATED EMISSIONS / t CO2e'],
-        [[title,f'{share}%',fmt(carbon*share/100/1000 if carbon is not None else None,3)] for _,title,share in SHARES],
+        [[title,f'{share}%',fmt(carbon*share/100/1000 if carbon is not None else None,3)] for _,title,share in shares],
         [155,110,WIDTH-265]),Spacer(1,6),p('End-use allocations are not separately metered. The whole-building inventory above is unchanged by the load filter. Annualised figures extrapolate source-day activity; no seasonality adjustment is established.',SMALL)]
 
     story += [PageBreak(), p('Disclosure index,<br/>sources & review', TITLE)]
@@ -260,7 +262,7 @@ def build_report(data, report_type='carbon'):
         story += [p(f'<b>{safe(issuer)}</b> - <link href="{safe(url)}" color="#C95C14">{safe(title)}</link>',SMALL),Spacer(1,6)]
     story += [p(f'References consulted 22 October 2026. Guidance informs the report structure; no official endorsement or regulatory filing is implied. '
         'Applicability and completeness must be assessed for the reporting organisation.',SMALL),Spacer(1,7),
-        p('<b>Activity data reference:</b> <link href="https://doi.org/10.5281/zenodo.3887306" color="#C95C14">Building Data Genome Project 2 v1.0</link> - CC BY 4.0.',SMALL)]
+        p('<b>Activity data reference:</b> <link href="https://doi.org/10.6084/m9.figshare.c.6946581" color="#C95C14">CLEMD Malaysian institutional electricity dataset</link> - CC BY 4.0.',SMALL)]
     story += section('REVIEW','Document approval record')
     story += [table(['REVIEW RESPONSIBILITY','NAME / DATE / SIGN-OFF'],[
         ['Prepared by','NEXORA automated export; accountable preparer not assigned'],

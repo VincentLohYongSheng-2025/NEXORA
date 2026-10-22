@@ -1,3 +1,4 @@
+import {energySymbol} from '../src/js/township_energy.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -13,7 +14,7 @@ function harness({width=1200,height=690,reduced=false}={}) {
   const overlay=element(),parent=element(),container=element();
   parent.querySelector=()=>overlay;container.parentElement=parent;
   container.clientWidth=width;container.clientHeight=height;
-  const context=vm.createContext({console,devicePixelRatio:1,floorZones,floorOptions,facilityAlerts,document:{createElement:element},
+  const context=vm.createContext({console,devicePixelRatio:1,energySymbol,floorZones,floorOptions,facilityAlerts,document:{createElement:element},
     performance:{now:()=>time},matchMedia:()=>({matches:reduced}),
     ResizeObserver:class{observe(){}disconnect(){}},
     requestAnimationFrame:callback=>{frames.set(++sequence,callback);return sequence},

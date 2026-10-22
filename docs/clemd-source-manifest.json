@@ -1,0 +1,428 @@
+[
+  {
+    "files": [
+      {
+        "id": 43077199,
+        "name": "3-27 Sep to 4 Oct.zip",
+        "size": 256446667,
+        "is_link_only": false,
+        "download_url": "https://ndownloader.figshare.com/files/43077199",
+        "supplied_md5": "257190cea151c86831b972d8c7c7e6d5",
+        "computed_md5": "257190cea151c86831b972d8c7c7e6d5",
+        "mimetype": "application/zip"
+      }
+    ],
+    "authors": [
+      {
+        "id": 16017434,
+        "full_name": "Omar Al-Khadher",
+        "first_name": "Omar",
+        "last_name": "Al-Khadher",
+        "is_active": true,
+        "url_name": "Omar_Al-Khadher",
+        "orcid_id": "0000-0001-5579-9743"
+      },
+      {
+        "id": 17354362,
+        "full_name": "Azharudin Mukhtaruddin",
+        "first_name": "Azharudin",
+        "last_name": "Mukhtaruddin",
+        "is_active": true,
+        "url_name": "Azharudin_Mukhtaruddin",
+        "orcid_id": "0000-0001-6684-0676"
+      },
+      {
+        "id": 17371161,
+        "full_name": "Fakroul Ridzuan Hashim",
+        "first_name": "Fakroul",
+        "last_name": "Ridzuan Hashim",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      },
+      {
+        "id": 12564922,
+        "full_name": "Muhammad Mokhzaini Azizan",
+        "first_name": "Muhammad Mokhzaini",
+        "last_name": "Azizan",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      },
+      {
+        "id": 17371166,
+        "full_name": "Hussin Mamat",
+        "first_name": "Hussin",
+        "last_name": "Mamat",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      }
+    ],
+    "description": "<p dir=\"ltr\">This set of data consists of electrical parameters for 8 electrical panels. However, data for the CP AC panel are missing. Electrical parameters available are voltage, current, frequency, real power, reactive power, apparent power, power factor, and odd harmonics for current.</p>",
+    "license": {
+      "value": 1,
+      "name": "CC BY 4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "id": 24523552,
+    "title": "27 Sep to 4 Oct.zip (csv format)",
+    "doi": "10.6084/m9.figshare.24523552.v1",
+    "url_public_html": "https://figshare.com/articles/dataset/27_Sep_to_4_Oct_zip_csv_format_/24523552"
+  },
+  {
+    "files": [
+      {
+        "id": 43077208,
+        "name": "2-21 Sep to  27 Sep.zip",
+        "size": 182535657,
+        "is_link_only": false,
+        "download_url": "https://ndownloader.figshare.com/files/43077208",
+        "supplied_md5": "db185ad1dc1d7a7337c404f879327ac0",
+        "computed_md5": "db185ad1dc1d7a7337c404f879327ac0",
+        "mimetype": "application/zip"
+      }
+    ],
+    "authors": [
+      {
+        "id": 16017434,
+        "full_name": "Omar Al-Khadher",
+        "first_name": "Omar",
+        "last_name": "Al-Khadher",
+        "is_active": true,
+        "url_name": "Omar_Al-Khadher",
+        "orcid_id": "0000-0001-5579-9743"
+      },
+      {
+        "id": 17354362,
+        "full_name": "Azharudin Mukhtaruddin",
+        "first_name": "Azharudin",
+        "last_name": "Mukhtaruddin",
+        "is_active": true,
+        "url_name": "Azharudin_Mukhtaruddin",
+        "orcid_id": "0000-0001-6684-0676"
+      },
+      {
+        "id": 17371161,
+        "full_name": "Fakroul Ridzuan Hashim",
+        "first_name": "Fakroul",
+        "last_name": "Ridzuan Hashim",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      },
+      {
+        "id": 12564922,
+        "full_name": "Muhammad Mokhzaini Azizan",
+        "first_name": "Muhammad Mokhzaini",
+        "last_name": "Azizan",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      },
+      {
+        "id": 17371166,
+        "full_name": "Hussin Mamat",
+        "first_name": "Hussin",
+        "last_name": "Mamat",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      }
+    ],
+    "description": "<p dir=\"ltr\">This set of data consists of electrical parameters for 8 electrical panels. However, data for the DB ML2 and DBML2 panels are missing. Electrical parameters available are voltage, current, frequency, real power, reactive power, apparent power, power factor, and odd harmonics for current.</p>",
+    "license": {
+      "value": 1,
+      "name": "CC BY 4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "id": 24523555,
+    "title": "21 Sep to 27 Sep.zip (csv format)",
+    "doi": "10.6084/m9.figshare.24523555.v1",
+    "url_public_html": "https://figshare.com/articles/dataset/21_Sep_to_27_Sep_zip_csv_format_/24523555"
+  },
+  {
+    "files": [
+      {
+        "id": 43077205,
+        "name": "1-16 Sep to 21 Sep.zip",
+        "size": 174738923,
+        "is_link_only": false,
+        "download_url": "https://ndownloader.figshare.com/files/43077205",
+        "supplied_md5": "4d3c58300ac15bfb7f54ead7fafacb6a",
+        "computed_md5": "4d3c58300ac15bfb7f54ead7fafacb6a",
+        "mimetype": "application/zip"
+      }
+    ],
+    "authors": [
+      {
+        "id": 16017434,
+        "full_name": "Omar Al-Khadher",
+        "first_name": "Omar",
+        "last_name": "Al-Khadher",
+        "is_active": true,
+        "url_name": "Omar_Al-Khadher",
+        "orcid_id": "0000-0001-5579-9743"
+      },
+      {
+        "id": 17354362,
+        "full_name": "Azharudin Mukhtaruddin",
+        "first_name": "Azharudin",
+        "last_name": "Mukhtaruddin",
+        "is_active": true,
+        "url_name": "Azharudin_Mukhtaruddin",
+        "orcid_id": "0000-0001-6684-0676"
+      },
+      {
+        "id": 17371161,
+        "full_name": "Fakroul Ridzuan Hashim",
+        "first_name": "Fakroul",
+        "last_name": "Ridzuan Hashim",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      },
+      {
+        "id": 12564922,
+        "full_name": "Muhammad Mokhzaini Azizan",
+        "first_name": "Muhammad Mokhzaini",
+        "last_name": "Azizan",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      },
+      {
+        "id": 17371166,
+        "full_name": "Hussin Mamat",
+        "first_name": "Hussin",
+        "last_name": "Mamat",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      }
+    ],
+    "description": "<p dir=\"ltr\">This set of data consists of electrical parameters for 8 electrical panels. However, data for the incoming supply are missing. Electrical parameters available are voltage, current, frequency, real power, reactive power, apparent power, power factor, and odd harmonics for current.</p>",
+    "license": {
+      "value": 1,
+      "name": "CC BY 4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "id": 24523558,
+    "title": "16 Sep to 21 Sep.zip (csv format)",
+    "doi": "10.6084/m9.figshare.24523558.v1",
+    "url_public_html": "https://figshare.com/articles/dataset/16_Sep_to_21_Sep_zip_csv_format_/24523558"
+  },
+  {
+    "files": [
+      {
+        "id": 43077211,
+        "name": "6-18 Oct to 25 Oct.zip",
+        "size": 306287750,
+        "is_link_only": false,
+        "download_url": "https://ndownloader.figshare.com/files/43077211",
+        "supplied_md5": "c35f998545cdc026c417611d704c7a68",
+        "computed_md5": "c35f998545cdc026c417611d704c7a68",
+        "mimetype": "application/zip"
+      }
+    ],
+    "authors": [
+      {
+        "id": 16017434,
+        "full_name": "Omar Al-Khadher",
+        "first_name": "Omar",
+        "last_name": "Al-Khadher",
+        "is_active": true,
+        "url_name": "Omar_Al-Khadher",
+        "orcid_id": "0000-0001-5579-9743"
+      },
+      {
+        "id": 17354362,
+        "full_name": "Azharudin Mukhtaruddin",
+        "first_name": "Azharudin",
+        "last_name": "Mukhtaruddin",
+        "is_active": true,
+        "url_name": "Azharudin_Mukhtaruddin",
+        "orcid_id": "0000-0001-6684-0676"
+      },
+      {
+        "id": 17371161,
+        "full_name": "Fakroul Ridzuan Hashim",
+        "first_name": "Fakroul",
+        "last_name": "Ridzuan Hashim",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      },
+      {
+        "id": 12564922,
+        "full_name": "Muhammad Mokhzaini Azizan",
+        "first_name": "Muhammad Mokhzaini",
+        "last_name": "Azizan",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      },
+      {
+        "id": 17371166,
+        "full_name": "Hussin Mamat",
+        "first_name": "Hussin",
+        "last_name": "Mamat",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      }
+    ],
+    "description": "<p dir=\"ltr\">This set of data consists of electrical parameters for 8 electrical panels. Electrical parameters available are voltage, current, frequency, real power, reactive power, apparent power, power factor, and odd harmonics for current.</p>",
+    "license": {
+      "value": 1,
+      "name": "CC BY 4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "id": 24523561,
+    "title": "18 Oct to 25 Oct.zip (csv format)",
+    "doi": "10.6084/m9.figshare.24523561.v1",
+    "url_public_html": "https://figshare.com/articles/dataset/18_Oct_to_25_Oct_zip_csv_format_/24523561"
+  },
+  {
+    "files": [
+      {
+        "id": 43077214,
+        "name": "5-11 Oct to 18 Oct.zip",
+        "size": 239655059,
+        "is_link_only": false,
+        "download_url": "https://ndownloader.figshare.com/files/43077214",
+        "supplied_md5": "4f71f526b95b243d54f36116e8304b2d",
+        "computed_md5": "4f71f526b95b243d54f36116e8304b2d",
+        "mimetype": "application/zip"
+      }
+    ],
+    "authors": [
+      {
+        "id": 16017434,
+        "full_name": "Omar Al-Khadher",
+        "first_name": "Omar",
+        "last_name": "Al-Khadher",
+        "is_active": true,
+        "url_name": "Omar_Al-Khadher",
+        "orcid_id": "0000-0001-5579-9743"
+      },
+      {
+        "id": 17354362,
+        "full_name": "Azharudin Mukhtaruddin",
+        "first_name": "Azharudin",
+        "last_name": "Mukhtaruddin",
+        "is_active": true,
+        "url_name": "Azharudin_Mukhtaruddin",
+        "orcid_id": "0000-0001-6684-0676"
+      },
+      {
+        "id": 17371161,
+        "full_name": "Fakroul Ridzuan Hashim",
+        "first_name": "Fakroul",
+        "last_name": "Ridzuan Hashim",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      },
+      {
+        "id": 12564922,
+        "full_name": "Muhammad Mokhzaini Azizan",
+        "first_name": "Muhammad Mokhzaini",
+        "last_name": "Azizan",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      },
+      {
+        "id": 17371166,
+        "full_name": "Hussin Mamat",
+        "first_name": "Hussin",
+        "last_name": "Mamat",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      }
+    ],
+    "description": "<p dir=\"ltr\">This set of data consists of electrical parameters for 8 electrical panels. However, data for DB ML2 and EMSB 1 are missing. Electrical parameters available are voltage, current, frequency, real power, reactive power, apparent power, power factor, and odd harmonics for current.</p>",
+    "license": {
+      "value": 1,
+      "name": "CC BY 4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "id": 24523564,
+    "title": "11 Oct to 18 Oct.zip (csv format)",
+    "doi": "10.6084/m9.figshare.24523564.v1",
+    "url_public_html": "https://figshare.com/articles/dataset/11_Oct_to_18_Oct_zip_csv_format_/24523564"
+  },
+  {
+    "files": [
+      {
+        "id": 43077202,
+        "name": "4-4 Oct to 11 Oct.zip",
+        "size": 289615497,
+        "is_link_only": false,
+        "download_url": "https://ndownloader.figshare.com/files/43077202",
+        "supplied_md5": "e72cb05e25cffd31350da064d38df0b4",
+        "computed_md5": "e72cb05e25cffd31350da064d38df0b4",
+        "mimetype": "application/zip"
+      }
+    ],
+    "authors": [
+      {
+        "id": 16017434,
+        "full_name": "Omar Al-Khadher",
+        "first_name": "Omar",
+        "last_name": "Al-Khadher",
+        "is_active": true,
+        "url_name": "Omar_Al-Khadher",
+        "orcid_id": "0000-0001-5579-9743"
+      },
+      {
+        "id": 17354362,
+        "full_name": "Azharudin Mukhtaruddin",
+        "first_name": "Azharudin",
+        "last_name": "Mukhtaruddin",
+        "is_active": true,
+        "url_name": "Azharudin_Mukhtaruddin",
+        "orcid_id": "0000-0001-6684-0676"
+      },
+      {
+        "id": 17371161,
+        "full_name": "Fakroul Ridzuan Hashim",
+        "first_name": "Fakroul",
+        "last_name": "Ridzuan Hashim",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      },
+      {
+        "id": 12564922,
+        "full_name": "Muhammad Mokhzaini Azizan",
+        "first_name": "Muhammad Mokhzaini",
+        "last_name": "Azizan",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      },
+      {
+        "id": 17371166,
+        "full_name": "Hussin Mamat",
+        "first_name": "Hussin",
+        "last_name": "Mamat",
+        "is_active": false,
+        "url_name": "_",
+        "orcid_id": ""
+      }
+    ],
+    "description": "<p dir=\"ltr\">This set of data consists of electrical parameters for 8 electrical panels. Electrical parameters available are voltage, current, frequency, real power, reactive power, apparent power, power factor, and odd harmonics for current.</p>",
+    "license": {
+      "value": 1,
+      "name": "CC BY 4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "id": 24523567,
+    "title": "4 Oct to 11 Oct.zip (csv format)",
+    "doi": "10.6084/m9.figshare.24523567.v1",
+    "url_public_html": "https://figshare.com/articles/dataset/4_Oct_to_11_Oct_zip_csv_format_/24523567"
+  }
+]
