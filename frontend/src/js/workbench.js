@@ -1,8 +1,8 @@
-import { carbonPage, bindCarbonDashboard } from './carbon_dashboard.js?v=carbon-solar-27';
+import { carbonPage, bindCarbonDashboard } from './carbon_dashboard.js?v=reports-33';
 import { mountBuildingPreview } from './building_preview.js';
 import { mountSpatialTwin, FACILITIES } from './spatial_twin.js?v=renewable-workspace-26';
 import { floorOptions, floorZones, floorIssueCount, facilityAlerts, syncAlertState, FLOOR_COUNTS } from './floor_conditions.js?v=alert-approval-16';
-import { simulatorPage, mountInstallation, installation, simulatorUI, syncSimulatorForm, bindSimulator, simulatorDesign, scenarioPayload } from './renewable_simulator.js?v=carbon-solar-27';
+import { simulatorPage, mountInstallation, installation, simulatorUI, syncSimulatorForm, bindSimulator, simulatorDesign, scenarioPayload, setSimulatorSettingsMode } from './renewable_simulator.js?v=ai-settings-31';
 
 const PAGES = [
   ['overview', 'Overview'], ['monitoring', 'Monitoring'], ['carbon', 'Carbon'],
@@ -57,11 +57,11 @@ function header(){
   <nav class="nav ${state.menuOpen?'open':''}" aria-label="Main navigation">${PAGES.filter(([id])=>id!=='copilot').map(([id,label])=>`<a href="#${id}" class="${state.page===id?'active':''}" ${state.page===id?'aria-current="page"':''}>${({overview:'Overview',monitoring:'Real-Time & Forecast',carbon:'Carbon Dashboard'})[id]||label}</a>`).join('')}</nav>
   </header>`;
 }
-function filters(){const all=state.page==='overview'&&!state.spatialFacility;return `<div class="filters">${all?'<span class="badge gray">All 6 facilities</span>':`<div class="building-filter"><label class="select-wrap"><span class="sr-only">Township building</span><select id="building-select" aria-label="Choose a township building">${state.assets.filter(asset=>asset.facility_id).map(asset=>`<option value="${asset.id}" ${asset.id===state.assetId?'selected':''}>${esc(sourceName(asset))}</option>`).join('')}</select></label>${state.page==='monitoring'?'<small class="building-filter-hint">Choose one of the six township buildings to view its estimated profile.</small>':''}</div>`}<label class="select-wrap"><select id="period-select" aria-label="History window"><option value="day" ${state.period==='day'?'selected':''}>24-hour view</option><option value="week" ${state.period==='week'?'selected':''}>7-day view</option></select></label></div>`}
+function filters(){const all=state.page==='overview'&&!state.spatialFacility;return `<div class="filters">${all?'<span class="badge gray">All 6 facilities</span>':`<div class="building-filter"><label class="select-wrap"><span class="sr-only">Township building</span><select id="building-select" aria-label="Choose a township building">${state.assets.filter(asset=>asset.facility_id).map(asset=>`<option value="${asset.id}" ${asset.id===state.assetId?'selected':''}>${esc(sourceName(asset))}</option>`).join('')}</select></label>${state.page==='monitoring'?'<small class="building-filter-hint">Choose one of the six township buildings to view its estimated profile.</small>':''}</div>`}<label class="select-wrap"><select id="period-select" aria-label="History window"><option value="day" ${state.period==='day'?'selected':''}>24-hour view</option><option value="week" ${state.period==='week'?'selected':''}>7-day view</option></select></label>${state.page==='monitoring'?'<button type="button" class="ghost monitoring-export" data-action="export-monitoring" aria-label="Export selected history and forecast as CSV">↓ <span>Export data</span></button>':''}</div>`}
 function heading(title,subtitle,controls=true){return `<div class="page-head"><div><h1>${title}</h1><p>${subtitle}</p></div>${controls?filters():''}</div>`}
 function sourceStrip(){const d=state.data;return `<div class="source-strip"><span><i class="dot"></i><strong>${d.asset.facility_id?'Township estimate · benchmark-derived':'Public benchmark · BDG2 v1.0'}</strong> · ${stamp()} · ${esc(d.asset.timezone)}</span><span>${d.asset.facility_id?'Illustrative energy, cost & carbon':'Historical readings · Estimated costs & simulations'}</span></div>`}
 function kpi(label,value,sub,kind='blue',icon='↗',series=null){const values=(series||state.data?.observed||[]).slice(-24).map(r=>r.consumption_kwh);const min=Math.min(...values),max=Math.max(...values),points=values.map((v,i)=>`${i*72/Math.max(values.length-1,1)},${26-(v-min)*20/Math.max(max-min,1)}`).join(' ');return `<div class="card kpi ${kind}"><span class="label">${label}</span><span class="kpi-icon">${icon}</span><div class="value">${value}</div><div class="sub">${sub}</div><svg class="sparkline" viewBox="0 0 74 30" aria-hidden="true"><polyline points="${points}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`}
-function chart(valuesA,valuesB,labels,{colors=['#e96b12','#f2a13a'],mode='split',height=205,labelsB=null,chartUnit='kWh',dashed=true,seriesATitle=null,seriesBTitle='Forecast',ariaLabel=null}={}){
+function chart(valuesA,valuesB,labels,{colors=['#e96b12','#f2a13a'],mode='split',height=205,labelsB=null,chartUnit='kWh',dashed=true,dashPattern='5 4',seriesATitle=null,seriesBTitle='Forecast',ariaLabel=null,xTickLabels=null}={}){
   const all=[...valuesA,...valuesB].filter(Number.isFinite),max=Math.max(...all,1)*1.15,min=0,w=700,h=height,left=34,right=12,top=12,bottom=29,innerW=w-left-right,innerH=h-top-bottom;
   const x=index=>left+index*innerW/Math.max(1,mode==='split'?valuesA.length+valuesB.length-1:Math.max(valuesA.length,valuesB.length)-1);
   const y=value=>top+(max-value)*innerH/max;
@@ -69,10 +69,95 @@ function chart(valuesA,valuesB,labels,{colors=['#e96b12','#f2a13a'],mode='split'
   const circle=(values,start,isForecast)=>values.map((v,i)=>`<circle cx="${x(i+start).toFixed(1)}" cy="${y(v).toFixed(1)}" r="7" fill="transparent" stroke="transparent"><title>${esc(isForecast?seriesBTitle:(seriesATitle||(state.data?.asset.facility_id?'Estimated reference':'Recorded reference')))} · ${esc((isForecast&&labelsB?labelsB[i]:labels[i+start])||`Interval ${i+start+1}`)}: ${num(v,1)} ${esc(chartUnit)}</title></circle>`).join('');
   const bStart=mode==='split'?valuesA.length:0;
   const ticks=[0,.25,.5,.75,1].map(p=>`<line x1="${left}" x2="${w-right}" y1="${top+p*innerH}" y2="${top+p*innerH}"/><text class="chart-axis" x="2" y="${top+p*innerH+3}">${num(max*(1-p),0)}</text>`).join('');
-  const xticks=[0,.25,.5,.75,1].map(p=>`<text class="chart-axis" x="${left+p*innerW}" y="${h-4}" text-anchor="middle">${esc(labels[Math.round(p*(labels.length-1))]?.slice(11,16)||'')}</text>`).join('');
-  return `<div class="chart-holder"><svg class="chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(ariaLabel||`Recorded and forecast ${chartUnit} chart; hover a point for its date and value`)}"><path d="${line(valuesA)} L${x(valuesA.length-1)},${top+innerH} L${left},${top+innerH}Z" fill="${colors[0]}" opacity=".055"/><g class="chart-grid">${ticks}</g>${xticks}<path class="chart-line" stroke="${colors[0]}" d="${line(valuesA)}"/><path class="chart-line" stroke="${colors[1]}" ${dashed?'stroke-dasharray="5 4"':''} d="${line(valuesB,bStart)}"/>${circle(valuesA,0,false)}${circle(valuesB,bStart,true)}</svg></div>`;
+  const xticks=xTickLabels?xTickLabels.map((label,i)=>`<text class="chart-axis" x="${x(i)}" y="${h-4}" text-anchor="middle">${esc(label)}</text>`).join(''):[0,.25,.5,.75,1].map(p=>`<text class="chart-axis" x="${left+p*innerW}" y="${h-4}" text-anchor="middle">${esc(labels[Math.round(p*(labels.length-1))]?.slice(11,16)||'')}</text>`).join('');
+  return `<div class="chart-holder"><svg class="chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(ariaLabel||`Recorded and forecast ${chartUnit} chart; hover a point for its date and value`)}"><path d="${line(valuesA)} L${x(valuesA.length-1)},${top+innerH} L${left},${top+innerH}Z" fill="${colors[0]}" opacity=".055"/><g class="chart-grid">${ticks}</g>${xticks}<path class="chart-line" stroke="${colors[0]}" d="${line(valuesA)}"/><path class="chart-line" stroke="${colors[1]}" ${dashed?`stroke-dasharray="${dashPattern}"`:''} d="${line(valuesB,bStart)}"/>${circle(valuesA,0,false)}${circle(valuesB,bStart,true)}</svg></div>`;
 }
-function forecastChart(metric='energy'){const d=state.data,a=d.observed.slice(-24),b=d.forecast,factor=metric==='cost'?d.config.tariff_myr_per_kwh:metric==='carbon'?d.config.carbon_kg_per_kwh:1;if(factor==null)return '<div class="empty">The selected calculation factor is not configured.</div>';const colors=metric==='carbon'?['#ed6a0b','#f5a623']:metric==='cost'?['#c94e08','#f2a13a']:['#ed6a0b','#f5a623'];return chart(a.map(r=>r.consumption_kwh*factor),b.map(r=>r.forecast_kwh*factor),a.map(r=>r.source_local_timestamp),{mode:'overlay',labelsB:b.map(r=>sourceHour(r.timestamp,d.asset.timezone)),colors,chartUnit:metric==='cost'?'RM':metric==='carbon'?'kg CO₂e':'kWh'})}
+function forecastChart(metric='energy'){
+  const d=state.data,factor=metric==='cost'?d.config.tariff_myr_per_kwh:metric==='carbon'?d.config.carbon_kg_per_kwh:1;
+  if(factor==null)return '<div class="empty">The selected calculation factor is not configured.</div>';
+  const colors=metric==='carbon'?['#ed6a0b','#f5a623']:metric==='cost'?['#c94e08','#f2a13a']:['#ed6a0b','#f5a623'];
+  const chartUnit=metric==='cost'?'RM':metric==='carbon'?'kg CO₂e':'kWh';
+  if(state.period==='week'){
+    const daily=new Map(),predicted=new Map();
+    for(const row of d.observed){const date=row.source_local_timestamp.slice(0,10);daily.set(date,(daily.get(date)||0)+row.consumption_kwh*factor);}
+    for(const row of d.history_forecast||[]){const date=row.source_local_timestamp.slice(0,10);predicted.set(date,(predicted.get(date)||0)+row.forecast_kwh*factor);}
+    const dates=[...daily.keys()].sort();
+    const matched=(d.history_forecast||[]).length===d.observed.length&&dates.every(date=>predicted.has(date));
+    const dateLabel=date=>new Intl.DateTimeFormat('en-MY',{day:'numeric',month:'short',timeZone:'UTC'}).format(new Date(`${date}T12:00:00Z`));
+    const metricLabel=metric==='cost'?'estimated cost':metric==='carbon'?'estimated carbon emissions':'energy';
+    const ariaLabel=`Daily benchmark and historical forecast ${metricLabel} across ${dates.length} selected days for ${sourceName(d.asset)}. Orange solid line is benchmark; green dotted line is forecast.`;
+    return chart(dates.map(date=>daily.get(date)),matched?dates.map(date=>predicted.get(date)):[],dates,{mode:'overlay',colors:[colors[0],'#278449'],dashPattern:'1 5',chartUnit,seriesATitle:'Benchmark',seriesBTitle:'Forecast (historical backtest)',xTickLabels:dates.map(dateLabel),ariaLabel})+(matched?'':'<p class="note">Historical forecast comparison is unavailable for this selection.</p>');
+  }
+  const a=d.observed.slice(-24),b=d.forecast;
+  return chart(a.map(r=>r.consumption_kwh*factor),b.map(r=>r.forecast_kwh*factor),a.map(r=>r.source_local_timestamp),{mode:'overlay',labelsB:b.map(r=>sourceHour(r.timestamp,d.asset.timezone)),colors,chartUnit});
+}
+function monitoringTimelineChart(metric='energy'){
+  const d=state.data;
+  const factor=metric==='cost'?d.config.tariff_myr_per_kwh:metric==='carbon'?d.config.carbon_kg_per_kwh:1;
+  if(factor==null)return '<div class="empty">The selected calculation factor is not configured.</div>';
+  const historical=state.period==='week'?d.observed:d.observed.slice(-24);
+  const future=d.forecast||[];
+  if(!historical.length||!future.length)return '<div class="empty">History or forecast data is unavailable for this selection.</div>';
+  const chartUnit=metric==='cost'?'RM':metric==='carbon'?'kg CO₂e':'kWh';
+  const historyValues=historical.map(row=>row.consumption_kwh*factor);
+  const forecastValues=future.map(row=>row.forecast_kwh*factor);
+  const timestamps=[...historical.map(row=>row.source_local_timestamp),...future.map(row=>sourceHour(row.timestamp,d.asset.timezone))];
+  const multiplier=Number(d.asset.demo_basis?.load_multiplier)||1;
+  const modelMae=Number(d.model?.test_metrics?.model?.mae_kwh);
+  const errorGuide=Number.isFinite(modelMae)?modelMae*multiplier*factor:null;
+  const upper=errorGuide==null?[]:forecastValues.map(value=>value+errorGuide);
+  const lower=errorGuide==null?[]:forecastValues.map(value=>Math.max(0,value-errorGuide));
+  const max=Math.max(1,...historyValues,...upper,...forecastValues)*1.08;
+  const w=700,h=260,left=44,right=12,top=18,bottom=32,innerW=w-left-right,innerH=h-top-bottom;
+  const count=historyValues.length+forecastValues.length;
+  const x=index=>left+index*innerW/Math.max(1,count-1);
+  const y=value=>top+(max-value)*innerH/max;
+  const path=points=>{
+    if(!points.length)return '';
+    let dPath=`M${points[0][0].toFixed(1)},${points[0][1].toFixed(1)}`;
+    for(let i=0;i<points.length-1;i++){
+      const p0=points[Math.max(0,i-1)],p1=points[i],p2=points[i+1],p3=points[Math.min(points.length-1,i+2)];
+      dPath+=` C${(p1[0]+(p2[0]-p0[0])/6).toFixed(1)},${(p1[1]+(p2[1]-p0[1])/6).toFixed(1)} ${(p2[0]-(p3[0]-p1[0])/6).toFixed(1)},${(p2[1]-(p3[1]-p1[1])/6).toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;
+    }
+    return dPath;
+  };
+  const historyPoints=historyValues.map((value,index)=>[x(index),y(value)]);
+  const forecastPoints=forecastValues.map((value,index)=>[x(historyValues.length+index),y(value)]);
+  const bandPath=errorGuide==null?'':`${path(upper.map((value,index)=>[x(historyValues.length+index),y(value)]))} ${path(lower.map((value,index)=>[x(historyValues.length+index),y(value)]).reverse()).replace(/^M/,'L')} Z`;
+  const boundary=(x(historyValues.length-.5));
+  const grid=[0,.25,.5,.75,1].map(position=>`<line x1="${left}" x2="${w-right}" y1="${top+position*innerH}" y2="${top+position*innerH}"/><text class="chart-axis" x="2" y="${top+position*innerH+3}">${num(max*(1-position),0)}</text>`).join('');
+  const tickIndices=state.period==='week'?[0,48,96,144,168,count-1]:[0,6,12,18,24,30,36,42,count-1];
+  const uniqueTicks=[...new Set(tickIndices)].filter(index=>index>=0&&index<count);
+  const dateLabel=value=>new Intl.DateTimeFormat('en-MY',{day:'numeric',month:'short',timeZone:'UTC'}).format(new Date(`${value.slice(0,10)}T12:00:00Z`));
+  const ticks=uniqueTicks.map((index,tickIndex)=>{
+    const isDayStart=index===0||index===historyValues.length;
+    const label=state.period==='week'?(index===count-1?'23:00':dateLabel(timestamps[index])):(isDayStart?dateLabel(timestamps[index]):timestamps[index].slice(11,16));
+    const anchor=tickIndex===0?'start':tickIndex===uniqueTicks.length-1?'end':'middle';
+    return `<text class="chart-axis" x="${x(index)}" y="${h-5}" text-anchor="${anchor}">${esc(label)}</text>`;
+  }).join('');
+  const points=(values,offset,title)=>values.map((value,index)=>`<circle cx="${x(offset+index).toFixed(1)}" cy="${y(value).toFixed(1)}" r="7" fill="transparent" stroke="transparent"><title>${esc(title)} · ${esc(timestamps[offset+index])}: ${num(value,1)} ${esc(chartUnit)}</title></circle>`).join('');
+  const sourceLabel=d.asset.facility_id?'Estimated history':'Benchmark readings';
+  const forecastLabel=d.asset.facility_id?'Estimated forecast':'Forecast · next 24 hours';
+  const accessible=`${sourceLabel} followed by the next 24-hour ${forecastLabel.toLowerCase()}, in ${chartUnit}, for ${sourceName(d.asset)}. Shading shows historical benchmark mean absolute error as a reference guide, not a confidence interval.`;
+  return `<div class="chart-holder"><svg class="chart monitoring-timeline" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(accessible)}"><rect class="monitoring-forecast-window" x="${boundary.toFixed(1)}" y="${top}" width="${(w-right-boundary).toFixed(1)}" height="${innerH}"/><g class="chart-grid">${grid}</g>${ticks}${errorGuide==null?'':`<path class="monitoring-mae-band" d="${bandPath}"/>`}<path class="chart-line" stroke="#ed6a0b" d="${path(historyPoints)}"/><path class="chart-line monitoring-forecast-line" stroke="#278449" stroke-dasharray="2 6" d="${path(forecastPoints)}"/><line class="monitoring-forecast-divider" x1="${boundary.toFixed(1)}" x2="${boundary.toFixed(1)}" y1="${top}" y2="${top+innerH}"/><text class="monitoring-phase-label" x="${left+5}" y="${top+12}">${esc(sourceLabel)}</text><text class="monitoring-phase-label monitoring-future-label" x="${Math.min(boundary+7,w-right-100)}" y="${top+12}">Next 24 hours</text>${points(historyValues,0,sourceLabel)}${points(forecastValues,historyValues.length,forecastLabel)}</svg></div>`;
+}
+function exportMonitoringData(){
+  const d=state.data,rows=[['Building','Period','Local date/time','Series','Energy (kWh)','Estimated cost (MYR)','Estimated carbon (kg CO2e)']];
+  const factors={cost:d.config.tariff_myr_per_kwh,carbon:d.config.carbon_kg_per_kwh};
+  const append=(stamp,series,kwh)=>rows.push([sourceName(d.asset),state.period==='week'?'7-day':'24-hour',stamp,series,kwh.toFixed(3),factors.cost==null?'':(kwh*factors.cost).toFixed(2),factors.carbon==null?'':(kwh*factors.carbon).toFixed(3)]);
+  if(state.period==='week'){
+    const observed=new Map(),forecast=new Map();
+    for(const row of d.observed){const day=row.source_local_timestamp.slice(0,10);observed.set(day,(observed.get(day)||0)+row.consumption_kwh)}
+    for(const row of d.history_forecast||[]){const day=row.source_local_timestamp.slice(0,10);forecast.set(day,(forecast.get(day)||0)+row.forecast_kwh)}
+    for(const day of [...observed.keys()].sort()){append(day,'Benchmark',observed.get(day));if(forecast.has(day))append(day,'Forecast (historical backtest)',forecast.get(day))}
+  }else{
+    for(const row of d.observed.slice(-24))append(row.source_local_timestamp,'Benchmark',row.consumption_kwh);
+    for(const row of d.forecast||[])append(sourceHour(row.timestamp,d.asset.timezone),'Forecast (next 24 hours)',row.forecast_kwh);
+  }
+  const csv=rows.map(row=>row.map(value=>`"${String(value).replaceAll('"','""')}"`).join(',')).join('\r\n');
+  const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),link=document.createElement('a');
+  link.href=url;link.download=`nexora-${sourceName(d.asset).toLowerCase().replace(/[^a-z0-9]+/g,'-')}-${state.period}-energy-forecast.csv`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
 const ENERGY_LAYERS=[['hvac','HVAC'],['grid','Grid'],['solar','Solar']];
 // Illustrative daily energy inputs for the model overlay only, in kWh.
 const MODEL_ENERGY_DEMO={mall:{hvac:3260,grid:5120,solar:480},hospital:{hvac:4200,grid:7900,solar:0},restaurant:{hvac:124,grid:280,solar:0},commercial:{hvac:2300,grid:4300,solar:360},residential:{hvac:1800,grid:3400,solar:540},solar:{hvac:0,grid:18,solar:4800}};
@@ -154,18 +239,22 @@ function monitoring(){
     colors:['#ed6a0b','#5b9f50'],chartUnit:'kWh',seriesATitle:'Forecast before load shift',seriesBTitle:'Illustrative shifted forecast',ariaLabel:'Next-day forecast load compared with an illustrative shifted load profile, in hourly kWh'
   });
   const peakBefore=Math.max(...shift.items.map(row=>row.before_kwh)),peakAfter=Math.max(...shift.items.map(row=>row.after_kwh));
-  return `${heading('Real-Time & Forecast','See the selected history, what the model forecasts next, and how it performed.')}${sourceStrip()}
-  <div class="monitoring-kpis">${kpi(state.period==='day'?`${referenceLabel} · 24 hours`:`${referenceLabel} · 7 days`,unit(m.observed_energy_kwh,'kWh',1),'Selected historical reference','blue','ϟ')}${kpi('Estimated energy cost',money(m.observed_cost_estimate_myr),'Uses the configured flat rate','teal','RM')}${kpi('Next 24-hour forecast',unit(m.forecast_energy_kwh,'kWh',1),'Calculated from historical data','green','↗')}${kpi('Reference peak',unit(m.observed_peak_interval_average_kw,'kW',1),'Highest hourly interval in selected history','blue','⌁')}</div>
-  <div class="grid split-grid monitoring-comparison monitoring-primary"><section class="card card-pad monitoring-chart-card"><div class="card-head monitoring-card-heading"><div><span class="eyebrow">Energy use</span><h2>Recent profile and next-day forecast</h2><p class="caption">Hourly energy for ${esc(sourceName(d.asset))} · ${esc(d.asset.timezone)} local time</p></div><div class="segmented" aria-label="Chart units">${[['energy','Energy'],['cost','Est. cost'],['carbon','CO₂e']].map(([id,label])=>`<button type="button" data-chart-metric="${id}" class="${state.chartMetric===id?'active':''}" aria-pressed="${state.chartMetric===id}">${label}</button>`).join('')}</div></div><p class="monitoring-chart-explain">The solid line is the selected reference day. The dashed line is the following day’s forecast.</p>${forecastChart(state.chartMetric)}<div class="legend"><span><i style="background:#ed6a0b"></i>${referenceLabel}</span><span><i style="background:#f5a623"></i>Forecast · next day</span></div><details class="monitoring-chart-details"><summary>How to read this chart</summary><p>Each point is energy used or forecast for one hour, in kWh. The selected ${state.period==='day'?'24-hour':'7-day'} period changes the reference summary above; the chart compares the most recent reference day with the next 24-hour forecast. Estimated cost and carbon views use the configured flat-rate assumptions.</p></details></section>
-  <section class="card card-pad monitoring-health"><div class="card-head"><div><span class="eyebrow">Model check</span><h2>How reliable is this forecast?</h2></div><span class="badge ${modelBeatsBaseline?'monitoring-status-good':'monitoring-status-watch'}">${modelStatus}</span></div><p class="monitoring-health-summary">The model was tested on past data it had not seen during training. Lower error means a closer forecast.</p><div class="monitoring-error-comparison"><div><span>Forecast model error</span><strong>${unit(modelMae,'kWh / hour',1)}</strong></div><div><span>Simple baseline error</span><strong>${unit(baselineMae,'kWh / hour',1)}</strong></div></div><div class="forecast-score"><strong>${relativeError==null?'—':`${num(Math.abs(relativeError),1)}% ${relativeError>=0?'lower':'higher'} error`}</strong><span>Compared with the simple baseline in the same test</span></div><div class="stat-row"><span>Past test intervals</span><strong>${num(samples)}</strong></div><p class="note monitoring-model-note">Historical BDG2 benchmark test only. It does not measure accuracy for this specific facility or today. Source history ends in 2017.</p></section></div>
+  return `${heading('Energy Monitoring & Prediction','Compare the selected building’s history with its next-day forecast and check how the model performed.')}${sourceStrip()}
+  <div class="monitoring-kpis">${kpi('Energy use',unit(m.observed_energy_kwh,'kWh',1),`Selected historical reference · ${state.period==='day'?'24 hours':'7 days'}`,'blue','ϟ')}${kpi('Estimated electricity bill',money(m.observed_cost_estimate_myr),'Historical period · assumed tariff','teal','RM')}${kpi('Peak demand estimate',unit(m.observed_peak_interval_average_kw,'kW',1),'Highest hourly reference interval','blue','⌁')}${kpi('Next 24-hour forecast',unit(m.forecast_energy_kwh,'kWh',1),'Calculated from historical patterns','green','↗')}</div>
+  <div class="grid split-grid monitoring-comparison monitoring-primary"><section class="card card-pad monitoring-chart-card">
+    <div class="card-head monitoring-card-heading"><div><span class="eyebrow">Energy use</span><h2>${state.period==='week'?'7-day history + next-day forecast':'Recent history + next-day forecast'}</h2><p class="caption">${state.period==='week'?'Hourly history across 7 days':'Hourly history across 24 hours'} · ${esc(sourceName(d.asset))} · ${esc(d.asset.timezone)} local time</p></div><div class="segmented" aria-label="Chart units">${[['energy','Energy'],['cost','Est. cost'],['carbon','CO₂e']].map(([id,label])=>`<button type="button" data-chart-metric="${id}" class="${state.chartMetric===id?'active':''}" aria-pressed="${state.chartMetric===id}">${label}</button>`).join('')}</div></div>
+    <p class="monitoring-chart-explain">Orange shows the selected history. Green dotted line is the next 24-hour forecast; the divider marks where it begins. The shaded band is a historical model-error guide.</p>
+    ${monitoringTimelineChart(state.chartMetric)}
+    <div class="legend"><span><i style="background:#ed6a0b"></i>${d.asset.facility_id?'Estimated history':'Benchmark history'}</span><span><i style="background:transparent;width:24px;height:0;border-top:3px dotted #278449"></i>${d.asset.facility_id?'Estimated forecast':'Forecast · next 24 hours'}</span><span class="monitoring-error-legend"><i></i>Historical MAE guide</span></div>
+    <details class="monitoring-chart-details"><summary>How to read this chart</summary><p>The orange line shows hourly history from the selected building profile. The dotted green line shows the next 24 hours, beginning at the vertical divider. The pale green band is the model’s held-out benchmark mean absolute error (MAE), scaled with the selected estimate where relevant. It is a historical error guide, not a confidence interval or a claim about today’s or this site’s accuracy. Estimated cost and carbon apply the configured assumptions; the source data is historical, not live.</p></details>
+</section><section class="card card-pad monitoring-health"><div class="card-head"><div><span class="eyebrow">Forecast health</span><h2>How close were past forecasts?</h2></div><span class="badge ${modelBeatsBaseline?'monitoring-status-good':'monitoring-status-watch'}">${modelStatus}</span></div><p class="monitoring-health-summary">Tested against held-out historical readings. Lower mean absolute error (MAE) means a closer estimate.</p><div class="monitoring-error-bars" role="img" aria-label="Historical test error: forecast model ${unit(modelMae,'kWh per hour',1)}, simple baseline ${unit(baselineMae,'kWh per hour',1)}. Lower is better."><div class="monitoring-error-row"><div><span>Forecast model</span><strong>${unit(modelMae,'kWh / hour',1)}</strong></div><div class="monitoring-error-track"><i class="model" style="width:${Math.max(modelMae,baselineMae)>0?Math.min(100,modelMae/Math.max(modelMae,baselineMae)*100):0}%"></i></div></div><div class="monitoring-error-row"><div><span>Simple baseline</span><strong>${unit(baselineMae,'kWh / hour',1)}</strong></div><div class="monitoring-error-track"><i class="baseline" style="width:${Math.max(modelMae,baselineMae)>0?Math.min(100,baselineMae/Math.max(modelMae,baselineMae)*100):0}%"></i></div></div></div><div class="forecast-score"><strong>${relativeError==null?'—':`${num(Math.abs(relativeError),1)}% ${relativeError>=0?'lower':'higher'} error`}</strong><span>Model compared with the simple baseline</span></div><div class="stat-row"><span>Held-out test intervals</span><strong>${num(samples)}</strong></div><p class="note monitoring-model-note">Historical BDG2 benchmark test only. It does not measure accuracy for this specific facility or today. Source history ends in 2017.</p></section></div>
   <section class="card card-pad monitoring-optimization"><div class="card-head monitoring-card-heading"><div><span class="eyebrow">Planning scenario</span><h2>What if flexible load moved away from the peak?</h2><p class="caption">A modelled next-day load shift for illustration · no equipment changes are made</p></div><a class="primary" href="#simulator">Explore Renewable Simulator →</a></div><p class="monitoring-chart-explain">The green line moves a small assumed amount of energy from the forecast’s busiest hour to its quietest hour.</p>${optimizationChart}<div class="legend"><span><i style="background:#ed6a0b"></i>Forecast before shift</span><span><i style="background:#5b9f50"></i>Illustrative shifted forecast</span></div><div class="monitoring-scenario-stats"><div><span>Peak before</span><strong>${unit(peakBefore,'kW',1)}</strong></div><div><span>Peak after shift</span><strong>${unit(peakAfter,'kW',1)}</strong></div><div><span>Peak change</span><strong>${unit(peakBefore-peakAfter,'kW',1)}</strong></div><div><span>Energy moved</span><strong>${unit(energyMoved,'kWh',1)}</strong></div></div><p class="note monitoring-model-note">This scenario assumes flexible equipment is available. The model preserves total energy, so it does not claim energy or bill savings. No load flexibility or physical controls have been verified.</p></section>
   <details class="card monitoring-actions"><summary>View proposed efficiency actions <span>${d.actions.filter(a=>a.status==='proposed').length} available</span></summary><div class="monitoring-action-list">${d.actions.map(a=>`<article class="monitoring-action"><div><h3>${esc(a.title)}</h3><p>${esc(a.reason)}</p><small>${esc(a.detail)}</small></div><span class="badge">${esc(a.status)}</span></article>`).join('')}</div><p class="note">These are planning proposals. Review or approve them in Action recommendations on Overview.</p></details>`
 }
 async function openCarbonSimulator(suggestion){
   if(suggestion.assetId!==state.assetId)return;
   const assetId=state.assetId;
-  state.scenarioDraft={...state.data.config};
-  Object.assign(simulatorDesign(state),suggestion.design);
+  setSimulatorSettingsMode(state,simulatorUI,'ai',{reset:true});
   state.scenarioName=suggestion.name;state.scenarioTech='pv';state.preview=null;state.previewError=null;
   Object.assign(simulatorUI,{tab:'pv',mode:'3d',after:true,case:'expected',saved:null,editing:null,compare:[]});
   installationView=null;state.calculating=true;
@@ -261,6 +350,7 @@ document.addEventListener('click',async event=>{
   const tech=event.target.closest('[data-tech]');if(tech){const form=document.getElementById('scenario-form');if(form){state.scenarioDraft=configFromForm(form,state.scenarioDraft||state.data.config);state.scenarioName=form.elements.scenario_name.value}state.scenarioTech=tech.dataset.tech;state.preview=null;render();return}
   const prompt=event.target.closest('[data-prompt]');if(prompt){const form=document.getElementById('page-chat-form')||document.getElementById('float-chat-form');if(form){form.elements.question.value=prompt.dataset.prompt;sendChat(form)}return}
   const button=event.target.closest('[data-action]');if(!button)return;const action=button.dataset.action;
+  if(action==='export-monitoring'){exportMonitoringData();return}
   if(action==='township-back'){returnToTownship();return}
   if(action==='township-night'){state.spatialNight=!state.spatialNight;render();return}
   if(action==='toggle-menu'){state.menuOpen=!state.menuOpen;render();return}

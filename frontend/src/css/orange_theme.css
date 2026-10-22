@@ -196,4 +196,28 @@ dialog::backdrop { background:#49301f70; }
 @media(max-width:1050px){.monitoring-primary{grid-template-columns:minmax(0,1.35fr) minmax(250px,.9fr)}}
 @media(max-width:900px){.monitoring-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.monitoring-primary{grid-template-columns:1fr}.monitoring-health{display:grid;grid-template-columns:1fr 1fr;column-gap:16px}.monitoring-health>.card-head,.monitoring-health>.monitoring-health-summary,.monitoring-health>.note{grid-column:1/-1}.monitoring-health>.forecast-score{align-self:center}}
 @media(max-width:600px){.monitoring-card-heading{flex-wrap:wrap}.monitoring-card-heading .segmented{max-width:100%}.monitoring-card-heading .segmented button{padding:7px 8px}.monitoring-chart-card .chart,.monitoring-optimization .chart{aspect-ratio:1.7}.monitoring-health{display:block}.monitoring-scenario-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.monitoring-action{align-items:flex-start}.monitoring-action .badge{font-size:9px}}
+.monitoring-kpis .kpi .sub{max-width:25ch;line-height:1.45;color:#88796b}
+.monitoring-export{gap:7px;min-height:36px;color:#785c42}
+.monitoring-export>span{font-size:10px}
+.monitoring-error-bars{display:grid;gap:14px;margin:15px 0 12px}
+.monitoring-error-row>div:first-child{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
+.monitoring-error-row span{color:#756456;font-size:10px}
+.monitoring-error-row strong{color:#3b3027;font-size:11px;white-space:nowrap}
+.monitoring-error-track{height:8px;border-radius:99px;background:#f4eee8;overflow:hidden}
+.monitoring-error-track i{display:block;height:100%;min-width:3px;border-radius:inherit;background:linear-gradient(90deg,#f29435,#ed6a0b)}
+.monitoring-error-track i.baseline{background:#d8b58f}
+.monitoring-timeline .chart-grid line{stroke:#ecdccc}
+.monitoring-timeline .chart-axis{fill:#8b7563;font-size:9px}
+.monitoring-timeline .chart-line{stroke-width:2.5}
+.monitoring-timeline .monitoring-forecast-line{stroke-width:2.8}
+.monitoring-forecast-window{fill:#f0f8ef}
+.monitoring-mae-band{fill:#77bf8d;opacity:.22;stroke:none}
+.monitoring-forecast-divider{stroke:#77a883;stroke-width:1.2;stroke-dasharray:2 4}
+.monitoring-phase-label{font-size:9px;letter-spacing:.06em;text-transform:uppercase;fill:#7e6b5b;font-family:inherit}
+.monitoring-future-label{fill:#447b4d}
+.monitoring-error-legend i{width:18px;height:10px;background:#dcefe0;border:1px solid #b6d7bd;border-radius:3px}
+.monitoring-health .forecast-score{padding:11px 12px;border:1px solid #dcebd3;border-radius:8px}
+.monitoring-optimization{border-top:3px solid #ed6a0b}
+.monitoring-actions[open]{box-shadow:0 6px 22px #59320f0a}
+@media(max-width:680px){.monitoring-export{padding:0 9px}.monitoring-export>span{font-size:9px}.monitoring-kpis .kpi .sub{max-width:none}}
 

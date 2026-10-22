@@ -1,0 +1,4064 @@
+{
+  "model_version": "bdg2_seasonal_baseline_blend_v1",
+  "readings_sha256": "f472e6b73c6e4e6a4b337b7a52a9942c378dfb029d067b55d62910c2d959321b",
+  "description": "Historical rolling 24-hour forecasts; seasonal profile fitted before the test period; blend chosen on validation data; only prior observations used at each origin.",
+  "attribution": "Building Data Genome Project 2 v1.0 (CC BY 4.0)",
+  "buildings": {
+    "Hog_office_Bill": {
+      "seasonal_weight": 1.0,
+      "training_end_exclusive": "2017-08-07T06:00:00Z",
+      "items": [
+        {
+          "timestamp": "2017-12-25T06:00:00Z",
+          "source_local_timestamp": "2017-12-25T00:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 178.882742
+        },
+        {
+          "timestamp": "2017-12-25T07:00:00Z",
+          "source_local_timestamp": "2017-12-25T01:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 178.231248
+        },
+        {
+          "timestamp": "2017-12-25T08:00:00Z",
+          "source_local_timestamp": "2017-12-25T02:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 176.443501
+        },
+        {
+          "timestamp": "2017-12-25T09:00:00Z",
+          "source_local_timestamp": "2017-12-25T03:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 175.122044
+        },
+        {
+          "timestamp": "2017-12-25T10:00:00Z",
+          "source_local_timestamp": "2017-12-25T04:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 175.031104
+        },
+        {
+          "timestamp": "2017-12-25T11:00:00Z",
+          "source_local_timestamp": "2017-12-25T05:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 175.329718
+        },
+        {
+          "timestamp": "2017-12-25T12:00:00Z",
+          "source_local_timestamp": "2017-12-25T06:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 179.099513
+        },
+        {
+          "timestamp": "2017-12-25T13:00:00Z",
+          "source_local_timestamp": "2017-12-25T07:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 211.657441
+        },
+        {
+          "timestamp": "2017-12-25T14:00:00Z",
+          "source_local_timestamp": "2017-12-25T08:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 252.210923
+        },
+        {
+          "timestamp": "2017-12-25T15:00:00Z",
+          "source_local_timestamp": "2017-12-25T09:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 268.805574
+        },
+        {
+          "timestamp": "2017-12-25T16:00:00Z",
+          "source_local_timestamp": "2017-12-25T10:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 277.696116
+        },
+        {
+          "timestamp": "2017-12-25T17:00:00Z",
+          "source_local_timestamp": "2017-12-25T11:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 283.006646
+        },
+        {
+          "timestamp": "2017-12-25T18:00:00Z",
+          "source_local_timestamp": "2017-12-25T12:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 282.660369
+        },
+        {
+          "timestamp": "2017-12-25T19:00:00Z",
+          "source_local_timestamp": "2017-12-25T13:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 283.434766
+        },
+        {
+          "timestamp": "2017-12-25T20:00:00Z",
+          "source_local_timestamp": "2017-12-25T14:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 284.501658
+        },
+        {
+          "timestamp": "2017-12-25T21:00:00Z",
+          "source_local_timestamp": "2017-12-25T15:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 284.235248
+        },
+        {
+          "timestamp": "2017-12-25T22:00:00Z",
+          "source_local_timestamp": "2017-12-25T16:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 265.413393
+        },
+        {
+          "timestamp": "2017-12-25T23:00:00Z",
+          "source_local_timestamp": "2017-12-25T17:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 235.552477
+        },
+        {
+          "timestamp": "2017-12-26T00:00:00Z",
+          "source_local_timestamp": "2017-12-25T18:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 210.939477
+        },
+        {
+          "timestamp": "2017-12-26T01:00:00Z",
+          "source_local_timestamp": "2017-12-25T19:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 196.184333
+        },
+        {
+          "timestamp": "2017-12-26T02:00:00Z",
+          "source_local_timestamp": "2017-12-25T20:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 191.20367
+        },
+        {
+          "timestamp": "2017-12-26T03:00:00Z",
+          "source_local_timestamp": "2017-12-25T21:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 191.483887
+        },
+        {
+          "timestamp": "2017-12-26T04:00:00Z",
+          "source_local_timestamp": "2017-12-25T22:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 188.017309
+        },
+        {
+          "timestamp": "2017-12-26T05:00:00Z",
+          "source_local_timestamp": "2017-12-25T23:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 184.876224
+        },
+        {
+          "timestamp": "2017-12-26T06:00:00Z",
+          "source_local_timestamp": "2017-12-26T00:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 132.169936
+        },
+        {
+          "timestamp": "2017-12-26T07:00:00Z",
+          "source_local_timestamp": "2017-12-26T01:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 131.961996
+        },
+        {
+          "timestamp": "2017-12-26T08:00:00Z",
+          "source_local_timestamp": "2017-12-26T02:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 129.38649
+        },
+        {
+          "timestamp": "2017-12-26T09:00:00Z",
+          "source_local_timestamp": "2017-12-26T03:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 128.260418
+        },
+        {
+          "timestamp": "2017-12-26T10:00:00Z",
+          "source_local_timestamp": "2017-12-26T04:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 128.56755
+        },
+        {
+          "timestamp": "2017-12-26T11:00:00Z",
+          "source_local_timestamp": "2017-12-26T05:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 130.017912
+        },
+        {
+          "timestamp": "2017-12-26T12:00:00Z",
+          "source_local_timestamp": "2017-12-26T06:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 132.728141
+        },
+        {
+          "timestamp": "2017-12-26T13:00:00Z",
+          "source_local_timestamp": "2017-12-26T07:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 167.443936
+        },
+        {
+          "timestamp": "2017-12-26T14:00:00Z",
+          "source_local_timestamp": "2017-12-26T08:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 210.897273
+        },
+        {
+          "timestamp": "2017-12-26T15:00:00Z",
+          "source_local_timestamp": "2017-12-26T09:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 231.327454
+        },
+        {
+          "timestamp": "2017-12-26T16:00:00Z",
+          "source_local_timestamp": "2017-12-26T10:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 241.134948
+        },
+        {
+          "timestamp": "2017-12-26T17:00:00Z",
+          "source_local_timestamp": "2017-12-26T11:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 244.21961
+        },
+        {
+          "timestamp": "2017-12-26T18:00:00Z",
+          "source_local_timestamp": "2017-12-26T12:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 241.853815
+        },
+        {
+          "timestamp": "2017-12-26T19:00:00Z",
+          "source_local_timestamp": "2017-12-26T13:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 243.916454
+        },
+        {
+          "timestamp": "2017-12-26T20:00:00Z",
+          "source_local_timestamp": "2017-12-26T14:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 245.645586
+        },
+        {
+          "timestamp": "2017-12-26T21:00:00Z",
+          "source_local_timestamp": "2017-12-26T15:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 241.995478
+        },
+        {
+          "timestamp": "2017-12-26T22:00:00Z",
+          "source_local_timestamp": "2017-12-26T16:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 222.474827
+        },
+        {
+          "timestamp": "2017-12-26T23:00:00Z",
+          "source_local_timestamp": "2017-12-26T17:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 190.281851
+        },
+        {
+          "timestamp": "2017-12-27T00:00:00Z",
+          "source_local_timestamp": "2017-12-26T18:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 161.741285
+        },
+        {
+          "timestamp": "2017-12-27T01:00:00Z",
+          "source_local_timestamp": "2017-12-26T19:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 143.673225
+        },
+        {
+          "timestamp": "2017-12-27T02:00:00Z",
+          "source_local_timestamp": "2017-12-26T20:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 138.212622
+        },
+        {
+          "timestamp": "2017-12-27T03:00:00Z",
+          "source_local_timestamp": "2017-12-26T21:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 136.814863
+        },
+        {
+          "timestamp": "2017-12-27T04:00:00Z",
+          "source_local_timestamp": "2017-12-26T22:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 134.961454
+        },
+        {
+          "timestamp": "2017-12-27T05:00:00Z",
+          "source_local_timestamp": "2017-12-26T23:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 132.529803
+        },
+        {
+          "timestamp": "2017-12-27T06:00:00Z",
+          "source_local_timestamp": "2017-12-27T00:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 136.564382
+        },
+        {
+          "timestamp": "2017-12-27T07:00:00Z",
+          "source_local_timestamp": "2017-12-27T01:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 132.219406
+        },
+        {
+          "timestamp": "2017-12-27T08:00:00Z",
+          "source_local_timestamp": "2017-12-27T02:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 130.495237
+        },
+        {
+          "timestamp": "2017-12-27T09:00:00Z",
+          "source_local_timestamp": "2017-12-27T03:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 128.174153
+        },
+        {
+          "timestamp": "2017-12-27T10:00:00Z",
+          "source_local_timestamp": "2017-12-27T04:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 128.460515
+        },
+        {
+          "timestamp": "2017-12-27T11:00:00Z",
+          "source_local_timestamp": "2017-12-27T05:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 129.644334
+        },
+        {
+          "timestamp": "2017-12-27T12:00:00Z",
+          "source_local_timestamp": "2017-12-27T06:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 128.232081
+        },
+        {
+          "timestamp": "2017-12-27T13:00:00Z",
+          "source_local_timestamp": "2017-12-27T07:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 167.573635
+        },
+        {
+          "timestamp": "2017-12-27T14:00:00Z",
+          "source_local_timestamp": "2017-12-27T08:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 212.027274
+        },
+        {
+          "timestamp": "2017-12-27T15:00:00Z",
+          "source_local_timestamp": "2017-12-27T09:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 229.599539
+        },
+        {
+          "timestamp": "2017-12-27T16:00:00Z",
+          "source_local_timestamp": "2017-12-27T10:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 240.322081
+        },
+        {
+          "timestamp": "2017-12-27T17:00:00Z",
+          "source_local_timestamp": "2017-12-27T11:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 244.587611
+        },
+        {
+          "timestamp": "2017-12-27T18:00:00Z",
+          "source_local_timestamp": "2017-12-27T12:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 243.509623
+        },
+        {
+          "timestamp": "2017-12-27T19:00:00Z",
+          "source_local_timestamp": "2017-12-27T13:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 245.955888
+        },
+        {
+          "timestamp": "2017-12-27T20:00:00Z",
+          "source_local_timestamp": "2017-12-27T14:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 247.58649
+        },
+        {
+          "timestamp": "2017-12-27T21:00:00Z",
+          "source_local_timestamp": "2017-12-27T15:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 244.66243
+        },
+        {
+          "timestamp": "2017-12-27T22:00:00Z",
+          "source_local_timestamp": "2017-12-27T16:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 223.027743
+        },
+        {
+          "timestamp": "2017-12-27T23:00:00Z",
+          "source_local_timestamp": "2017-12-27T17:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 190.329418
+        },
+        {
+          "timestamp": "2017-12-28T00:00:00Z",
+          "source_local_timestamp": "2017-12-27T18:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 163.034213
+        },
+        {
+          "timestamp": "2017-12-28T01:00:00Z",
+          "source_local_timestamp": "2017-12-27T19:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 146.175912
+        },
+        {
+          "timestamp": "2017-12-28T02:00:00Z",
+          "source_local_timestamp": "2017-12-27T20:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 137.781394
+        },
+        {
+          "timestamp": "2017-12-28T03:00:00Z",
+          "source_local_timestamp": "2017-12-27T21:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 139.088984
+        },
+        {
+          "timestamp": "2017-12-28T04:00:00Z",
+          "source_local_timestamp": "2017-12-27T22:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 136.542081
+        },
+        {
+          "timestamp": "2017-12-28T05:00:00Z",
+          "source_local_timestamp": "2017-12-27T23:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 133.943165
+        },
+        {
+          "timestamp": "2017-12-28T06:00:00Z",
+          "source_local_timestamp": "2017-12-28T00:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 184.599809
+        },
+        {
+          "timestamp": "2017-12-28T07:00:00Z",
+          "source_local_timestamp": "2017-12-28T01:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 183.21893
+        },
+        {
+          "timestamp": "2017-12-28T08:00:00Z",
+          "source_local_timestamp": "2017-12-28T02:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 179.975954
+        },
+        {
+          "timestamp": "2017-12-28T09:00:00Z",
+          "source_local_timestamp": "2017-12-28T03:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 178.68952
+        },
+        {
+          "timestamp": "2017-12-28T10:00:00Z",
+          "source_local_timestamp": "2017-12-28T04:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 174.654159
+        },
+        {
+          "timestamp": "2017-12-28T11:00:00Z",
+          "source_local_timestamp": "2017-12-28T05:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 176.017508
+        },
+        {
+          "timestamp": "2017-12-28T12:00:00Z",
+          "source_local_timestamp": "2017-12-28T06:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 178.530918
+        },
+        {
+          "timestamp": "2017-12-28T13:00:00Z",
+          "source_local_timestamp": "2017-12-28T07:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 214.57493
+        },
+        {
+          "timestamp": "2017-12-28T14:00:00Z",
+          "source_local_timestamp": "2017-12-28T08:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 248.598207
+        },
+        {
+          "timestamp": "2017-12-28T15:00:00Z",
+          "source_local_timestamp": "2017-12-28T09:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 274.684038
+        },
+        {
+          "timestamp": "2017-12-28T16:00:00Z",
+          "source_local_timestamp": "2017-12-28T10:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 285.261388
+        },
+        {
+          "timestamp": "2017-12-28T17:00:00Z",
+          "source_local_timestamp": "2017-12-28T11:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 290.72258
+        },
+        {
+          "timestamp": "2017-12-28T18:00:00Z",
+          "source_local_timestamp": "2017-12-28T12:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 289.409219
+        },
+        {
+          "timestamp": "2017-12-28T19:00:00Z",
+          "source_local_timestamp": "2017-12-28T13:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 289.875641
+        },
+        {
+          "timestamp": "2017-12-28T20:00:00Z",
+          "source_local_timestamp": "2017-12-28T14:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 290.527942
+        },
+        {
+          "timestamp": "2017-12-28T21:00:00Z",
+          "source_local_timestamp": "2017-12-28T15:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 287.482122
+        },
+        {
+          "timestamp": "2017-12-28T22:00:00Z",
+          "source_local_timestamp": "2017-12-28T16:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 268.815219
+        },
+        {
+          "timestamp": "2017-12-28T23:00:00Z",
+          "source_local_timestamp": "2017-12-28T17:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 236.029701
+        },
+        {
+          "timestamp": "2017-12-29T00:00:00Z",
+          "source_local_timestamp": "2017-12-28T18:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 208.705243
+        },
+        {
+          "timestamp": "2017-12-29T01:00:00Z",
+          "source_local_timestamp": "2017-12-28T19:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 190.129424
+        },
+        {
+          "timestamp": "2017-12-29T02:00:00Z",
+          "source_local_timestamp": "2017-12-28T20:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 184.556761
+        },
+        {
+          "timestamp": "2017-12-29T03:00:00Z",
+          "source_local_timestamp": "2017-12-28T21:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 182.391267
+        },
+        {
+          "timestamp": "2017-12-29T04:00:00Z",
+          "source_local_timestamp": "2017-12-28T22:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 180.071629
+        },
+        {
+          "timestamp": "2017-12-29T05:00:00Z",
+          "source_local_timestamp": "2017-12-28T23:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 178.499062
+        },
+        {
+          "timestamp": "2017-12-29T06:00:00Z",
+          "source_local_timestamp": "2017-12-29T00:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 181.204631
+        },
+        {
+          "timestamp": "2017-12-29T07:00:00Z",
+          "source_local_timestamp": "2017-12-29T01:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 180.666143
+        },
+        {
+          "timestamp": "2017-12-29T08:00:00Z",
+          "source_local_timestamp": "2017-12-29T02:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 177.906012
+        },
+        {
+          "timestamp": "2017-12-29T09:00:00Z",
+          "source_local_timestamp": "2017-12-29T03:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 176.38506
+        },
+        {
+          "timestamp": "2017-12-29T10:00:00Z",
+          "source_local_timestamp": "2017-12-29T04:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 174.817631
+        },
+        {
+          "timestamp": "2017-12-29T11:00:00Z",
+          "source_local_timestamp": "2017-12-29T05:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 177.142738
+        },
+        {
+          "timestamp": "2017-12-29T12:00:00Z",
+          "source_local_timestamp": "2017-12-29T06:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 178.835548
+        },
+        {
+          "timestamp": "2017-12-29T13:00:00Z",
+          "source_local_timestamp": "2017-12-29T07:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 216.088905
+        },
+        {
+          "timestamp": "2017-12-29T14:00:00Z",
+          "source_local_timestamp": "2017-12-29T08:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 256.120203
+        },
+        {
+          "timestamp": "2017-12-29T15:00:00Z",
+          "source_local_timestamp": "2017-12-29T09:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 272.948822
+        },
+        {
+          "timestamp": "2017-12-29T16:00:00Z",
+          "source_local_timestamp": "2017-12-29T10:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 277.695667
+        },
+        {
+          "timestamp": "2017-12-29T17:00:00Z",
+          "source_local_timestamp": "2017-12-29T11:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 281.606917
+        },
+        {
+          "timestamp": "2017-12-29T18:00:00Z",
+          "source_local_timestamp": "2017-12-29T12:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 282.158119
+        },
+        {
+          "timestamp": "2017-12-29T19:00:00Z",
+          "source_local_timestamp": "2017-12-29T13:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 283.236667
+        },
+        {
+          "timestamp": "2017-12-29T20:00:00Z",
+          "source_local_timestamp": "2017-12-29T14:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 283.460417
+        },
+        {
+          "timestamp": "2017-12-29T21:00:00Z",
+          "source_local_timestamp": "2017-12-29T15:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 278.287941
+        },
+        {
+          "timestamp": "2017-12-29T22:00:00Z",
+          "source_local_timestamp": "2017-12-29T16:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 261.763512
+        },
+        {
+          "timestamp": "2017-12-29T23:00:00Z",
+          "source_local_timestamp": "2017-12-29T17:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 234.256357
+        },
+        {
+          "timestamp": "2017-12-30T00:00:00Z",
+          "source_local_timestamp": "2017-12-29T18:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 210.02206
+        },
+        {
+          "timestamp": "2017-12-30T01:00:00Z",
+          "source_local_timestamp": "2017-12-29T19:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 195.971488
+        },
+        {
+          "timestamp": "2017-12-30T02:00:00Z",
+          "source_local_timestamp": "2017-12-29T20:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 191.912238
+        },
+        {
+          "timestamp": "2017-12-30T03:00:00Z",
+          "source_local_timestamp": "2017-12-29T21:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 191.253643
+        },
+        {
+          "timestamp": "2017-12-30T04:00:00Z",
+          "source_local_timestamp": "2017-12-29T22:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 187.461262
+        },
+        {
+          "timestamp": "2017-12-30T05:00:00Z",
+          "source_local_timestamp": "2017-12-29T23:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 186.094298
+        },
+        {
+          "timestamp": "2017-12-30T06:00:00Z",
+          "source_local_timestamp": "2017-12-30T00:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 187.095917
+        },
+        {
+          "timestamp": "2017-12-30T07:00:00Z",
+          "source_local_timestamp": "2017-12-30T01:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 186.128834
+        },
+        {
+          "timestamp": "2017-12-30T08:00:00Z",
+          "source_local_timestamp": "2017-12-30T02:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 185.369239
+        },
+        {
+          "timestamp": "2017-12-30T09:00:00Z",
+          "source_local_timestamp": "2017-12-30T03:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 183.171191
+        },
+        {
+          "timestamp": "2017-12-30T10:00:00Z",
+          "source_local_timestamp": "2017-12-30T04:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 181.581298
+        },
+        {
+          "timestamp": "2017-12-30T11:00:00Z",
+          "source_local_timestamp": "2017-12-30T05:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 180.720703
+        },
+        {
+          "timestamp": "2017-12-30T12:00:00Z",
+          "source_local_timestamp": "2017-12-30T06:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 179.393441
+        },
+        {
+          "timestamp": "2017-12-30T13:00:00Z",
+          "source_local_timestamp": "2017-12-30T07:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 178.225905
+        },
+        {
+          "timestamp": "2017-12-30T14:00:00Z",
+          "source_local_timestamp": "2017-12-30T08:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 177.947441
+        },
+        {
+          "timestamp": "2017-12-30T15:00:00Z",
+          "source_local_timestamp": "2017-12-30T09:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 179.085393
+        },
+        {
+          "timestamp": "2017-12-30T16:00:00Z",
+          "source_local_timestamp": "2017-12-30T10:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 177.366596
+        },
+        {
+          "timestamp": "2017-12-30T17:00:00Z",
+          "source_local_timestamp": "2017-12-30T11:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 180.821536
+        },
+        {
+          "timestamp": "2017-12-30T18:00:00Z",
+          "source_local_timestamp": "2017-12-30T12:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 186.054441
+        },
+        {
+          "timestamp": "2017-12-30T19:00:00Z",
+          "source_local_timestamp": "2017-12-30T13:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 190.879346
+        },
+        {
+          "timestamp": "2017-12-30T20:00:00Z",
+          "source_local_timestamp": "2017-12-30T14:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 191.328465
+        },
+        {
+          "timestamp": "2017-12-30T21:00:00Z",
+          "source_local_timestamp": "2017-12-30T15:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 191.69631
+        },
+        {
+          "timestamp": "2017-12-30T22:00:00Z",
+          "source_local_timestamp": "2017-12-30T16:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 191.221655
+        },
+        {
+          "timestamp": "2017-12-30T23:00:00Z",
+          "source_local_timestamp": "2017-12-30T17:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 191.137298
+        },
+        {
+          "timestamp": "2017-12-31T00:00:00Z",
+          "source_local_timestamp": "2017-12-30T18:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 190.604096
+        },
+        {
+          "timestamp": "2017-12-31T01:00:00Z",
+          "source_local_timestamp": "2017-12-30T19:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 189.597691
+        },
+        {
+          "timestamp": "2017-12-31T02:00:00Z",
+          "source_local_timestamp": "2017-12-30T20:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 188.257239
+        },
+        {
+          "timestamp": "2017-12-31T03:00:00Z",
+          "source_local_timestamp": "2017-12-30T21:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 188.108703
+        },
+        {
+          "timestamp": "2017-12-31T04:00:00Z",
+          "source_local_timestamp": "2017-12-30T22:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 187.512191
+        },
+        {
+          "timestamp": "2017-12-31T05:00:00Z",
+          "source_local_timestamp": "2017-12-30T23:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 186.565489
+        },
+        {
+          "timestamp": "2017-12-31T06:00:00Z",
+          "source_local_timestamp": "2017-12-31T00:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 175.260324
+        },
+        {
+          "timestamp": "2017-12-31T07:00:00Z",
+          "source_local_timestamp": "2017-12-31T01:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 174.734818
+        },
+        {
+          "timestamp": "2017-12-31T08:00:00Z",
+          "source_local_timestamp": "2017-12-31T02:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 176.107459
+        },
+        {
+          "timestamp": "2017-12-31T09:00:00Z",
+          "source_local_timestamp": "2017-12-31T03:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 173.563769
+        },
+        {
+          "timestamp": "2017-12-31T10:00:00Z",
+          "source_local_timestamp": "2017-12-31T04:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 172.284436
+        },
+        {
+          "timestamp": "2017-12-31T11:00:00Z",
+          "source_local_timestamp": "2017-12-31T05:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 170.831519
+        },
+        {
+          "timestamp": "2017-12-31T12:00:00Z",
+          "source_local_timestamp": "2017-12-31T06:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 169.199983
+        },
+        {
+          "timestamp": "2017-12-31T13:00:00Z",
+          "source_local_timestamp": "2017-12-31T07:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 168.399959
+        },
+        {
+          "timestamp": "2017-12-31T14:00:00Z",
+          "source_local_timestamp": "2017-12-31T08:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 169.051412
+        },
+        {
+          "timestamp": "2017-12-31T15:00:00Z",
+          "source_local_timestamp": "2017-12-31T09:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 169.80134
+        },
+        {
+          "timestamp": "2017-12-31T16:00:00Z",
+          "source_local_timestamp": "2017-12-31T10:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 170.95009
+        },
+        {
+          "timestamp": "2017-12-31T17:00:00Z",
+          "source_local_timestamp": "2017-12-31T11:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 172.857102
+        },
+        {
+          "timestamp": "2017-12-31T18:00:00Z",
+          "source_local_timestamp": "2017-12-31T12:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 176.345959
+        },
+        {
+          "timestamp": "2017-12-31T19:00:00Z",
+          "source_local_timestamp": "2017-12-31T13:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 178.469328
+        },
+        {
+          "timestamp": "2017-12-31T20:00:00Z",
+          "source_local_timestamp": "2017-12-31T14:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 180.049328
+        },
+        {
+          "timestamp": "2017-12-31T21:00:00Z",
+          "source_local_timestamp": "2017-12-31T15:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 180.386055
+        },
+        {
+          "timestamp": "2017-12-31T22:00:00Z",
+          "source_local_timestamp": "2017-12-31T16:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 180.82634
+        },
+        {
+          "timestamp": "2017-12-31T23:00:00Z",
+          "source_local_timestamp": "2017-12-31T17:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 181.118769
+        },
+        {
+          "timestamp": "2018-01-01T00:00:00Z",
+          "source_local_timestamp": "2017-12-31T18:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 180.978305
+        },
+        {
+          "timestamp": "2018-01-01T01:00:00Z",
+          "source_local_timestamp": "2017-12-31T19:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 180.486805
+        },
+        {
+          "timestamp": "2018-01-01T02:00:00Z",
+          "source_local_timestamp": "2017-12-31T20:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 180.558138
+        },
+        {
+          "timestamp": "2018-01-01T03:00:00Z",
+          "source_local_timestamp": "2017-12-31T21:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 180.709483
+        },
+        {
+          "timestamp": "2018-01-01T04:00:00Z",
+          "source_local_timestamp": "2017-12-31T22:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 179.861566
+        },
+        {
+          "timestamp": "2018-01-01T05:00:00Z",
+          "source_local_timestamp": "2017-12-31T23:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 180.094947
+        }
+      ]
+    },
+    "Hog_education_Donnie": {
+      "seasonal_weight": 0.4,
+      "training_end_exclusive": "2017-08-07T06:00:00Z",
+      "items": [
+        {
+          "timestamp": "2017-12-25T06:00:00Z",
+          "source_local_timestamp": "2017-12-25T00:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 10.9656
+        },
+        {
+          "timestamp": "2017-12-25T07:00:00Z",
+          "source_local_timestamp": "2017-12-25T01:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 11.9178
+        },
+        {
+          "timestamp": "2017-12-25T08:00:00Z",
+          "source_local_timestamp": "2017-12-25T02:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 9.8736
+        },
+        {
+          "timestamp": "2017-12-25T09:00:00Z",
+          "source_local_timestamp": "2017-12-25T03:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 11.115
+        },
+        {
+          "timestamp": "2017-12-25T10:00:00Z",
+          "source_local_timestamp": "2017-12-25T04:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 10.9464
+        },
+        {
+          "timestamp": "2017-12-25T11:00:00Z",
+          "source_local_timestamp": "2017-12-25T05:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 11.8872
+        },
+        {
+          "timestamp": "2017-12-25T12:00:00Z",
+          "source_local_timestamp": "2017-12-25T06:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 14.7011
+        },
+        {
+          "timestamp": "2017-12-25T13:00:00Z",
+          "source_local_timestamp": "2017-12-25T07:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 30.338744
+        },
+        {
+          "timestamp": "2017-12-25T14:00:00Z",
+          "source_local_timestamp": "2017-12-25T08:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 48.318662
+        },
+        {
+          "timestamp": "2017-12-25T15:00:00Z",
+          "source_local_timestamp": "2017-12-25T09:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 60.696057
+        },
+        {
+          "timestamp": "2017-12-25T16:00:00Z",
+          "source_local_timestamp": "2017-12-25T10:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 65.270859
+        },
+        {
+          "timestamp": "2017-12-25T17:00:00Z",
+          "source_local_timestamp": "2017-12-25T11:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 66.476382
+        },
+        {
+          "timestamp": "2017-12-25T18:00:00Z",
+          "source_local_timestamp": "2017-12-25T12:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 66.75692
+        },
+        {
+          "timestamp": "2017-12-25T19:00:00Z",
+          "source_local_timestamp": "2017-12-25T13:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 67.172896
+        },
+        {
+          "timestamp": "2017-12-25T20:00:00Z",
+          "source_local_timestamp": "2017-12-25T14:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 68.118686
+        },
+        {
+          "timestamp": "2017-12-25T21:00:00Z",
+          "source_local_timestamp": "2017-12-25T15:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 68.223165
+        },
+        {
+          "timestamp": "2017-12-25T22:00:00Z",
+          "source_local_timestamp": "2017-12-25T16:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 67.980185
+        },
+        {
+          "timestamp": "2017-12-25T23:00:00Z",
+          "source_local_timestamp": "2017-12-25T17:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 63.814137
+        },
+        {
+          "timestamp": "2017-12-26T00:00:00Z",
+          "source_local_timestamp": "2017-12-25T18:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 44.274445
+        },
+        {
+          "timestamp": "2017-12-26T01:00:00Z",
+          "source_local_timestamp": "2017-12-25T19:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 34.511756
+        },
+        {
+          "timestamp": "2017-12-26T02:00:00Z",
+          "source_local_timestamp": "2017-12-25T20:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 35.704187
+        },
+        {
+          "timestamp": "2017-12-26T03:00:00Z",
+          "source_local_timestamp": "2017-12-25T21:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 29.760026
+        },
+        {
+          "timestamp": "2017-12-26T04:00:00Z",
+          "source_local_timestamp": "2017-12-25T22:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 23.421165
+        },
+        {
+          "timestamp": "2017-12-26T05:00:00Z",
+          "source_local_timestamp": "2017-12-25T23:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 14.616679
+        },
+        {
+          "timestamp": "2017-12-26T06:00:00Z",
+          "source_local_timestamp": "2017-12-26T00:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 13.86
+        },
+        {
+          "timestamp": "2017-12-26T07:00:00Z",
+          "source_local_timestamp": "2017-12-26T01:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 10.701
+        },
+        {
+          "timestamp": "2017-12-26T08:00:00Z",
+          "source_local_timestamp": "2017-12-26T02:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 14.0238
+        },
+        {
+          "timestamp": "2017-12-26T09:00:00Z",
+          "source_local_timestamp": "2017-12-26T03:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 11.5308
+        },
+        {
+          "timestamp": "2017-12-26T10:00:00Z",
+          "source_local_timestamp": "2017-12-26T04:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 14.6952
+        },
+        {
+          "timestamp": "2017-12-26T11:00:00Z",
+          "source_local_timestamp": "2017-12-26T05:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 10.0548
+        },
+        {
+          "timestamp": "2017-12-26T12:00:00Z",
+          "source_local_timestamp": "2017-12-26T06:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 17.682683
+        },
+        {
+          "timestamp": "2017-12-26T13:00:00Z",
+          "source_local_timestamp": "2017-12-26T07:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 29.274225
+        },
+        {
+          "timestamp": "2017-12-26T14:00:00Z",
+          "source_local_timestamp": "2017-12-26T08:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 49.715285
+        },
+        {
+          "timestamp": "2017-12-26T15:00:00Z",
+          "source_local_timestamp": "2017-12-26T09:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 62.759396
+        },
+        {
+          "timestamp": "2017-12-26T16:00:00Z",
+          "source_local_timestamp": "2017-12-26T10:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 65.526972
+        },
+        {
+          "timestamp": "2017-12-26T17:00:00Z",
+          "source_local_timestamp": "2017-12-26T11:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 66.109892
+        },
+        {
+          "timestamp": "2017-12-26T18:00:00Z",
+          "source_local_timestamp": "2017-12-26T12:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 66.099912
+        },
+        {
+          "timestamp": "2017-12-26T19:00:00Z",
+          "source_local_timestamp": "2017-12-26T13:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 67.971982
+        },
+        {
+          "timestamp": "2017-12-26T20:00:00Z",
+          "source_local_timestamp": "2017-12-26T14:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 67.979124
+        },
+        {
+          "timestamp": "2017-12-26T21:00:00Z",
+          "source_local_timestamp": "2017-12-26T15:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 66.334338
+        },
+        {
+          "timestamp": "2017-12-26T22:00:00Z",
+          "source_local_timestamp": "2017-12-26T16:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 67.007618
+        },
+        {
+          "timestamp": "2017-12-26T23:00:00Z",
+          "source_local_timestamp": "2017-12-26T17:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 62.352461
+        },
+        {
+          "timestamp": "2017-12-27T00:00:00Z",
+          "source_local_timestamp": "2017-12-26T18:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 49.639336
+        },
+        {
+          "timestamp": "2017-12-27T01:00:00Z",
+          "source_local_timestamp": "2017-12-26T19:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 40.388822
+        },
+        {
+          "timestamp": "2017-12-27T02:00:00Z",
+          "source_local_timestamp": "2017-12-26T20:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 39.642714
+        },
+        {
+          "timestamp": "2017-12-27T03:00:00Z",
+          "source_local_timestamp": "2017-12-26T21:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 31.757249
+        },
+        {
+          "timestamp": "2017-12-27T04:00:00Z",
+          "source_local_timestamp": "2017-12-26T22:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 25.336743
+        },
+        {
+          "timestamp": "2017-12-27T05:00:00Z",
+          "source_local_timestamp": "2017-12-26T23:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 16.013936
+        },
+        {
+          "timestamp": "2017-12-27T06:00:00Z",
+          "source_local_timestamp": "2017-12-27T00:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 17.532
+        },
+        {
+          "timestamp": "2017-12-27T07:00:00Z",
+          "source_local_timestamp": "2017-12-27T01:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 13.284
+        },
+        {
+          "timestamp": "2017-12-27T08:00:00Z",
+          "source_local_timestamp": "2017-12-27T02:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 15.1176
+        },
+        {
+          "timestamp": "2017-12-27T09:00:00Z",
+          "source_local_timestamp": "2017-12-27T03:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 13.8402
+        },
+        {
+          "timestamp": "2017-12-27T10:00:00Z",
+          "source_local_timestamp": "2017-12-27T04:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 15.6708
+        },
+        {
+          "timestamp": "2017-12-27T11:00:00Z",
+          "source_local_timestamp": "2017-12-27T05:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 14.9868
+        },
+        {
+          "timestamp": "2017-12-27T12:00:00Z",
+          "source_local_timestamp": "2017-12-27T06:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 18.217801
+        },
+        {
+          "timestamp": "2017-12-27T13:00:00Z",
+          "source_local_timestamp": "2017-12-27T07:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 31.23403
+        },
+        {
+          "timestamp": "2017-12-27T14:00:00Z",
+          "source_local_timestamp": "2017-12-27T08:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 50.518825
+        },
+        {
+          "timestamp": "2017-12-27T15:00:00Z",
+          "source_local_timestamp": "2017-12-27T09:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 58.743634
+        },
+        {
+          "timestamp": "2017-12-27T16:00:00Z",
+          "source_local_timestamp": "2017-12-27T10:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 59.342078
+        },
+        {
+          "timestamp": "2017-12-27T17:00:00Z",
+          "source_local_timestamp": "2017-12-27T11:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 60.658555
+        },
+        {
+          "timestamp": "2017-12-27T18:00:00Z",
+          "source_local_timestamp": "2017-12-27T12:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 61.497586
+        },
+        {
+          "timestamp": "2017-12-27T19:00:00Z",
+          "source_local_timestamp": "2017-12-27T13:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 63.021251
+        },
+        {
+          "timestamp": "2017-12-27T20:00:00Z",
+          "source_local_timestamp": "2017-12-27T14:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 63.113217
+        },
+        {
+          "timestamp": "2017-12-27T21:00:00Z",
+          "source_local_timestamp": "2017-12-27T15:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 63.435405
+        },
+        {
+          "timestamp": "2017-12-27T22:00:00Z",
+          "source_local_timestamp": "2017-12-27T16:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 63.18661
+        },
+        {
+          "timestamp": "2017-12-27T23:00:00Z",
+          "source_local_timestamp": "2017-12-27T17:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 60.255034
+        },
+        {
+          "timestamp": "2017-12-28T00:00:00Z",
+          "source_local_timestamp": "2017-12-27T18:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 47.560545
+        },
+        {
+          "timestamp": "2017-12-28T01:00:00Z",
+          "source_local_timestamp": "2017-12-27T19:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 35.043446
+        },
+        {
+          "timestamp": "2017-12-28T02:00:00Z",
+          "source_local_timestamp": "2017-12-27T20:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 33.45167
+        },
+        {
+          "timestamp": "2017-12-28T03:00:00Z",
+          "source_local_timestamp": "2017-12-27T21:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 27.781919
+        },
+        {
+          "timestamp": "2017-12-28T04:00:00Z",
+          "source_local_timestamp": "2017-12-27T22:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 21.893813
+        },
+        {
+          "timestamp": "2017-12-28T05:00:00Z",
+          "source_local_timestamp": "2017-12-27T23:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 13.492562
+        },
+        {
+          "timestamp": "2017-12-28T06:00:00Z",
+          "source_local_timestamp": "2017-12-28T00:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 15.2148
+        },
+        {
+          "timestamp": "2017-12-28T07:00:00Z",
+          "source_local_timestamp": "2017-12-28T01:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 11.3946
+        },
+        {
+          "timestamp": "2017-12-28T08:00:00Z",
+          "source_local_timestamp": "2017-12-28T02:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 14.0322
+        },
+        {
+          "timestamp": "2017-12-28T09:00:00Z",
+          "source_local_timestamp": "2017-12-28T03:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 14.0634
+        },
+        {
+          "timestamp": "2017-12-28T10:00:00Z",
+          "source_local_timestamp": "2017-12-28T04:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 15.7302
+        },
+        {
+          "timestamp": "2017-12-28T11:00:00Z",
+          "source_local_timestamp": "2017-12-28T05:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 15.6312
+        },
+        {
+          "timestamp": "2017-12-28T12:00:00Z",
+          "source_local_timestamp": "2017-12-28T06:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 16.685579
+        },
+        {
+          "timestamp": "2017-12-28T13:00:00Z",
+          "source_local_timestamp": "2017-12-28T07:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 35.57836
+        },
+        {
+          "timestamp": "2017-12-28T14:00:00Z",
+          "source_local_timestamp": "2017-12-28T08:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 51.856984
+        },
+        {
+          "timestamp": "2017-12-28T15:00:00Z",
+          "source_local_timestamp": "2017-12-28T09:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 61.688352
+        },
+        {
+          "timestamp": "2017-12-28T16:00:00Z",
+          "source_local_timestamp": "2017-12-28T10:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 64.502066
+        },
+        {
+          "timestamp": "2017-12-28T17:00:00Z",
+          "source_local_timestamp": "2017-12-28T11:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 63.838538
+        },
+        {
+          "timestamp": "2017-12-28T18:00:00Z",
+          "source_local_timestamp": "2017-12-28T12:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 66.341572
+        },
+        {
+          "timestamp": "2017-12-28T19:00:00Z",
+          "source_local_timestamp": "2017-12-28T13:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 66.250622
+        },
+        {
+          "timestamp": "2017-12-28T20:00:00Z",
+          "source_local_timestamp": "2017-12-28T14:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 67.621738
+        },
+        {
+          "timestamp": "2017-12-28T21:00:00Z",
+          "source_local_timestamp": "2017-12-28T15:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 67.781608
+        },
+        {
+          "timestamp": "2017-12-28T22:00:00Z",
+          "source_local_timestamp": "2017-12-28T16:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 67.586275
+        },
+        {
+          "timestamp": "2017-12-28T23:00:00Z",
+          "source_local_timestamp": "2017-12-28T17:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 64.548391
+        },
+        {
+          "timestamp": "2017-12-29T00:00:00Z",
+          "source_local_timestamp": "2017-12-28T18:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 51.291263
+        },
+        {
+          "timestamp": "2017-12-29T01:00:00Z",
+          "source_local_timestamp": "2017-12-28T19:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 39.612774
+        },
+        {
+          "timestamp": "2017-12-29T02:00:00Z",
+          "source_local_timestamp": "2017-12-28T20:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 37.645721
+        },
+        {
+          "timestamp": "2017-12-29T03:00:00Z",
+          "source_local_timestamp": "2017-12-28T21:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 31.684991
+        },
+        {
+          "timestamp": "2017-12-29T04:00:00Z",
+          "source_local_timestamp": "2017-12-28T22:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 26.147155
+        },
+        {
+          "timestamp": "2017-12-29T05:00:00Z",
+          "source_local_timestamp": "2017-12-28T23:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 14.435651
+        },
+        {
+          "timestamp": "2017-12-29T06:00:00Z",
+          "source_local_timestamp": "2017-12-29T00:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 16.7628
+        },
+        {
+          "timestamp": "2017-12-29T07:00:00Z",
+          "source_local_timestamp": "2017-12-29T01:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 12.0294
+        },
+        {
+          "timestamp": "2017-12-29T08:00:00Z",
+          "source_local_timestamp": "2017-12-29T02:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 13.0896
+        },
+        {
+          "timestamp": "2017-12-29T09:00:00Z",
+          "source_local_timestamp": "2017-12-29T03:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 14.1822
+        },
+        {
+          "timestamp": "2017-12-29T10:00:00Z",
+          "source_local_timestamp": "2017-12-29T04:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 14.0214
+        },
+        {
+          "timestamp": "2017-12-29T11:00:00Z",
+          "source_local_timestamp": "2017-12-29T05:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 13.2564
+        },
+        {
+          "timestamp": "2017-12-29T12:00:00Z",
+          "source_local_timestamp": "2017-12-29T06:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 15.844038
+        },
+        {
+          "timestamp": "2017-12-29T13:00:00Z",
+          "source_local_timestamp": "2017-12-29T07:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 33.197747
+        },
+        {
+          "timestamp": "2017-12-29T14:00:00Z",
+          "source_local_timestamp": "2017-12-29T08:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 50.259504
+        },
+        {
+          "timestamp": "2017-12-29T15:00:00Z",
+          "source_local_timestamp": "2017-12-29T09:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 60.457876
+        },
+        {
+          "timestamp": "2017-12-29T16:00:00Z",
+          "source_local_timestamp": "2017-12-29T10:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 62.537004
+        },
+        {
+          "timestamp": "2017-12-29T17:00:00Z",
+          "source_local_timestamp": "2017-12-29T11:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 64.270252
+        },
+        {
+          "timestamp": "2017-12-29T18:00:00Z",
+          "source_local_timestamp": "2017-12-29T12:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 65.937662
+        },
+        {
+          "timestamp": "2017-12-29T19:00:00Z",
+          "source_local_timestamp": "2017-12-29T13:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 66.711904
+        },
+        {
+          "timestamp": "2017-12-29T20:00:00Z",
+          "source_local_timestamp": "2017-12-29T14:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 67.407109
+        },
+        {
+          "timestamp": "2017-12-29T21:00:00Z",
+          "source_local_timestamp": "2017-12-29T15:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 68.170828
+        },
+        {
+          "timestamp": "2017-12-29T22:00:00Z",
+          "source_local_timestamp": "2017-12-29T16:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 67.526557
+        },
+        {
+          "timestamp": "2017-12-29T23:00:00Z",
+          "source_local_timestamp": "2017-12-29T17:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 63.799204
+        },
+        {
+          "timestamp": "2017-12-30T00:00:00Z",
+          "source_local_timestamp": "2017-12-29T18:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 49.530581
+        },
+        {
+          "timestamp": "2017-12-30T01:00:00Z",
+          "source_local_timestamp": "2017-12-29T19:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 39.439338
+        },
+        {
+          "timestamp": "2017-12-30T02:00:00Z",
+          "source_local_timestamp": "2017-12-29T20:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 41.222395
+        },
+        {
+          "timestamp": "2017-12-30T03:00:00Z",
+          "source_local_timestamp": "2017-12-29T21:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 35.391309
+        },
+        {
+          "timestamp": "2017-12-30T04:00:00Z",
+          "source_local_timestamp": "2017-12-29T22:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 33.756757
+        },
+        {
+          "timestamp": "2017-12-30T05:00:00Z",
+          "source_local_timestamp": "2017-12-29T23:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 19.780695
+        },
+        {
+          "timestamp": "2017-12-30T06:00:00Z",
+          "source_local_timestamp": "2017-12-30T00:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 16.9068
+        },
+        {
+          "timestamp": "2017-12-30T07:00:00Z",
+          "source_local_timestamp": "2017-12-30T01:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 11.769
+        },
+        {
+          "timestamp": "2017-12-30T08:00:00Z",
+          "source_local_timestamp": "2017-12-30T02:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 13.3314
+        },
+        {
+          "timestamp": "2017-12-30T09:00:00Z",
+          "source_local_timestamp": "2017-12-30T03:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 14.6616
+        },
+        {
+          "timestamp": "2017-12-30T10:00:00Z",
+          "source_local_timestamp": "2017-12-30T04:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 11.238
+        },
+        {
+          "timestamp": "2017-12-30T11:00:00Z",
+          "source_local_timestamp": "2017-12-30T05:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 13.9692
+        },
+        {
+          "timestamp": "2017-12-30T12:00:00Z",
+          "source_local_timestamp": "2017-12-30T06:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 17.986579
+        },
+        {
+          "timestamp": "2017-12-30T13:00:00Z",
+          "source_local_timestamp": "2017-12-30T07:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 23.980946
+        },
+        {
+          "timestamp": "2017-12-30T14:00:00Z",
+          "source_local_timestamp": "2017-12-30T08:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 41.430827
+        },
+        {
+          "timestamp": "2017-12-30T15:00:00Z",
+          "source_local_timestamp": "2017-12-30T09:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 59.958041
+        },
+        {
+          "timestamp": "2017-12-30T16:00:00Z",
+          "source_local_timestamp": "2017-12-30T10:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 65.230593
+        },
+        {
+          "timestamp": "2017-12-30T17:00:00Z",
+          "source_local_timestamp": "2017-12-30T11:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 68.105641
+        },
+        {
+          "timestamp": "2017-12-30T18:00:00Z",
+          "source_local_timestamp": "2017-12-30T12:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 68.852184
+        },
+        {
+          "timestamp": "2017-12-30T19:00:00Z",
+          "source_local_timestamp": "2017-12-30T13:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 68.001069
+        },
+        {
+          "timestamp": "2017-12-30T20:00:00Z",
+          "source_local_timestamp": "2017-12-30T14:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 68.029593
+        },
+        {
+          "timestamp": "2017-12-30T21:00:00Z",
+          "source_local_timestamp": "2017-12-30T15:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 68.271517
+        },
+        {
+          "timestamp": "2017-12-30T22:00:00Z",
+          "source_local_timestamp": "2017-12-30T16:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 67.99776
+        },
+        {
+          "timestamp": "2017-12-30T23:00:00Z",
+          "source_local_timestamp": "2017-12-30T17:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 62.829784
+        },
+        {
+          "timestamp": "2017-12-31T00:00:00Z",
+          "source_local_timestamp": "2017-12-30T18:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 48.661836
+        },
+        {
+          "timestamp": "2017-12-31T01:00:00Z",
+          "source_local_timestamp": "2017-12-30T19:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 38.959027
+        },
+        {
+          "timestamp": "2017-12-31T02:00:00Z",
+          "source_local_timestamp": "2017-12-30T20:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 41.128431
+        },
+        {
+          "timestamp": "2017-12-31T03:00:00Z",
+          "source_local_timestamp": "2017-12-30T21:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 35.403117
+        },
+        {
+          "timestamp": "2017-12-31T04:00:00Z",
+          "source_local_timestamp": "2017-12-30T22:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 32.535717
+        },
+        {
+          "timestamp": "2017-12-31T05:00:00Z",
+          "source_local_timestamp": "2017-12-30T23:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 22.162193
+        },
+        {
+          "timestamp": "2017-12-31T06:00:00Z",
+          "source_local_timestamp": "2017-12-31T00:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 16.7268
+        },
+        {
+          "timestamp": "2017-12-31T07:00:00Z",
+          "source_local_timestamp": "2017-12-31T01:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 17.3628
+        },
+        {
+          "timestamp": "2017-12-31T08:00:00Z",
+          "source_local_timestamp": "2017-12-31T02:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 14.3934
+        },
+        {
+          "timestamp": "2017-12-31T09:00:00Z",
+          "source_local_timestamp": "2017-12-31T03:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 13.713
+        },
+        {
+          "timestamp": "2017-12-31T10:00:00Z",
+          "source_local_timestamp": "2017-12-31T04:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 13.9434
+        },
+        {
+          "timestamp": "2017-12-31T11:00:00Z",
+          "source_local_timestamp": "2017-12-31T05:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 16.5054
+        },
+        {
+          "timestamp": "2017-12-31T12:00:00Z",
+          "source_local_timestamp": "2017-12-31T06:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 18.35301
+        },
+        {
+          "timestamp": "2017-12-31T13:00:00Z",
+          "source_local_timestamp": "2017-12-31T07:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 24.569124
+        },
+        {
+          "timestamp": "2017-12-31T14:00:00Z",
+          "source_local_timestamp": "2017-12-31T08:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 39.145353
+        },
+        {
+          "timestamp": "2017-12-31T15:00:00Z",
+          "source_local_timestamp": "2017-12-31T09:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 57.048114
+        },
+        {
+          "timestamp": "2017-12-31T16:00:00Z",
+          "source_local_timestamp": "2017-12-31T10:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 64.50701
+        },
+        {
+          "timestamp": "2017-12-31T17:00:00Z",
+          "source_local_timestamp": "2017-12-31T11:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 65.943934
+        },
+        {
+          "timestamp": "2017-12-31T18:00:00Z",
+          "source_local_timestamp": "2017-12-31T12:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 67.2129
+        },
+        {
+          "timestamp": "2017-12-31T19:00:00Z",
+          "source_local_timestamp": "2017-12-31T13:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 67.715638
+        },
+        {
+          "timestamp": "2017-12-31T20:00:00Z",
+          "source_local_timestamp": "2017-12-31T14:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 67.7055
+        },
+        {
+          "timestamp": "2017-12-31T21:00:00Z",
+          "source_local_timestamp": "2017-12-31T15:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 68.122591
+        },
+        {
+          "timestamp": "2017-12-31T22:00:00Z",
+          "source_local_timestamp": "2017-12-31T16:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 68.714843
+        },
+        {
+          "timestamp": "2017-12-31T23:00:00Z",
+          "source_local_timestamp": "2017-12-31T17:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 61.1775
+        },
+        {
+          "timestamp": "2018-01-01T00:00:00Z",
+          "source_local_timestamp": "2017-12-31T18:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 41.131457
+        },
+        {
+          "timestamp": "2018-01-01T01:00:00Z",
+          "source_local_timestamp": "2017-12-31T19:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 34.827362
+        },
+        {
+          "timestamp": "2018-01-01T02:00:00Z",
+          "source_local_timestamp": "2017-12-31T20:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 33.711976
+        },
+        {
+          "timestamp": "2018-01-01T03:00:00Z",
+          "source_local_timestamp": "2017-12-31T21:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 28.171724
+        },
+        {
+          "timestamp": "2018-01-01T04:00:00Z",
+          "source_local_timestamp": "2017-12-31T22:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 24.146895
+        },
+        {
+          "timestamp": "2018-01-01T05:00:00Z",
+          "source_local_timestamp": "2017-12-31T23:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 16.448057
+        }
+      ]
+    },
+    "Hog_assembly_Dona": {
+      "seasonal_weight": 0.7,
+      "training_end_exclusive": "2017-08-07T06:00:00Z",
+      "items": [
+        {
+          "timestamp": "2017-12-25T06:00:00Z",
+          "source_local_timestamp": "2017-12-25T00:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 151.555026
+        },
+        {
+          "timestamp": "2017-12-25T07:00:00Z",
+          "source_local_timestamp": "2017-12-25T01:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 145.34125
+        },
+        {
+          "timestamp": "2017-12-25T08:00:00Z",
+          "source_local_timestamp": "2017-12-25T02:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 117.519178
+        },
+        {
+          "timestamp": "2017-12-25T09:00:00Z",
+          "source_local_timestamp": "2017-12-25T03:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 116.35192
+        },
+        {
+          "timestamp": "2017-12-25T10:00:00Z",
+          "source_local_timestamp": "2017-12-25T04:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 130.645779
+        },
+        {
+          "timestamp": "2017-12-25T11:00:00Z",
+          "source_local_timestamp": "2017-12-25T05:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 126.748646
+        },
+        {
+          "timestamp": "2017-12-25T12:00:00Z",
+          "source_local_timestamp": "2017-12-25T06:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 129.413412
+        },
+        {
+          "timestamp": "2017-12-25T13:00:00Z",
+          "source_local_timestamp": "2017-12-25T07:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 162.160576
+        },
+        {
+          "timestamp": "2017-12-25T14:00:00Z",
+          "source_local_timestamp": "2017-12-25T08:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 171.977009
+        },
+        {
+          "timestamp": "2017-12-25T15:00:00Z",
+          "source_local_timestamp": "2017-12-25T09:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 176.614283
+        },
+        {
+          "timestamp": "2017-12-25T16:00:00Z",
+          "source_local_timestamp": "2017-12-25T10:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 216.948166
+        },
+        {
+          "timestamp": "2017-12-25T17:00:00Z",
+          "source_local_timestamp": "2017-12-25T11:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 223.773087
+        },
+        {
+          "timestamp": "2017-12-25T18:00:00Z",
+          "source_local_timestamp": "2017-12-25T12:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 212.503056
+        },
+        {
+          "timestamp": "2017-12-25T19:00:00Z",
+          "source_local_timestamp": "2017-12-25T13:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 225.233067
+        },
+        {
+          "timestamp": "2017-12-25T20:00:00Z",
+          "source_local_timestamp": "2017-12-25T14:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 218.56272
+        },
+        {
+          "timestamp": "2017-12-25T21:00:00Z",
+          "source_local_timestamp": "2017-12-25T15:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 222.166183
+        },
+        {
+          "timestamp": "2017-12-25T22:00:00Z",
+          "source_local_timestamp": "2017-12-25T16:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 238.300271
+        },
+        {
+          "timestamp": "2017-12-25T23:00:00Z",
+          "source_local_timestamp": "2017-12-25T17:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 233.315968
+        },
+        {
+          "timestamp": "2017-12-26T00:00:00Z",
+          "source_local_timestamp": "2017-12-25T18:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 227.177043
+        },
+        {
+          "timestamp": "2017-12-26T01:00:00Z",
+          "source_local_timestamp": "2017-12-25T19:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 243.858285
+        },
+        {
+          "timestamp": "2017-12-26T02:00:00Z",
+          "source_local_timestamp": "2017-12-25T20:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 235.428447
+        },
+        {
+          "timestamp": "2017-12-26T03:00:00Z",
+          "source_local_timestamp": "2017-12-25T21:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 224.741402
+        },
+        {
+          "timestamp": "2017-12-26T04:00:00Z",
+          "source_local_timestamp": "2017-12-25T22:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 232.161847
+        },
+        {
+          "timestamp": "2017-12-26T05:00:00Z",
+          "source_local_timestamp": "2017-12-25T23:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 211.779667
+        },
+        {
+          "timestamp": "2017-12-26T06:00:00Z",
+          "source_local_timestamp": "2017-12-26T00:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 165.914994
+        },
+        {
+          "timestamp": "2017-12-26T07:00:00Z",
+          "source_local_timestamp": "2017-12-26T01:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 141.460407
+        },
+        {
+          "timestamp": "2017-12-26T08:00:00Z",
+          "source_local_timestamp": "2017-12-26T02:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 106.723491
+        },
+        {
+          "timestamp": "2017-12-26T09:00:00Z",
+          "source_local_timestamp": "2017-12-26T03:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 105.171438
+        },
+        {
+          "timestamp": "2017-12-26T10:00:00Z",
+          "source_local_timestamp": "2017-12-26T04:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 114.220271
+        },
+        {
+          "timestamp": "2017-12-26T11:00:00Z",
+          "source_local_timestamp": "2017-12-26T05:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 118.179727
+        },
+        {
+          "timestamp": "2017-12-26T12:00:00Z",
+          "source_local_timestamp": "2017-12-26T06:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 116.223614
+        },
+        {
+          "timestamp": "2017-12-26T13:00:00Z",
+          "source_local_timestamp": "2017-12-26T07:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 149.911319
+        },
+        {
+          "timestamp": "2017-12-26T14:00:00Z",
+          "source_local_timestamp": "2017-12-26T08:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 177.758483
+        },
+        {
+          "timestamp": "2017-12-26T15:00:00Z",
+          "source_local_timestamp": "2017-12-26T09:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 182.791325
+        },
+        {
+          "timestamp": "2017-12-26T16:00:00Z",
+          "source_local_timestamp": "2017-12-26T10:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 206.435109
+        },
+        {
+          "timestamp": "2017-12-26T17:00:00Z",
+          "source_local_timestamp": "2017-12-26T11:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 212.081112
+        },
+        {
+          "timestamp": "2017-12-26T18:00:00Z",
+          "source_local_timestamp": "2017-12-26T12:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 213.127948
+        },
+        {
+          "timestamp": "2017-12-26T19:00:00Z",
+          "source_local_timestamp": "2017-12-26T13:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 231.843715
+        },
+        {
+          "timestamp": "2017-12-26T20:00:00Z",
+          "source_local_timestamp": "2017-12-26T14:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 228.734632
+        },
+        {
+          "timestamp": "2017-12-26T21:00:00Z",
+          "source_local_timestamp": "2017-12-26T15:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 225.604333
+        },
+        {
+          "timestamp": "2017-12-26T22:00:00Z",
+          "source_local_timestamp": "2017-12-26T16:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 239.951685
+        },
+        {
+          "timestamp": "2017-12-26T23:00:00Z",
+          "source_local_timestamp": "2017-12-26T17:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 237.376333
+        },
+        {
+          "timestamp": "2017-12-27T00:00:00Z",
+          "source_local_timestamp": "2017-12-26T18:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 241.83984
+        },
+        {
+          "timestamp": "2017-12-27T01:00:00Z",
+          "source_local_timestamp": "2017-12-26T19:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 254.51068
+        },
+        {
+          "timestamp": "2017-12-27T02:00:00Z",
+          "source_local_timestamp": "2017-12-26T20:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 244.796894
+        },
+        {
+          "timestamp": "2017-12-27T03:00:00Z",
+          "source_local_timestamp": "2017-12-26T21:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 227.412032
+        },
+        {
+          "timestamp": "2017-12-27T04:00:00Z",
+          "source_local_timestamp": "2017-12-26T22:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 226.76926
+        },
+        {
+          "timestamp": "2017-12-27T05:00:00Z",
+          "source_local_timestamp": "2017-12-26T23:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 203.881864
+        },
+        {
+          "timestamp": "2017-12-27T06:00:00Z",
+          "source_local_timestamp": "2017-12-27T00:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 220.736497
+        },
+        {
+          "timestamp": "2017-12-27T07:00:00Z",
+          "source_local_timestamp": "2017-12-27T01:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 197.468939
+        },
+        {
+          "timestamp": "2017-12-27T08:00:00Z",
+          "source_local_timestamp": "2017-12-27T02:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 181.413079
+        },
+        {
+          "timestamp": "2017-12-27T09:00:00Z",
+          "source_local_timestamp": "2017-12-27T03:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 169.089276
+        },
+        {
+          "timestamp": "2017-12-27T10:00:00Z",
+          "source_local_timestamp": "2017-12-27T04:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 180.680668
+        },
+        {
+          "timestamp": "2017-12-27T11:00:00Z",
+          "source_local_timestamp": "2017-12-27T05:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 190.661018
+        },
+        {
+          "timestamp": "2017-12-27T12:00:00Z",
+          "source_local_timestamp": "2017-12-27T06:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 185.112804
+        },
+        {
+          "timestamp": "2017-12-27T13:00:00Z",
+          "source_local_timestamp": "2017-12-27T07:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 215.494196
+        },
+        {
+          "timestamp": "2017-12-27T14:00:00Z",
+          "source_local_timestamp": "2017-12-27T08:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 239.259735
+        },
+        {
+          "timestamp": "2017-12-27T15:00:00Z",
+          "source_local_timestamp": "2017-12-27T09:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 283.511883
+        },
+        {
+          "timestamp": "2017-12-27T16:00:00Z",
+          "source_local_timestamp": "2017-12-27T10:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 310.457421
+        },
+        {
+          "timestamp": "2017-12-27T17:00:00Z",
+          "source_local_timestamp": "2017-12-27T11:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 327.382141
+        },
+        {
+          "timestamp": "2017-12-27T18:00:00Z",
+          "source_local_timestamp": "2017-12-27T12:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 346.368039
+        },
+        {
+          "timestamp": "2017-12-27T19:00:00Z",
+          "source_local_timestamp": "2017-12-27T13:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 356.468232
+        },
+        {
+          "timestamp": "2017-12-27T20:00:00Z",
+          "source_local_timestamp": "2017-12-27T14:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 374.548986
+        },
+        {
+          "timestamp": "2017-12-27T21:00:00Z",
+          "source_local_timestamp": "2017-12-27T15:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 371.87169
+        },
+        {
+          "timestamp": "2017-12-27T22:00:00Z",
+          "source_local_timestamp": "2017-12-27T16:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 365.877536
+        },
+        {
+          "timestamp": "2017-12-27T23:00:00Z",
+          "source_local_timestamp": "2017-12-27T17:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 372.002048
+        },
+        {
+          "timestamp": "2017-12-28T00:00:00Z",
+          "source_local_timestamp": "2017-12-27T18:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 368.695024
+        },
+        {
+          "timestamp": "2017-12-28T01:00:00Z",
+          "source_local_timestamp": "2017-12-27T19:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 387.837864
+        },
+        {
+          "timestamp": "2017-12-28T02:00:00Z",
+          "source_local_timestamp": "2017-12-27T20:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 367.034318
+        },
+        {
+          "timestamp": "2017-12-28T03:00:00Z",
+          "source_local_timestamp": "2017-12-27T21:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 342.578532
+        },
+        {
+          "timestamp": "2017-12-28T04:00:00Z",
+          "source_local_timestamp": "2017-12-27T22:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 337.826748
+        },
+        {
+          "timestamp": "2017-12-28T05:00:00Z",
+          "source_local_timestamp": "2017-12-27T23:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 309.108072
+        },
+        {
+          "timestamp": "2017-12-28T06:00:00Z",
+          "source_local_timestamp": "2017-12-28T00:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 262.776573
+        },
+        {
+          "timestamp": "2017-12-28T07:00:00Z",
+          "source_local_timestamp": "2017-12-28T01:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 230.333929
+        },
+        {
+          "timestamp": "2017-12-28T08:00:00Z",
+          "source_local_timestamp": "2017-12-28T02:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 195.86872
+        },
+        {
+          "timestamp": "2017-12-28T09:00:00Z",
+          "source_local_timestamp": "2017-12-28T03:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 195.288835
+        },
+        {
+          "timestamp": "2017-12-28T10:00:00Z",
+          "source_local_timestamp": "2017-12-28T04:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 199.073314
+        },
+        {
+          "timestamp": "2017-12-28T11:00:00Z",
+          "source_local_timestamp": "2017-12-28T05:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 196.006809
+        },
+        {
+          "timestamp": "2017-12-28T12:00:00Z",
+          "source_local_timestamp": "2017-12-28T06:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 211.875745
+        },
+        {
+          "timestamp": "2017-12-28T13:00:00Z",
+          "source_local_timestamp": "2017-12-28T07:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 243.955394
+        },
+        {
+          "timestamp": "2017-12-28T14:00:00Z",
+          "source_local_timestamp": "2017-12-28T08:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 269.01873
+        },
+        {
+          "timestamp": "2017-12-28T15:00:00Z",
+          "source_local_timestamp": "2017-12-28T09:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 308.286017
+        },
+        {
+          "timestamp": "2017-12-28T16:00:00Z",
+          "source_local_timestamp": "2017-12-28T10:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 314.150526
+        },
+        {
+          "timestamp": "2017-12-28T17:00:00Z",
+          "source_local_timestamp": "2017-12-28T11:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 348.6592
+        },
+        {
+          "timestamp": "2017-12-28T18:00:00Z",
+          "source_local_timestamp": "2017-12-28T12:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 364.087098
+        },
+        {
+          "timestamp": "2017-12-28T19:00:00Z",
+          "source_local_timestamp": "2017-12-28T13:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 384.660904
+        },
+        {
+          "timestamp": "2017-12-28T20:00:00Z",
+          "source_local_timestamp": "2017-12-28T14:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 377.193268
+        },
+        {
+          "timestamp": "2017-12-28T21:00:00Z",
+          "source_local_timestamp": "2017-12-28T15:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 383.220124
+        },
+        {
+          "timestamp": "2017-12-28T22:00:00Z",
+          "source_local_timestamp": "2017-12-28T16:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 391.85512
+        },
+        {
+          "timestamp": "2017-12-28T23:00:00Z",
+          "source_local_timestamp": "2017-12-28T17:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 378.665349
+        },
+        {
+          "timestamp": "2017-12-29T00:00:00Z",
+          "source_local_timestamp": "2017-12-28T18:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 390.315084
+        },
+        {
+          "timestamp": "2017-12-29T01:00:00Z",
+          "source_local_timestamp": "2017-12-28T19:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 390.912344
+        },
+        {
+          "timestamp": "2017-12-29T02:00:00Z",
+          "source_local_timestamp": "2017-12-28T20:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 386.260098
+        },
+        {
+          "timestamp": "2017-12-29T03:00:00Z",
+          "source_local_timestamp": "2017-12-28T21:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 377.35922
+        },
+        {
+          "timestamp": "2017-12-29T04:00:00Z",
+          "source_local_timestamp": "2017-12-28T22:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 347.86323
+        },
+        {
+          "timestamp": "2017-12-29T05:00:00Z",
+          "source_local_timestamp": "2017-12-28T23:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 302.372336
+        },
+        {
+          "timestamp": "2017-12-29T06:00:00Z",
+          "source_local_timestamp": "2017-12-29T00:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 244.182102
+        },
+        {
+          "timestamp": "2017-12-29T07:00:00Z",
+          "source_local_timestamp": "2017-12-29T01:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 204.763618
+        },
+        {
+          "timestamp": "2017-12-29T08:00:00Z",
+          "source_local_timestamp": "2017-12-29T02:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 197.44241
+        },
+        {
+          "timestamp": "2017-12-29T09:00:00Z",
+          "source_local_timestamp": "2017-12-29T03:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 189.107727
+        },
+        {
+          "timestamp": "2017-12-29T10:00:00Z",
+          "source_local_timestamp": "2017-12-29T04:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 175.010502
+        },
+        {
+          "timestamp": "2017-12-29T11:00:00Z",
+          "source_local_timestamp": "2017-12-29T05:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 197.386685
+        },
+        {
+          "timestamp": "2017-12-29T12:00:00Z",
+          "source_local_timestamp": "2017-12-29T06:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 193.427193
+        },
+        {
+          "timestamp": "2017-12-29T13:00:00Z",
+          "source_local_timestamp": "2017-12-29T07:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 211.433277
+        },
+        {
+          "timestamp": "2017-12-29T14:00:00Z",
+          "source_local_timestamp": "2017-12-29T08:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 253.385477
+        },
+        {
+          "timestamp": "2017-12-29T15:00:00Z",
+          "source_local_timestamp": "2017-12-29T09:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 257.090793
+        },
+        {
+          "timestamp": "2017-12-29T16:00:00Z",
+          "source_local_timestamp": "2017-12-29T10:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 298.055852
+        },
+        {
+          "timestamp": "2017-12-29T17:00:00Z",
+          "source_local_timestamp": "2017-12-29T11:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 358.767077
+        },
+        {
+          "timestamp": "2017-12-29T18:00:00Z",
+          "source_local_timestamp": "2017-12-29T12:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 354.09731
+        },
+        {
+          "timestamp": "2017-12-29T19:00:00Z",
+          "source_local_timestamp": "2017-12-29T13:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 360.642352
+        },
+        {
+          "timestamp": "2017-12-29T20:00:00Z",
+          "source_local_timestamp": "2017-12-29T14:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 351.435735
+        },
+        {
+          "timestamp": "2017-12-29T21:00:00Z",
+          "source_local_timestamp": "2017-12-29T15:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 367.11161
+        },
+        {
+          "timestamp": "2017-12-29T22:00:00Z",
+          "source_local_timestamp": "2017-12-29T16:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 360.877002
+        },
+        {
+          "timestamp": "2017-12-29T23:00:00Z",
+          "source_local_timestamp": "2017-12-29T17:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 370.741902
+        },
+        {
+          "timestamp": "2017-12-30T00:00:00Z",
+          "source_local_timestamp": "2017-12-29T18:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 383.984068
+        },
+        {
+          "timestamp": "2017-12-30T01:00:00Z",
+          "source_local_timestamp": "2017-12-29T19:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 378.952452
+        },
+        {
+          "timestamp": "2017-12-30T02:00:00Z",
+          "source_local_timestamp": "2017-12-29T20:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 381.586493
+        },
+        {
+          "timestamp": "2017-12-30T03:00:00Z",
+          "source_local_timestamp": "2017-12-29T21:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 358.500743
+        },
+        {
+          "timestamp": "2017-12-30T04:00:00Z",
+          "source_local_timestamp": "2017-12-29T22:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 300.31001
+        },
+        {
+          "timestamp": "2017-12-30T05:00:00Z",
+          "source_local_timestamp": "2017-12-29T23:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 249.328802
+        },
+        {
+          "timestamp": "2017-12-30T06:00:00Z",
+          "source_local_timestamp": "2017-12-30T00:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 194.522635
+        },
+        {
+          "timestamp": "2017-12-30T07:00:00Z",
+          "source_local_timestamp": "2017-12-30T01:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 169.586585
+        },
+        {
+          "timestamp": "2017-12-30T08:00:00Z",
+          "source_local_timestamp": "2017-12-30T02:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 143.394144
+        },
+        {
+          "timestamp": "2017-12-30T09:00:00Z",
+          "source_local_timestamp": "2017-12-30T03:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 150.753535
+        },
+        {
+          "timestamp": "2017-12-30T10:00:00Z",
+          "source_local_timestamp": "2017-12-30T04:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 153.731302
+        },
+        {
+          "timestamp": "2017-12-30T11:00:00Z",
+          "source_local_timestamp": "2017-12-30T05:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 144.304402
+        },
+        {
+          "timestamp": "2017-12-30T12:00:00Z",
+          "source_local_timestamp": "2017-12-30T06:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 161.311885
+        },
+        {
+          "timestamp": "2017-12-30T13:00:00Z",
+          "source_local_timestamp": "2017-12-30T07:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 175.265894
+        },
+        {
+          "timestamp": "2017-12-30T14:00:00Z",
+          "source_local_timestamp": "2017-12-30T08:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 197.182452
+        },
+        {
+          "timestamp": "2017-12-30T15:00:00Z",
+          "source_local_timestamp": "2017-12-30T09:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 246.455269
+        },
+        {
+          "timestamp": "2017-12-30T16:00:00Z",
+          "source_local_timestamp": "2017-12-30T10:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 277.165644
+        },
+        {
+          "timestamp": "2017-12-30T17:00:00Z",
+          "source_local_timestamp": "2017-12-30T11:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 312.299985
+        },
+        {
+          "timestamp": "2017-12-30T18:00:00Z",
+          "source_local_timestamp": "2017-12-30T12:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 295.947985
+        },
+        {
+          "timestamp": "2017-12-30T19:00:00Z",
+          "source_local_timestamp": "2017-12-30T13:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 302.995619
+        },
+        {
+          "timestamp": "2017-12-30T20:00:00Z",
+          "source_local_timestamp": "2017-12-30T14:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 312.676519
+        },
+        {
+          "timestamp": "2017-12-30T21:00:00Z",
+          "source_local_timestamp": "2017-12-30T15:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 318.735427
+        },
+        {
+          "timestamp": "2017-12-30T22:00:00Z",
+          "source_local_timestamp": "2017-12-30T16:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 307.463819
+        },
+        {
+          "timestamp": "2017-12-30T23:00:00Z",
+          "source_local_timestamp": "2017-12-30T17:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 309.360369
+        },
+        {
+          "timestamp": "2017-12-31T00:00:00Z",
+          "source_local_timestamp": "2017-12-30T18:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 315.57001
+        },
+        {
+          "timestamp": "2017-12-31T01:00:00Z",
+          "source_local_timestamp": "2017-12-30T19:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 293.390619
+        },
+        {
+          "timestamp": "2017-12-31T02:00:00Z",
+          "source_local_timestamp": "2017-12-30T20:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 297.056327
+        },
+        {
+          "timestamp": "2017-12-31T03:00:00Z",
+          "source_local_timestamp": "2017-12-30T21:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 241.247352
+        },
+        {
+          "timestamp": "2017-12-31T04:00:00Z",
+          "source_local_timestamp": "2017-12-30T22:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 215.515694
+        },
+        {
+          "timestamp": "2017-12-31T05:00:00Z",
+          "source_local_timestamp": "2017-12-30T23:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 201.94566
+        },
+        {
+          "timestamp": "2017-12-31T06:00:00Z",
+          "source_local_timestamp": "2017-12-31T00:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 204.326866
+        },
+        {
+          "timestamp": "2017-12-31T07:00:00Z",
+          "source_local_timestamp": "2017-12-31T01:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 200.775619
+        },
+        {
+          "timestamp": "2017-12-31T08:00:00Z",
+          "source_local_timestamp": "2017-12-31T02:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 191.719463
+        },
+        {
+          "timestamp": "2017-12-31T09:00:00Z",
+          "source_local_timestamp": "2017-12-31T03:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 179.730551
+        },
+        {
+          "timestamp": "2017-12-31T10:00:00Z",
+          "source_local_timestamp": "2017-12-31T04:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 194.048384
+        },
+        {
+          "timestamp": "2017-12-31T11:00:00Z",
+          "source_local_timestamp": "2017-12-31T05:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 194.640542
+        },
+        {
+          "timestamp": "2017-12-31T12:00:00Z",
+          "source_local_timestamp": "2017-12-31T06:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 189.506892
+        },
+        {
+          "timestamp": "2017-12-31T13:00:00Z",
+          "source_local_timestamp": "2017-12-31T07:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 211.854392
+        },
+        {
+          "timestamp": "2017-12-31T14:00:00Z",
+          "source_local_timestamp": "2017-12-31T08:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 247.852867
+        },
+        {
+          "timestamp": "2017-12-31T15:00:00Z",
+          "source_local_timestamp": "2017-12-31T09:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 283.072551
+        },
+        {
+          "timestamp": "2017-12-31T16:00:00Z",
+          "source_local_timestamp": "2017-12-31T10:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 339.576376
+        },
+        {
+          "timestamp": "2017-12-31T17:00:00Z",
+          "source_local_timestamp": "2017-12-31T11:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 378.282334
+        },
+        {
+          "timestamp": "2017-12-31T18:00:00Z",
+          "source_local_timestamp": "2017-12-31T12:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 356.935109
+        },
+        {
+          "timestamp": "2017-12-31T19:00:00Z",
+          "source_local_timestamp": "2017-12-31T13:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 365.322051
+        },
+        {
+          "timestamp": "2017-12-31T20:00:00Z",
+          "source_local_timestamp": "2017-12-31T14:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 368.758517
+        },
+        {
+          "timestamp": "2017-12-31T21:00:00Z",
+          "source_local_timestamp": "2017-12-31T15:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 370.409534
+        },
+        {
+          "timestamp": "2017-12-31T22:00:00Z",
+          "source_local_timestamp": "2017-12-31T16:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 375.452176
+        },
+        {
+          "timestamp": "2017-12-31T23:00:00Z",
+          "source_local_timestamp": "2017-12-31T17:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 375.121801
+        },
+        {
+          "timestamp": "2018-01-01T00:00:00Z",
+          "source_local_timestamp": "2017-12-31T18:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 368.874834
+        },
+        {
+          "timestamp": "2018-01-01T01:00:00Z",
+          "source_local_timestamp": "2017-12-31T19:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 366.900992
+        },
+        {
+          "timestamp": "2018-01-01T02:00:00Z",
+          "source_local_timestamp": "2017-12-31T20:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 352.926942
+        },
+        {
+          "timestamp": "2018-01-01T03:00:00Z",
+          "source_local_timestamp": "2017-12-31T21:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 314.186101
+        },
+        {
+          "timestamp": "2018-01-01T04:00:00Z",
+          "source_local_timestamp": "2017-12-31T22:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 316.190801
+        },
+        {
+          "timestamp": "2018-01-01T05:00:00Z",
+          "source_local_timestamp": "2017-12-31T23:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 265.596467
+        }
+      ]
+    },
+    "Hog_lodging_Francisco": {
+      "seasonal_weight": 0.3,
+      "training_end_exclusive": "2017-08-07T06:00:00Z",
+      "items": [
+        {
+          "timestamp": "2017-12-25T06:00:00Z",
+          "source_local_timestamp": "2017-12-25T00:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 88.77224
+        },
+        {
+          "timestamp": "2017-12-25T07:00:00Z",
+          "source_local_timestamp": "2017-12-25T01:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 86.827855
+        },
+        {
+          "timestamp": "2017-12-25T08:00:00Z",
+          "source_local_timestamp": "2017-12-25T02:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 86.853277
+        },
+        {
+          "timestamp": "2017-12-25T09:00:00Z",
+          "source_local_timestamp": "2017-12-25T03:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 86.185479
+        },
+        {
+          "timestamp": "2017-12-25T10:00:00Z",
+          "source_local_timestamp": "2017-12-25T04:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 84.465205
+        },
+        {
+          "timestamp": "2017-12-25T11:00:00Z",
+          "source_local_timestamp": "2017-12-25T05:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 89.037688
+        },
+        {
+          "timestamp": "2017-12-25T12:00:00Z",
+          "source_local_timestamp": "2017-12-25T06:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 93.713529
+        },
+        {
+          "timestamp": "2017-12-25T13:00:00Z",
+          "source_local_timestamp": "2017-12-25T07:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 98.618752
+        },
+        {
+          "timestamp": "2017-12-25T14:00:00Z",
+          "source_local_timestamp": "2017-12-25T08:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 101.710237
+        },
+        {
+          "timestamp": "2017-12-25T15:00:00Z",
+          "source_local_timestamp": "2017-12-25T09:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 103.332175
+        },
+        {
+          "timestamp": "2017-12-25T16:00:00Z",
+          "source_local_timestamp": "2017-12-25T10:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 109.256388
+        },
+        {
+          "timestamp": "2017-12-25T17:00:00Z",
+          "source_local_timestamp": "2017-12-25T11:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 111.171339
+        },
+        {
+          "timestamp": "2017-12-25T18:00:00Z",
+          "source_local_timestamp": "2017-12-25T12:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 111.130031
+        },
+        {
+          "timestamp": "2017-12-25T19:00:00Z",
+          "source_local_timestamp": "2017-12-25T13:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 109.135836
+        },
+        {
+          "timestamp": "2017-12-25T20:00:00Z",
+          "source_local_timestamp": "2017-12-25T14:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 106.292428
+        },
+        {
+          "timestamp": "2017-12-25T21:00:00Z",
+          "source_local_timestamp": "2017-12-25T15:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 102.80466
+        },
+        {
+          "timestamp": "2017-12-25T22:00:00Z",
+          "source_local_timestamp": "2017-12-25T16:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 101.944786
+        },
+        {
+          "timestamp": "2017-12-25T23:00:00Z",
+          "source_local_timestamp": "2017-12-25T17:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 106.796094
+        },
+        {
+          "timestamp": "2017-12-26T00:00:00Z",
+          "source_local_timestamp": "2017-12-25T18:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 110.453628
+        },
+        {
+          "timestamp": "2017-12-26T01:00:00Z",
+          "source_local_timestamp": "2017-12-25T19:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 110.917543
+        },
+        {
+          "timestamp": "2017-12-26T02:00:00Z",
+          "source_local_timestamp": "2017-12-25T20:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 107.200825
+        },
+        {
+          "timestamp": "2017-12-26T03:00:00Z",
+          "source_local_timestamp": "2017-12-25T21:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 101.797588
+        },
+        {
+          "timestamp": "2017-12-26T04:00:00Z",
+          "source_local_timestamp": "2017-12-25T22:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 94.512361
+        },
+        {
+          "timestamp": "2017-12-26T05:00:00Z",
+          "source_local_timestamp": "2017-12-25T23:00:00",
+          "forecast_origin": "2017-12-25T06:00:00Z",
+          "forecast_kwh": 91.581249
+        },
+        {
+          "timestamp": "2017-12-26T06:00:00Z",
+          "source_local_timestamp": "2017-12-26T00:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 83.956538
+        },
+        {
+          "timestamp": "2017-12-26T07:00:00Z",
+          "source_local_timestamp": "2017-12-26T01:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 82.292981
+        },
+        {
+          "timestamp": "2017-12-26T08:00:00Z",
+          "source_local_timestamp": "2017-12-26T02:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 82.535705
+        },
+        {
+          "timestamp": "2017-12-26T09:00:00Z",
+          "source_local_timestamp": "2017-12-26T03:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 81.519356
+        },
+        {
+          "timestamp": "2017-12-26T10:00:00Z",
+          "source_local_timestamp": "2017-12-26T04:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 82.346969
+        },
+        {
+          "timestamp": "2017-12-26T11:00:00Z",
+          "source_local_timestamp": "2017-12-26T05:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 85.30232
+        },
+        {
+          "timestamp": "2017-12-26T12:00:00Z",
+          "source_local_timestamp": "2017-12-26T06:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 96.927547
+        },
+        {
+          "timestamp": "2017-12-26T13:00:00Z",
+          "source_local_timestamp": "2017-12-26T07:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 99.088339
+        },
+        {
+          "timestamp": "2017-12-26T14:00:00Z",
+          "source_local_timestamp": "2017-12-26T08:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 103.306835
+        },
+        {
+          "timestamp": "2017-12-26T15:00:00Z",
+          "source_local_timestamp": "2017-12-26T09:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 103.857114
+        },
+        {
+          "timestamp": "2017-12-26T16:00:00Z",
+          "source_local_timestamp": "2017-12-26T10:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 103.298375
+        },
+        {
+          "timestamp": "2017-12-26T17:00:00Z",
+          "source_local_timestamp": "2017-12-26T11:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 104.702511
+        },
+        {
+          "timestamp": "2017-12-26T18:00:00Z",
+          "source_local_timestamp": "2017-12-26T12:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 105.495563
+        },
+        {
+          "timestamp": "2017-12-26T19:00:00Z",
+          "source_local_timestamp": "2017-12-26T13:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 105.717421
+        },
+        {
+          "timestamp": "2017-12-26T20:00:00Z",
+          "source_local_timestamp": "2017-12-26T14:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 103.08237
+        },
+        {
+          "timestamp": "2017-12-26T21:00:00Z",
+          "source_local_timestamp": "2017-12-26T15:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 99.502968
+        },
+        {
+          "timestamp": "2017-12-26T22:00:00Z",
+          "source_local_timestamp": "2017-12-26T16:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 98.266451
+        },
+        {
+          "timestamp": "2017-12-26T23:00:00Z",
+          "source_local_timestamp": "2017-12-26T17:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 102.905732
+        },
+        {
+          "timestamp": "2017-12-27T00:00:00Z",
+          "source_local_timestamp": "2017-12-26T18:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 107.370614
+        },
+        {
+          "timestamp": "2017-12-27T01:00:00Z",
+          "source_local_timestamp": "2017-12-26T19:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 107.571033
+        },
+        {
+          "timestamp": "2017-12-27T02:00:00Z",
+          "source_local_timestamp": "2017-12-26T20:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 104.211079
+        },
+        {
+          "timestamp": "2017-12-27T03:00:00Z",
+          "source_local_timestamp": "2017-12-26T21:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 98.337302
+        },
+        {
+          "timestamp": "2017-12-27T04:00:00Z",
+          "source_local_timestamp": "2017-12-26T22:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 91.447026
+        },
+        {
+          "timestamp": "2017-12-27T05:00:00Z",
+          "source_local_timestamp": "2017-12-26T23:00:00",
+          "forecast_origin": "2017-12-26T06:00:00Z",
+          "forecast_kwh": 89.130697
+        },
+        {
+          "timestamp": "2017-12-27T06:00:00Z",
+          "source_local_timestamp": "2017-12-27T00:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 86.440762
+        },
+        {
+          "timestamp": "2017-12-27T07:00:00Z",
+          "source_local_timestamp": "2017-12-27T01:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 87.981895
+        },
+        {
+          "timestamp": "2017-12-27T08:00:00Z",
+          "source_local_timestamp": "2017-12-27T02:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 85.314006
+        },
+        {
+          "timestamp": "2017-12-27T09:00:00Z",
+          "source_local_timestamp": "2017-12-27T03:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 83.645184
+        },
+        {
+          "timestamp": "2017-12-27T10:00:00Z",
+          "source_local_timestamp": "2017-12-27T04:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 83.799314
+        },
+        {
+          "timestamp": "2017-12-27T11:00:00Z",
+          "source_local_timestamp": "2017-12-27T05:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 87.455765
+        },
+        {
+          "timestamp": "2017-12-27T12:00:00Z",
+          "source_local_timestamp": "2017-12-27T06:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 98.13859
+        },
+        {
+          "timestamp": "2017-12-27T13:00:00Z",
+          "source_local_timestamp": "2017-12-27T07:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 102.921188
+        },
+        {
+          "timestamp": "2017-12-27T14:00:00Z",
+          "source_local_timestamp": "2017-12-27T08:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 106.24182
+        },
+        {
+          "timestamp": "2017-12-27T15:00:00Z",
+          "source_local_timestamp": "2017-12-27T09:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 106.773967
+        },
+        {
+          "timestamp": "2017-12-27T16:00:00Z",
+          "source_local_timestamp": "2017-12-27T10:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 108.690949
+        },
+        {
+          "timestamp": "2017-12-27T17:00:00Z",
+          "source_local_timestamp": "2017-12-27T11:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 110.602044
+        },
+        {
+          "timestamp": "2017-12-27T18:00:00Z",
+          "source_local_timestamp": "2017-12-27T12:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 111.5873
+        },
+        {
+          "timestamp": "2017-12-27T19:00:00Z",
+          "source_local_timestamp": "2017-12-27T13:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 112.589076
+        },
+        {
+          "timestamp": "2017-12-27T20:00:00Z",
+          "source_local_timestamp": "2017-12-27T14:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 109.328279
+        },
+        {
+          "timestamp": "2017-12-27T21:00:00Z",
+          "source_local_timestamp": "2017-12-27T15:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 106.868523
+        },
+        {
+          "timestamp": "2017-12-27T22:00:00Z",
+          "source_local_timestamp": "2017-12-27T16:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 105.905936
+        },
+        {
+          "timestamp": "2017-12-27T23:00:00Z",
+          "source_local_timestamp": "2017-12-27T17:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 110.439512
+        },
+        {
+          "timestamp": "2017-12-28T00:00:00Z",
+          "source_local_timestamp": "2017-12-27T18:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 113.955903
+        },
+        {
+          "timestamp": "2017-12-28T01:00:00Z",
+          "source_local_timestamp": "2017-12-27T19:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 113.647341
+        },
+        {
+          "timestamp": "2017-12-28T02:00:00Z",
+          "source_local_timestamp": "2017-12-27T20:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 110.371154
+        },
+        {
+          "timestamp": "2017-12-28T03:00:00Z",
+          "source_local_timestamp": "2017-12-27T21:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 104.526849
+        },
+        {
+          "timestamp": "2017-12-28T04:00:00Z",
+          "source_local_timestamp": "2017-12-27T22:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 97.930837
+        },
+        {
+          "timestamp": "2017-12-28T05:00:00Z",
+          "source_local_timestamp": "2017-12-27T23:00:00",
+          "forecast_origin": "2017-12-27T06:00:00Z",
+          "forecast_kwh": 92.853421
+        },
+        {
+          "timestamp": "2017-12-28T06:00:00Z",
+          "source_local_timestamp": "2017-12-28T00:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 90.636767
+        },
+        {
+          "timestamp": "2017-12-28T07:00:00Z",
+          "source_local_timestamp": "2017-12-28T01:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 91.384342
+        },
+        {
+          "timestamp": "2017-12-28T08:00:00Z",
+          "source_local_timestamp": "2017-12-28T02:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 90.687902
+        },
+        {
+          "timestamp": "2017-12-28T09:00:00Z",
+          "source_local_timestamp": "2017-12-28T03:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 89.739498
+        },
+        {
+          "timestamp": "2017-12-28T10:00:00Z",
+          "source_local_timestamp": "2017-12-28T04:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 87.213299
+        },
+        {
+          "timestamp": "2017-12-28T11:00:00Z",
+          "source_local_timestamp": "2017-12-28T05:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 92.013541
+        },
+        {
+          "timestamp": "2017-12-28T12:00:00Z",
+          "source_local_timestamp": "2017-12-28T06:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 96.072165
+        },
+        {
+          "timestamp": "2017-12-28T13:00:00Z",
+          "source_local_timestamp": "2017-12-28T07:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 100.686361
+        },
+        {
+          "timestamp": "2017-12-28T14:00:00Z",
+          "source_local_timestamp": "2017-12-28T08:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 104.137421
+        },
+        {
+          "timestamp": "2017-12-28T15:00:00Z",
+          "source_local_timestamp": "2017-12-28T09:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 105.077408
+        },
+        {
+          "timestamp": "2017-12-28T16:00:00Z",
+          "source_local_timestamp": "2017-12-28T10:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 106.400438
+        },
+        {
+          "timestamp": "2017-12-28T17:00:00Z",
+          "source_local_timestamp": "2017-12-28T11:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 109.133844
+        },
+        {
+          "timestamp": "2017-12-28T18:00:00Z",
+          "source_local_timestamp": "2017-12-28T12:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 110.51585
+        },
+        {
+          "timestamp": "2017-12-28T19:00:00Z",
+          "source_local_timestamp": "2017-12-28T13:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 111.531214
+        },
+        {
+          "timestamp": "2017-12-28T20:00:00Z",
+          "source_local_timestamp": "2017-12-28T14:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 108.976123
+        },
+        {
+          "timestamp": "2017-12-28T21:00:00Z",
+          "source_local_timestamp": "2017-12-28T15:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 104.827887
+        },
+        {
+          "timestamp": "2017-12-28T22:00:00Z",
+          "source_local_timestamp": "2017-12-28T16:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 102.447989
+        },
+        {
+          "timestamp": "2017-12-28T23:00:00Z",
+          "source_local_timestamp": "2017-12-28T17:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 106.624495
+        },
+        {
+          "timestamp": "2017-12-29T00:00:00Z",
+          "source_local_timestamp": "2017-12-28T18:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 109.826916
+        },
+        {
+          "timestamp": "2017-12-29T01:00:00Z",
+          "source_local_timestamp": "2017-12-28T19:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 109.701909
+        },
+        {
+          "timestamp": "2017-12-29T02:00:00Z",
+          "source_local_timestamp": "2017-12-28T20:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 107.594159
+        },
+        {
+          "timestamp": "2017-12-29T03:00:00Z",
+          "source_local_timestamp": "2017-12-28T21:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 100.724635
+        },
+        {
+          "timestamp": "2017-12-29T04:00:00Z",
+          "source_local_timestamp": "2017-12-28T22:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 93.891697
+        },
+        {
+          "timestamp": "2017-12-29T05:00:00Z",
+          "source_local_timestamp": "2017-12-28T23:00:00",
+          "forecast_origin": "2017-12-28T06:00:00Z",
+          "forecast_kwh": 92.544003
+        },
+        {
+          "timestamp": "2017-12-29T06:00:00Z",
+          "source_local_timestamp": "2017-12-29T00:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 91.915098
+        },
+        {
+          "timestamp": "2017-12-29T07:00:00Z",
+          "source_local_timestamp": "2017-12-29T01:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 89.457173
+        },
+        {
+          "timestamp": "2017-12-29T08:00:00Z",
+          "source_local_timestamp": "2017-12-29T02:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 87.847444
+        },
+        {
+          "timestamp": "2017-12-29T09:00:00Z",
+          "source_local_timestamp": "2017-12-29T03:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 86.83548
+        },
+        {
+          "timestamp": "2017-12-29T10:00:00Z",
+          "source_local_timestamp": "2017-12-29T04:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 86.255873
+        },
+        {
+          "timestamp": "2017-12-29T11:00:00Z",
+          "source_local_timestamp": "2017-12-29T05:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 89.961759
+        },
+        {
+          "timestamp": "2017-12-29T12:00:00Z",
+          "source_local_timestamp": "2017-12-29T06:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 94.931698
+        },
+        {
+          "timestamp": "2017-12-29T13:00:00Z",
+          "source_local_timestamp": "2017-12-29T07:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 100.147891
+        },
+        {
+          "timestamp": "2017-12-29T14:00:00Z",
+          "source_local_timestamp": "2017-12-29T08:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 105.688609
+        },
+        {
+          "timestamp": "2017-12-29T15:00:00Z",
+          "source_local_timestamp": "2017-12-29T09:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 104.369509
+        },
+        {
+          "timestamp": "2017-12-29T16:00:00Z",
+          "source_local_timestamp": "2017-12-29T10:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 107.353062
+        },
+        {
+          "timestamp": "2017-12-29T17:00:00Z",
+          "source_local_timestamp": "2017-12-29T11:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 115.050991
+        },
+        {
+          "timestamp": "2017-12-29T18:00:00Z",
+          "source_local_timestamp": "2017-12-29T12:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 121.250001
+        },
+        {
+          "timestamp": "2017-12-29T19:00:00Z",
+          "source_local_timestamp": "2017-12-29T13:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 119.902505
+        },
+        {
+          "timestamp": "2017-12-29T20:00:00Z",
+          "source_local_timestamp": "2017-12-29T14:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 114.105001
+        },
+        {
+          "timestamp": "2017-12-29T21:00:00Z",
+          "source_local_timestamp": "2017-12-29T15:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 112.630851
+        },
+        {
+          "timestamp": "2017-12-29T22:00:00Z",
+          "source_local_timestamp": "2017-12-29T16:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 107.297548
+        },
+        {
+          "timestamp": "2017-12-29T23:00:00Z",
+          "source_local_timestamp": "2017-12-29T17:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 109.473294
+        },
+        {
+          "timestamp": "2017-12-30T00:00:00Z",
+          "source_local_timestamp": "2017-12-29T18:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 111.872744
+        },
+        {
+          "timestamp": "2017-12-30T01:00:00Z",
+          "source_local_timestamp": "2017-12-29T19:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 109.287369
+        },
+        {
+          "timestamp": "2017-12-30T02:00:00Z",
+          "source_local_timestamp": "2017-12-29T20:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 102.085605
+        },
+        {
+          "timestamp": "2017-12-30T03:00:00Z",
+          "source_local_timestamp": "2017-12-29T21:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 99.362098
+        },
+        {
+          "timestamp": "2017-12-30T04:00:00Z",
+          "source_local_timestamp": "2017-12-29T22:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 95.47143
+        },
+        {
+          "timestamp": "2017-12-30T05:00:00Z",
+          "source_local_timestamp": "2017-12-29T23:00:00",
+          "forecast_origin": "2017-12-29T06:00:00Z",
+          "forecast_kwh": 93.364448
+        },
+        {
+          "timestamp": "2017-12-30T06:00:00Z",
+          "source_local_timestamp": "2017-12-30T00:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 93.650689
+        },
+        {
+          "timestamp": "2017-12-30T07:00:00Z",
+          "source_local_timestamp": "2017-12-30T01:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 91.487271
+        },
+        {
+          "timestamp": "2017-12-30T08:00:00Z",
+          "source_local_timestamp": "2017-12-30T02:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 90.673728
+        },
+        {
+          "timestamp": "2017-12-30T09:00:00Z",
+          "source_local_timestamp": "2017-12-30T03:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 89.469353
+        },
+        {
+          "timestamp": "2017-12-30T10:00:00Z",
+          "source_local_timestamp": "2017-12-30T04:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 89.088428
+        },
+        {
+          "timestamp": "2017-12-30T11:00:00Z",
+          "source_local_timestamp": "2017-12-30T05:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 88.969581
+        },
+        {
+          "timestamp": "2017-12-30T12:00:00Z",
+          "source_local_timestamp": "2017-12-30T06:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 88.184628
+        },
+        {
+          "timestamp": "2017-12-30T13:00:00Z",
+          "source_local_timestamp": "2017-12-30T07:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 88.494967
+        },
+        {
+          "timestamp": "2017-12-30T14:00:00Z",
+          "source_local_timestamp": "2017-12-30T08:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 93.158924
+        },
+        {
+          "timestamp": "2017-12-30T15:00:00Z",
+          "source_local_timestamp": "2017-12-30T09:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 96.610346
+        },
+        {
+          "timestamp": "2017-12-30T16:00:00Z",
+          "source_local_timestamp": "2017-12-30T10:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 98.274192
+        },
+        {
+          "timestamp": "2017-12-30T17:00:00Z",
+          "source_local_timestamp": "2017-12-30T11:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 103.962499
+        },
+        {
+          "timestamp": "2017-12-30T18:00:00Z",
+          "source_local_timestamp": "2017-12-30T12:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 106.397249
+        },
+        {
+          "timestamp": "2017-12-30T19:00:00Z",
+          "source_local_timestamp": "2017-12-30T13:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 105.119656
+        },
+        {
+          "timestamp": "2017-12-30T20:00:00Z",
+          "source_local_timestamp": "2017-12-30T14:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 103.230035
+        },
+        {
+          "timestamp": "2017-12-30T21:00:00Z",
+          "source_local_timestamp": "2017-12-30T15:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 101.902539
+        },
+        {
+          "timestamp": "2017-12-30T22:00:00Z",
+          "source_local_timestamp": "2017-12-30T16:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 101.474364
+        },
+        {
+          "timestamp": "2017-12-30T23:00:00Z",
+          "source_local_timestamp": "2017-12-30T17:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 105.493353
+        },
+        {
+          "timestamp": "2017-12-31T00:00:00Z",
+          "source_local_timestamp": "2017-12-30T18:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 107.643767
+        },
+        {
+          "timestamp": "2017-12-31T01:00:00Z",
+          "source_local_timestamp": "2017-12-30T19:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 106.902596
+        },
+        {
+          "timestamp": "2017-12-31T02:00:00Z",
+          "source_local_timestamp": "2017-12-30T20:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 101.262446
+        },
+        {
+          "timestamp": "2017-12-31T03:00:00Z",
+          "source_local_timestamp": "2017-12-30T21:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 98.230528
+        },
+        {
+          "timestamp": "2017-12-31T04:00:00Z",
+          "source_local_timestamp": "2017-12-30T22:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 94.909192
+        },
+        {
+          "timestamp": "2017-12-31T05:00:00Z",
+          "source_local_timestamp": "2017-12-30T23:00:00",
+          "forecast_origin": "2017-12-30T06:00:00Z",
+          "forecast_kwh": 93.429042
+        },
+        {
+          "timestamp": "2017-12-31T06:00:00Z",
+          "source_local_timestamp": "2017-12-31T00:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 96.456586
+        },
+        {
+          "timestamp": "2017-12-31T07:00:00Z",
+          "source_local_timestamp": "2017-12-31T01:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 95.680238
+        },
+        {
+          "timestamp": "2017-12-31T08:00:00Z",
+          "source_local_timestamp": "2017-12-31T02:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 94.837391
+        },
+        {
+          "timestamp": "2017-12-31T09:00:00Z",
+          "source_local_timestamp": "2017-12-31T03:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 93.538436
+        },
+        {
+          "timestamp": "2017-12-31T10:00:00Z",
+          "source_local_timestamp": "2017-12-31T04:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 92.429561
+        },
+        {
+          "timestamp": "2017-12-31T11:00:00Z",
+          "source_local_timestamp": "2017-12-31T05:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 92.62025
+        },
+        {
+          "timestamp": "2017-12-31T12:00:00Z",
+          "source_local_timestamp": "2017-12-31T06:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 91.635696
+        },
+        {
+          "timestamp": "2017-12-31T13:00:00Z",
+          "source_local_timestamp": "2017-12-31T07:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 91.839111
+        },
+        {
+          "timestamp": "2017-12-31T14:00:00Z",
+          "source_local_timestamp": "2017-12-31T08:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 96.555486
+        },
+        {
+          "timestamp": "2017-12-31T15:00:00Z",
+          "source_local_timestamp": "2017-12-31T09:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 97.835814
+        },
+        {
+          "timestamp": "2017-12-31T16:00:00Z",
+          "source_local_timestamp": "2017-12-31T10:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 100.640882
+        },
+        {
+          "timestamp": "2017-12-31T17:00:00Z",
+          "source_local_timestamp": "2017-12-31T11:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 105.655328
+        },
+        {
+          "timestamp": "2017-12-31T18:00:00Z",
+          "source_local_timestamp": "2017-12-31T12:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 109.237289
+        },
+        {
+          "timestamp": "2017-12-31T19:00:00Z",
+          "source_local_timestamp": "2017-12-31T13:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 109.948089
+        },
+        {
+          "timestamp": "2017-12-31T20:00:00Z",
+          "source_local_timestamp": "2017-12-31T14:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 108.744457
+        },
+        {
+          "timestamp": "2017-12-31T21:00:00Z",
+          "source_local_timestamp": "2017-12-31T15:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 107.941425
+        },
+        {
+          "timestamp": "2017-12-31T22:00:00Z",
+          "source_local_timestamp": "2017-12-31T16:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 108.570225
+        },
+        {
+          "timestamp": "2017-12-31T23:00:00Z",
+          "source_local_timestamp": "2017-12-31T17:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 112.106789
+        },
+        {
+          "timestamp": "2018-01-01T00:00:00Z",
+          "source_local_timestamp": "2017-12-31T18:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 115.822275
+        },
+        {
+          "timestamp": "2018-01-01T01:00:00Z",
+          "source_local_timestamp": "2017-12-31T19:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 116.338118
+        },
+        {
+          "timestamp": "2018-01-01T02:00:00Z",
+          "source_local_timestamp": "2017-12-31T20:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 114.230139
+        },
+        {
+          "timestamp": "2018-01-01T03:00:00Z",
+          "source_local_timestamp": "2017-12-31T21:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 110.154821
+        },
+        {
+          "timestamp": "2018-01-01T04:00:00Z",
+          "source_local_timestamp": "2017-12-31T22:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 102.776489
+        },
+        {
+          "timestamp": "2018-01-01T05:00:00Z",
+          "source_local_timestamp": "2017-12-31T23:00:00",
+          "forecast_origin": "2017-12-31T06:00:00Z",
+          "forecast_kwh": 101.252743
+        }
+      ]
+    }
+  }
+}

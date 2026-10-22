@@ -26,6 +26,7 @@ from src.scenario_profile import build_scenario_profile
 
 router = APIRouter(prefix="/workbench", tags=["Local demonstration workbench"])
 SNAPSHOT = json.loads((Path(__file__).resolve().parents[1] / "bdg2_live_snapshot.json").read_text(encoding="utf-8"))
+HISTORY_FORECASTS = json.loads((Path(__file__).resolve().parents[1] / "bdg2_history_forecasts.json").read_text(encoding="utf-8"))
 ASSETS = {item["id"]: item for item in SNAPSHOT["assets"]["items"]}
 SESSION_FILE = Path(__file__).resolve().parents[2] / "data/local/workbench-session.json"
 try:
@@ -241,6 +242,11 @@ def _state(asset_id: str, period: str) -> dict:
     session = _session(asset_id)
     config = session["config"]
     observed = bundle["readings"]["items"][-PERIODS[period]:]
+    historical_model = HISTORY_FORECASTS['buildings'][asset['source_asset_id']]
+    observed_times = {row['timestamp'] for row in observed}
+    multiplier = asset.get('demo_basis', {}).get('load_multiplier', 1)
+    history_forecast = [{**row, 'forecast_kwh': row['forecast_kwh'] * multiplier}
+                        for row in historical_model['items'] if row['timestamp'] in observed_times]
     forecast = bundle["forecast"]["items"]
     observed_total = sum(row["consumption_kwh"] for row in observed)
     forecast_total = sum(row["forecast_kwh"] for row in forecast)
@@ -276,9 +282,13 @@ def _state(asset_id: str, period: str) -> dict:
     return {
         "asset": asset, "period": period, "snapshot_fetched_at": SNAPSHOT["fetched_at"],
         "observed_window": {"from": observed[0]["source_local_timestamp"], "to": latest["source_local_timestamp"], "timezone": asset["timezone"]},
-        "observed": observed, "observed_trend": bundle["readings"]["items"], "forecast": forecast, "anomalies": bundle["anomalies"],
+        "observed": observed, "observed_trend": bundle["readings"]["items"], "forecast": forecast, "history_forecast": history_forecast, "anomalies": bundle["anomalies"],
         "model": {"method": bundle["forecast"]["method"], "test_metrics": bundle["forecast"]["test_metrics"],
-                  "limitations": bundle["forecast"]["limitations"]},
+                  "limitations": bundle["forecast"]["limitations"],
+                  "history_forecast": {"model_version": HISTORY_FORECASTS['model_version'],
+                                       "description": HISTORY_FORECASTS['description'],
+                                       "training_end_exclusive": historical_model['training_end_exclusive'],
+                                       "seasonal_weight": historical_model['seasonal_weight']}},
         "config": config, "alerts": alerts, "actions": actions, "history": session["history"], "scenarios": session["scenarios"],
         "support_requests": session.get("support_requests", []),
         "metrics": {
@@ -599,23 +609,30 @@ async def gemini_copilot(request: Request, payload: CopilotRequest,
 @router.get("/report.pdf")
 def report(asset_id: UUID, period: Literal["day", "week"] = "day",
            dashboard: bool = False,
+           report_type: Literal["carbon", "esg"] = "carbon",
            load_type: Literal["all", "hvac", "lighting", "plugs", "lifts", "ev"] = "all",
            target_percent: Annotated[float, Query(ge=1, le=100)] = 20,
            tree_factor: Annotated[float, Query(ge=0.1, le=10000)] = 21.77,
            bei_benchmark: Annotated[float, Query(ge=1, le=10000)] = 180,
-           evidence_count: Annotated[int, Query(ge=0, le=6)] = 0):
+           evidence_count: Annotated[int, Query(ge=0, le=6)] = 0,
+           reviewed_items: Annotated[str, Query(max_length=150)] = ""):
     from src.carbon_report import build_carbon_report
 
     data = _state(str(asset_id), period)
+    allowed_checks = {"energy", "factor", "scope", "area", "plan", "assurance"}
+    checked = {item for item in reviewed_items.split(",") if item}
+    if not checked <= allowed_checks:
+        raise HTTPException(status_code=422, detail="Unknown evidence review item")
     if dashboard:
         data["dashboard_planning"] = {
             "load_type": load_type, "target_percent": target_percent,
             "tree_factor": tree_factor, "bei_benchmark": bei_benchmark,
             "evidence_count": evidence_count,
+            "reviewed_items": sorted(checked),
         }
     name = data["asset"].get("name") or data["asset"]["source_asset_id"]
     slug = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
-    filename = f"nexora-carbon-esg-{slug}-{period}.pdf"
-    return Response(build_carbon_report(data), media_type="application/pdf",
+    filename = f"nexora-{report_type}-report-{slug}-{period}.pdf"
+    return Response(build_carbon_report(data, report_type=report_type), media_type="application/pdf",
                     headers={"Content-Disposition": f'attachment; filename="{filename}"',
                              "Cache-Control": "no-store"})
