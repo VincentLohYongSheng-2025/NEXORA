@@ -92,9 +92,11 @@ def _alerts(asset, session, forecast_total, config):
         fraction = .012 if roof else .018 if critical else .01
         energy = forecast_total * fraction
         alert_id = f"{floor}:{zone}"
+        title = "TNB Peak Demand (MD) Risk" if roof else "AHU Bypass Valve Stiction" if critical else "Unoccupied Cooling Overrun"
+        solution = "Pre-cool thermal mass and activate BESS peak-shaving dispatch." if roof else "Re-zero modulating actuator and trim VFD pump speed to 35 Hz." if critical else "Apply dynamic 26°C setback and enable PIR occupancy shutoff."
         result.append({"id": alert_id, "floor": floor, "zone": zone, "floor_label": "Roof" if roof else f"Level {index}" if index else "Ground", "name": name,
-                       "title": "High supply temperature" if roof else "Room overheating" if critical else "Cooling an unoccupied zone",
-                       "solution": "Service the filter and restore the cooling setpoint." if roof else "Restore airflow and adjust the cooling schedule." if critical else "Reduce cooling when the zone is unoccupied.",
+                       "title": title,
+                       "solution": solution,
                        "status": "settled" if alert_id in session.get("settled_alerts", []) else "proposed", "fraction": fraction,
                        "energy_kwh": energy, "cost_myr": energy * config["tariff_myr_per_kwh"] if config["tariff_myr_per_kwh"] is not None else None,
                        "carbon_kg": energy * config["carbon_kg_per_kwh"] if config["carbon_kg_per_kwh"] is not None else None})

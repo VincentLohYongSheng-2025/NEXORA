@@ -7,14 +7,14 @@ export function floorOptions(facility){
 function rawFloorZones(facility,floor){
   if(floor==='whole'||!floor)return [];
   if(floor==='roof')return [
-    {id:'plant',name:'HVAC plant',status:'Attention',temperature:29.2,occupancy:0,share:.8,issue:'Supply temperature above the selected target.',action:'Inspect the filter and cooling setpoint.'},
-    {id:'pv',name:'Solar array',status:'Normal',temperature:null,occupancy:0,share:0,issue:'No issue under this scenario.',action:'Review generation in the Solar layer.'},
-    {id:'service',name:'Service area',status:'Normal',temperature:24.1,occupancy:0,share:.2,issue:'No issue under this scenario.',action:'Continue routine checks.'}
+    {id:'plant',name:'Central chiller plant',status:'Attention',temperature:29.2,occupancy:0,share:.8,issue:'Chiller staging threatens TNB Maximum Demand threshold.',action:'Pre-cool thermal mass and activate BESS peak-shaving dispatch.'},
+    {id:'pv',name:'Solar array',status:'Normal',temperature:null,occupancy:0,share:0,issue:'Operating normally with zero curtailment.',action:'Review generation in the Solar layer.'},
+    {id:'service',name:'Service area',status:'Normal',temperature:24.1,occupancy:0,share:.2,issue:'Operating within target energy envelope.',action:'Continue routine checks.'}
   ];
   const index=floor==='ground'?0:Number(floor.split('_')[1]);
   const names=facility==='hospital'?['Care zone','Consultation rooms','Support room']:facility==='restaurant'?['Dining room','Kitchen','Cold storage']:facility==='residential'?['Apartment zone A','Apartment zone B','Common area']:facility==='mall'?['Retail zone A','Retail zone B','Service corridor']:['Office zone A','Meeting rooms','Service room'];
   const problem=index%3;
-  return names.map((name,i)=>({id:`zone_${i}`,name,status:index%3!==2&&i===problem?(index%2?'Critical':'Attention'):'Normal',temperature:index%3!==2&&i===problem?(index%2?29.4:27.1):23.2+i*.3,occupancy:index%3!==2&&i===problem?0:8+i*4,share:[.46,.34,.2][i],issue:index%3!==2&&i===problem?(index%2?'Room temperature exceeds the 28°C alert threshold.':'Cooling is running in an unoccupied zone.'):'No issue under this scenario.',action:index%3!==2&&i===problem?(index%2?'Inspect airflow and check the cooling setpoint.':'Review occupancy and reduce the cooling schedule.'):'Continue routine checks.'}));
+  return names.map((name,i)=>({id:`zone_${i}`,name,status:index%3!==2&&i===problem?(index%2?'Critical':'Attention'):'Normal',temperature:index%3!==2&&i===problem?(index%2?29.4:27.1):23.2+i*.3,occupancy:index%3!==2&&i===problem?0:8+i*4,share:[.46,.34,.2][i],issue:index%3!==2&&i===problem?(index%2?'AHU modulating bypass valve stuck 100% open; primary pump over-cycling.':'Active cooling running in unoccupied zone (0 occupancy vs active AC).'):'Operating within target energy envelope.',action:index%3!==2&&i===problem?(index%2?'Re-zero modulating actuator and trim VFD pump speed to 35 Hz.':'Apply dynamic 26°C setback and enable PIR occupancy shutoff.'):'Continue routine checks.'}));
 }
 export function floorIssueCount(facility,floor){return floorZones(facility,floor).filter(z=>z.status!=='Normal').length;}
 
