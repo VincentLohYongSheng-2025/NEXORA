@@ -1,134 +1,143 @@
-# NEXORA EnergiOS
+# NEXORA
 
-**Township energy intelligence for better building operations.**
+**Township energy intelligence for building operations.**
 
-NEXORA is a prototype that brings building energy profiles, forecasts, renewable planning, and coordinated township recommendations into one workspace. It is designed to help a township manager understand estimated demand, explore possible actions, and review their projected effects before making an operational decision.
+NEXORA is a local web prototype for exploring building energy profiles, forecasts, renewable planning, and coordinated township actions. This guide explains how to install and run the current prototype.
 
-> **Prototype status:** The application uses historical benchmark data and clearly labelled estimates. It is not connected to live building meters or equipment controls. Recommendations and reported impacts are for demonstration and planning only.
+> **Prototype note:** The demo uses historical reference data and clearly identified assumptions. Building profiles, alerts, environmental conditions, and action impacts are illustrative. The prototype does not read live meters or control equipment.
 
-## Product features
+## What you can explore
 
-- **Township overview:** Explore six illustrative facilities in an interactive 3D township and review estimated energy, cost, and emissions alongside alerts and AI suggestions.
-- **Real-Time & Forecast:** Review historical energy profiles, a calculated next-day forecast, 24-hour and seven-day views, and estimated energy, cost, and CO₂e trends.
-- **Township recommendations:** Review building alerts and AI suggestions, preview individual actions, and explore a cross-sector flexibility scenario involving refrigeration, irrigation, and EV charging schedules.
-- **Action Simulator:** Compare scenario outcomes across the township, including demand before and after the proposed actions. Demo approvals do not send equipment commands.
-- **Renewable Simulator:** Explore illustrative rooftop solar PV and battery configurations and their estimated energy and investment outcomes.
-- **Carbon Dashboard:** Review estimated electricity-related emissions, planning assumptions, and carbon actions. Download a carbon report or an **ESG report draft** with the available evidence and limitations disclosed.
-- **NEXORA Copilot:** Ask questions about the selected building’s calculations and plans using the built-in deterministic, read-only results explainer.
+- **Overview:** View the illustrative 3D township, facility energy summaries, alerts, and recommendations.
+- **Real-Time & Forecast:** Explore historical energy profiles, calculated forecasts, and estimated energy, cost, and emissions.
+- **Action Simulator:** Preview a township flexibility scenario and compare its modelled effects.
+- **Renewable Simulator:** Adjust rooftop solar and battery assumptions and review estimated output and investment results.
+- **Carbon Dashboard:** Review electricity-related emissions and prepare a carbon report or an ESG report draft.
+- **Copilot:** Ask questions about the selected building and its available calculations.
 
-## Data and prototype boundaries
-
-The app packages a normalized, audited subset of the **CLEMD** Malaysian electricity dataset. It contains 696 complete hourly observations from one institutional building at the Faculty of Medicine and Defence Health, Universiti Pertahanan Nasional Malaysia. The source measurements are historical (September–October 2023); incomplete hours remain missing.
-
-The six NEXORA township facilities are illustrative profiles derived from that single reference dataset using assumed building areas, schedules, load shares, and calibration factors. They are not measured NEXORA, Sime Darby Property, or township buildings. Their floor and room conditions, alerts, and equipment flexibility are also simulated.
-
-Electricity cost, emissions, solar generation, battery dispatch, savings, and financial outcomes depend on configurable planning assumptions. The default rate is RM 0.45/kWh and the default emissions factor is 0.760 kgCO₂e/kWh. The ESG report is a draft: the application does not provide a complete corporate ESG inventory, Scope 1 and Scope 3 evidence, independent assurance, or regulatory compliance certification.
-
-See [Malaysia demo data](docs/malaysia-demo-data.md), [township digital twin](docs/township-digital-twin.md), and [township flexibility scenario](docs/township-flex-scenario.md) for calculation details and limitations.
-
-**Dataset attribution:** CLEMD, [Figshare collection](https://doi.org/10.6084/m9.figshare.c.6946581), described by Al-Khadher et al. in [*Scientific Data* (2024)](https://doi.org/10.1038/s41597-024-03433-7). Dataset archives are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Additional attribution and transformation details are in [docs/malaysia-demo-data.md](docs/malaysia-demo-data.md).
-
-## Technology
-
-- Python 3.12, FastAPI, and Pydantic
-- HTML, CSS, and JavaScript modules
-- Three.js for the interactive township and building views
-- Vite for optional frontend hot reload and production build
-
-## Run locally
+## Install and run
 
 ### Requirements
 
 - Git
-- Python 3.12
-- [`uv`](https://docs.astral.sh/uv/getting-started/installation/)
+- `uv`, which installs and manages the required Python 3.12 environment
+- An internet connection for the first dependency install
 
-Install `uv` on Windows with WinGet:
+Node.js and npm are only needed for the optional frontend hot-reload workflow and frontend checks.
+
+### 1. Install uv
+
+Use the command for your operating system. See the [official uv installation guide](https://docs.astral.sh/uv/getting-started/installation/) for other methods.
+
+**Windows (PowerShell):**
 
 ```powershell
 winget install --id=astral-sh.uv -e
 ```
 
-Clone the repository and install the backend dependencies:
+**macOS (Homebrew):**
 
-```powershell
-git clone https://github.com/VincentLohYongSheng-2025/NEXORA.git
-cd NEXORA\backend
+```sh
+brew install uv
+```
+
+**Linux:**
+
+```sh
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+After installation, open a new terminal and check `uv --version`.
+
+### 2. Download the project and install backend packages
+
+Run these commands in a terminal:
+
+```sh
+git clone --branch main https://github.com/VincentLohYongSheng-2025/NEXORA.git
+cd NEXORA/backend
 uv python install 3.12
 uv sync --locked
 ```
 
-Start NEXORA:
+`uv sync --locked` creates the project environment and installs the locked packages.
 
-```powershell
+### 3. Start NEXORA
+
+From the `backend` folder, run:
+
+```sh
 uv run --locked uvicorn app:app --host 127.0.0.1 --port 8009
 ```
 
-Open [http://127.0.0.1:8009](http://127.0.0.1:8009). The FastAPI server serves the prototype UI and local API together; Node.js is not required for this setup. Stop the server with **Ctrl+C**.
+Open **http://127.0.0.1:8009** in your browser. The backend serves the prototype website and its local API together. No API key or database setup is needed for the standard demo. Stop the server with `Ctrl+C`.
 
-Useful local endpoints:
+Useful checks: [health](http://127.0.0.1:8009/health) and [API documentation](http://127.0.0.1:8009/docs).
 
-- `/health` — application process health
-- `/docs` — interactive API documentation
-- `/api/workbench/assets` — available demo facilities and reference asset
-- `/api/workbench/township?period=day` — township summary and recommendations
+## Optional frontend hot reload
 
-### Optional: frontend development server
+Use this when editing frontend files. Keep both terminals running.
 
-For frontend hot reload, start the backend on port **8001** in one terminal from `backend/`:
+**Terminal 1:** from `NEXORA/backend`, start the API on port 8001:
 
-```powershell
+```sh
 uv run --locked uvicorn app:app --host 127.0.0.1 --port 8001
 ```
 
-In a second terminal, from the repository root:
+**Terminal 2:** from the repository root, start Vite:
 
-```powershell
+```sh
 cd frontend
 npm ci
 npm run dev
 ```
 
-Open the local URL printed by Vite. The Vite proxy is configured to forward API requests to the backend on port 8001.
+Open the local address printed by Vite. Its `/api` requests are proxied to the backend on port 8001. Install Node.js and npm before using this optional workflow.
 
-## Tests and build
+## Run checks
 
-Run backend tests from `backend/`:
+From `backend/`:
 
-```powershell
+```sh
 uv run --locked pytest
 ```
 
-Run frontend tests and build from `frontend/`:
+From `frontend/` (after installing Node.js):
 
-```powershell
+```sh
 npm ci
 npm test
 npm run build
 ```
 
-## Local demo state
+## Data and saved demo state
 
-Configuration, saved scenarios, reviews, and activity are stored in the ignored local file `data/local/workbench-malaysia-v2-session.json`. Carbon Dashboard preferences and evidence-review selections are stored in the browser. Neither is committed to Git by default.
+The packaged Malaysian electricity reference is CLEMD data from one institutional building at Universiti Pertahanan Nasional Malaysia, collected in 2023. The six named township facilities are illustrative profiles derived from this single source using NEXORA assumptions; they are not six measured buildings. Forecasts, alerts, room conditions, renewable output, costs, emissions, and action results are estimates or simulations.
 
-## Repository layout
+See [the one-page data sources and assumptions document](output/documentation/NEXORA_Data_Sources_and_Assumptions.docx), [Malaysia demo data](docs/malaysia-demo-data.md), [digital twin notes](docs/township-digital-twin.md), and [township flexibility scenario](docs/township-flex-scenario.md) for details.
+
+Local scenario and review state is saved in `data/local/workbench-malaysia-v2-session.json`. It is ignored by Git and can be removed to reset local demo changes. Carbon Dashboard preferences are saved in the browser.
+
+## Project structure
 
 ```text
 backend/
-  app.py                    FastAPI application and local UI server
-  data/                     Packaged Malaysian reference data
-  src/workbench.py          Workbench API and demo calculations
-  src/malaysia_benchmark.py Data validation, forecast, and profile preparation
-  src/township_flex.py      Township flexibility scenario calculations
-  tests/                    Backend tests
+  app.py                 Local API and website server
+  data/                  Packaged reference dataset and provenance
+  src/                   Forecast, simulator, reporting, and API modules
+  tests/                 Backend checks
 frontend/
-  index.html                Main prototype entry point
-  src/js/                   Application, charts, simulators, and 3D views
-  src/css/                  Application styles
-  tests/                    Frontend tests
-  vite.config.js             Optional Vite server and API proxy
-docs/
-  malaysia-demo-data.md
-  township-digital-twin.md
-  township-flex-scenario.md
+  index.html             Main prototype page
+  src/js/                Application features and visualisations
+  src/css/               Application styles
+  tests/                 Frontend checks
+  vite.config.js          Optional development server configuration
+docs/                     Data, digital twin, and scenario notes
 ```
+
+## Common setup fixes
+
+- **`uv` is not recognized:** reopen the terminal after installing uv, then run `uv --version`.
+- **Port 8009 is already in use:** change `--port 8009` to `--port 8010` and open `http://127.0.0.1:8010`.
+- **Vite cannot reach the API:** confirm Terminal 1 is running the backend on port 8001.
+- **Dependency installation fails:** check your internet connection, then rerun `uv sync --locked` from `backend/`.
