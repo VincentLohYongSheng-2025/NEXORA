@@ -1,34 +1,134 @@
-# EnergiOS local workbench
+# NEXORA EnergiOS
 
-Seven application screens recreated from the supplied video references: Overview, Monitoring, Renewable Simulator, Carbon, Digital Twin, AI Control and Copilot. The local server is available at http://127.0.0.1:8001 while it is running.
+**Township energy intelligence for better building operations.**
 
-Overview opens with an interactive Three.js township and combined energy, cost and carbon cards above it. Select one of six concept facilities to zoom into its model and open its individual demo results; use Back to township to return to the totals. Each facility has an independent configuration and plan, using documented illustrative load profiles derived from historical benchmarks. The four measured benchmark datasets remain separately selectable. See [township calculation basis and verification](docs/township-digital-twin.md).
+NEXORA is a prototype that brings building energy profiles, forecasts, renewable planning, and coordinated township recommendations into one workspace. It is designed to help a township manager understand estimated demand, explore possible actions, and review their projected effects before making an operational decision.
 
-## Run
+> **Prototype status:** The application uses historical benchmark data and clearly labelled estimates. It is not connected to live building meters or equipment controls. Recommendations and reported impacts are for demonstration and planning only.
 
-From `backend/`, use the project's Python 3.12 environment:
+## Product features
+
+- **Township overview:** Explore six illustrative facilities in an interactive 3D township and review estimated energy, cost, and emissions alongside alerts and AI suggestions.
+- **Real-Time & Forecast:** Review historical energy profiles, a calculated next-day forecast, 24-hour and seven-day views, and estimated energy, cost, and CO₂e trends.
+- **Township recommendations:** Review building alerts and AI suggestions, preview individual actions, and explore a cross-sector flexibility scenario involving refrigeration, irrigation, and EV charging schedules.
+- **Action Simulator:** Compare scenario outcomes across the township, including demand before and after the proposed actions. Demo approvals do not send equipment commands.
+- **Renewable Simulator:** Explore illustrative rooftop solar PV and battery configurations and their estimated energy and investment outcomes.
+- **Carbon Dashboard:** Review estimated electricity-related emissions, planning assumptions, and carbon actions. Download a carbon report or an **ESG report draft** with the available evidence and limitations disclosed.
+- **NEXORA Copilot:** Ask questions about the selected building’s calculations and plans using the built-in deterministic, read-only results explainer.
+
+## Data and prototype boundaries
+
+The app packages a normalized, audited subset of the **CLEMD** Malaysian electricity dataset. It contains 696 complete hourly observations from one institutional building at the Faculty of Medicine and Defence Health, Universiti Pertahanan Nasional Malaysia. The source measurements are historical (September–October 2023); incomplete hours remain missing.
+
+The six NEXORA township facilities are illustrative profiles derived from that single reference dataset using assumed building areas, schedules, load shares, and calibration factors. They are not measured NEXORA, Sime Darby Property, or township buildings. Their floor and room conditions, alerts, and equipment flexibility are also simulated.
+
+Electricity cost, emissions, solar generation, battery dispatch, savings, and financial outcomes depend on configurable planning assumptions. The default rate is RM 0.45/kWh and the default emissions factor is 0.760 kgCO₂e/kWh. The ESG report is a draft: the application does not provide a complete corporate ESG inventory, Scope 1 and Scope 3 evidence, independent assurance, or regulatory compliance certification.
+
+See [Malaysia demo data](docs/malaysia-demo-data.md), [township digital twin](docs/township-digital-twin.md), and [township flexibility scenario](docs/township-flex-scenario.md) for calculation details and limitations.
+
+**Dataset attribution:** CLEMD, [Figshare collection](https://doi.org/10.6084/m9.figshare.c.6946581), described by Al-Khadher et al. in [*Scientific Data* (2024)](https://doi.org/10.1038/s41597-024-03433-7). Dataset archives are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Additional attribution and transformation details are in [docs/malaysia-demo-data.md](docs/malaysia-demo-data.md).
+
+## Technology
+
+- Python 3.12, FastAPI, and Pydantic
+- HTML, CSS, and JavaScript modules
+- Three.js for the interactive township and building views
+- Vite for optional frontend hot reload and production build
+
+## Run locally
+
+### Requirements
+
+- Git
+- Python 3.12
+- [`uv`](https://docs.astral.sh/uv/getting-started/installation/)
+
+Install `uv` on Windows with WinGet:
 
 ```powershell
+winget install --id=astral-sh.uv -e
+```
+
+Clone the repository and install the backend dependencies:
+
+```powershell
+git clone https://github.com/VincentLohYongSheng-2025/NEXORA.git
+cd NEXORA\backend
+uv python install 3.12
 uv sync --locked
+```
+
+Start NEXORA:
+
+```powershell
+uv run --locked uvicorn app:app --host 127.0.0.1 --port 8009
+```
+
+Open [http://127.0.0.1:8009](http://127.0.0.1:8009). The FastAPI server serves the prototype UI and local API together; Node.js is not required for this setup. Stop the server with **Ctrl+C**.
+
+Useful local endpoints:
+
+- `/health` — application process health
+- `/docs` — interactive API documentation
+- `/api/workbench/assets` — available demo facilities and reference asset
+- `/api/workbench/township?period=day` — township summary and recommendations
+
+### Optional: frontend development server
+
+For frontend hot reload, start the backend on port **8001** in one terminal from `backend/`:
+
+```powershell
 uv run --locked uvicorn app:app --host 127.0.0.1 --port 8001
 ```
 
-The backend serves the frontend directly; Node installation is optional. For a separate Vite development server, run `npm ci` and `npm run dev` from `frontend/` while the backend is running on port 8001.
+In a second terminal, from the repository root:
 
-## Data and demo state
+```powershell
+cd frontend
+npm ci
+npm run dev
+```
 
-- The workbench uses the existing frozen public BDG2 API snapshot, fetched 14 October 2026. Its observed source window is 25–31 December 2017; the saved 24-hour forecast is for 1 January 2018. The original database-backed endpoints, import pipeline, analytics, Gemini integration and calculation modules are preserved.
-- All four source buildings retain separate observations, forecast evaluation, configuration and demo plans. The browser remembers the selected building and period.
-- Cost, carbon, PV, battery, efficiency targets and equipment settings are explicitly hypothetical, editable demo assumptions. Defaults include RM 0.50/kWh, 0.55 kg CO2e/kWh and a 5% efficiency planning target. They are not official factors, tariffs or measured savings.
-- Approvals, dismissals, configurations, scenarios and activity are held in the local server process. Restarting the server resets this demo state. Dismissing a proposal never removes an approved action.
-- Copilot's new **local results mode** is a deterministic results explainer over the selected building and current calculations. It does not claim to be a Gemini response. The original provider-backed assistant API is preserved separately and requires its existing private backend configuration.
-- The model geometry and room selections are illustrative. No room telemetry or physical equipment command is connected. EV simulation is unavailable because no supported calculation is implemented.
-- The public measured cohort and source files were copied from the existing `EnergyOS/data` folder for retained import/model regression checks. No database migration, hosted configuration, deployment, commit or push was performed.
+Open the local URL printed by Vite. The Vite proxy is configured to forward API requests to the backend on port 8001.
 
-## Verification
+## Tests and build
 
-`frontend/qa-audit.html` renders all seven screens at 390, 768 and 1440 px to check loading and horizontal overflow. `frontend/qa.html?width=390&height=844&route=overview` provides an inspectable responsive viewport.
+Run backend tests from `backend/`:
 
-Run backend checks with `uv run --locked pytest` from `backend/` and the retained frontend calculation/client checks with `npm test` from `frontend/`. The inherited `tests/compliance.test.mjs` describes the retired multi-page DOM and is retained as historical source; its old sidebar/island markup assertions are superseded by the browser checks for this rebuild.
+```powershell
+uv run --locked pytest
+```
 
-Dataset: Building Data Genome Project 2 v1.0, CC BY 4.0, https://doi.org/10.5281/zenodo.3887306. Paper: Miller et al., Scientific Data 7, 368 (2020), https://doi.org/10.1038/s41597-020-00712-x. This is not Sime Darby or Elmina operational data.
+Run frontend tests and build from `frontend/`:
+
+```powershell
+npm ci
+npm test
+npm run build
+```
+
+## Local demo state
+
+Configuration, saved scenarios, reviews, and activity are stored in the ignored local file `data/local/workbench-malaysia-v2-session.json`. Carbon Dashboard preferences and evidence-review selections are stored in the browser. Neither is committed to Git by default.
+
+## Repository layout
+
+```text
+backend/
+  app.py                    FastAPI application and local UI server
+  data/                     Packaged Malaysian reference data
+  src/workbench.py          Workbench API and demo calculations
+  src/malaysia_benchmark.py Data validation, forecast, and profile preparation
+  src/township_flex.py      Township flexibility scenario calculations
+  tests/                    Backend tests
+frontend/
+  index.html                Main prototype entry point
+  src/js/                   Application, charts, simulators, and 3D views
+  src/css/                  Application styles
+  tests/                    Frontend tests
+  vite.config.js             Optional Vite server and API proxy
+docs/
+  malaysia-demo-data.md
+  township-digital-twin.md
+  township-flex-scenario.md
+```

@@ -1,0 +1,2 @@
+# Keep the audited CSV byte-identical on Windows, macOS and Linux.
+backend/data/clemd-hourly.csv text eol=lf
